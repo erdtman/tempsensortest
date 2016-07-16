@@ -9,7 +9,7 @@ let bodyParser = require('body-parser');
 let m = require('./models/Measurement.js');
 let db = require('./db.js');
 
-let url = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
+let url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
 let port = process.env.PORT || 5000;
 
 app.set('port', port);
