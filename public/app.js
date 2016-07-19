@@ -54,7 +54,7 @@ $(document).ready(function() {
     var max = json[0].measurement;
     json.forEach(function(value) {
       if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
-        continue;
+        return;
       }
       data.push(value.measurement);
       labels.push(value.time);
