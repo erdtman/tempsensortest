@@ -8,7 +8,7 @@ let Q = require('q');
 exports.create = function(id, value) {
   let deferred = Q.defer();
 
-  if(parseInt(value) < -50 && parseInt(value) > 50) {
+  if(parseInt(value) < -50 || parseInt(value) > 50) {
     return deferred.reject(new Error("ignoring unresonable value"));
   }
 
