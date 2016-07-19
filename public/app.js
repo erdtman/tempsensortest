@@ -41,7 +41,7 @@ function draw(labels, data, min, max) {
 }
 
 $(document).ready(function() {
-  $.getJSON("/measurement/sensor1", {start:"1468941950037"})
+  $.getJSON("/measurement/sensor1")
   .done(function( json ) {
     var data = [];
     var labels = [];
