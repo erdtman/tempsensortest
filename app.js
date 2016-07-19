@@ -48,7 +48,7 @@ app.get('/measurement/:id', function(req, res) {
     return res.status(400).send("missing parameter");
   }
 
-  m.list(id, start, end).then(function(values){
+  m.list(id, start).then(function(values){
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(values));
   }).fail(function(error) {

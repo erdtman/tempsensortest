@@ -45,6 +45,11 @@ $(document).ready(function() {
   .done(function( json ) {
     var data = [];
     var labels = [];
+
+    if(json.length !> 0) {
+      return; // TODO error handling
+    }
+
     var min = json[0].measurement;
     var max = json[0].measurement;
     json.forEach(function(value) {
