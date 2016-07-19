@@ -21,8 +21,8 @@ function draw(labels, data, min, max) {
             pointHoverBackgroundColor: "rgba(75,192,192,1)",
             pointHoverBorderColor: "rgba(220,220,220,1)",
             pointHoverBorderWidth: 2,
-            pointRadius: 10,
-            pointHitRadius: 10,
+            pointRadius: 1,
+            pointHitRadius: 1,
             data: data,
         }]
     },
@@ -40,8 +40,9 @@ function draw(labels, data, min, max) {
   });
 }
 
-$(document).ready(function() {
-  $.getJSON("/measurement/sensor1")
+function load() {
+  var now = new Date().getTime();
+  $.getJSON("/measurement/sensor2", {start: now - interval})
   .done(function( json ) {
     var data = [];
     var labels = [];
@@ -67,6 +68,45 @@ $(document).ready(function() {
   .fail(function( jqxhr, textStatus, error ) {
     var err = textStatus + ", " + error;
     console.log( "Request Failed: " + err );
-});;
+  });
+}
 
+var SECOND = 1000;
+var MINUTE = SECOND*60;
+var HOUR = MINUTE*60;
+var DAY = HOUR*24;
+var WEEK = DAY*7
+var MONTH = DAY*30;
+var interval = HOUR;
+
+$("#hour").click(function(e) {
+  interval = HOUR;
+  e.preventDefault();
+  $(this).tab('show');
+  load();
+});
+
+$("#day").click(function(e) {
+  interval = WEEK;
+  e.preventDefault();
+  $(this).tab('show');
+  load();
+});
+
+$("#week").click(function(e) {
+  interval = HOUR;
+  e.preventDefault();
+  $(this).tab('show');
+  load();
+});
+
+$("#month").click(function(e) {
+  interval = MONTH;
+  e.preventDefault();
+  $(this).tab('show');
+  load();
+});
+
+$(document).ready(function() {
+  load();
 });
