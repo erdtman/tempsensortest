@@ -46,7 +46,7 @@ $(document).ready(function() {
     var data = [];
     var labels = [];
 
-    if(json.length !> 0) {
+    if(json.length < 1) {
       return; // TODO error handling
     }
 
