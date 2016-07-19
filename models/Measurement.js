@@ -10,7 +10,7 @@ exports.create = function(id, value) {
   let measurement = {
     "id" : id,
     "measurement" : value,
-    "time": new Date()
+    "time": new Date().getTime()
   };
 
   let collection = db.get().collection('measurement');
@@ -25,11 +25,11 @@ exports.create = function(id, value) {
   return deferred.promise;
 };
 
-exports.list = function(id) {
+exports.list = function(id, start, end) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
 
-  collection.find({id:id}).toArray(function(err, docs) {
+  collection.find({id:id, time : {$gte: start }}).toArray(function(err, docs) {
     if (err) {
       return deferred.reject(new Error(err));
     }

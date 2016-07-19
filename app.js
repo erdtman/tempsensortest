@@ -12,13 +12,12 @@ let db = require('./db.js');
 let url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
 let port = process.env.PORT || 5000;
 
-app.set('port', port);
-
-app.use(express.static(__dirname + '/public'));
+app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-// views is directory for all template files
+app.set('port', port);
+app.set('etag', false);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
@@ -43,13 +42,15 @@ app.post('/measurement/:id', function(req, res) {
 
 app.get('/measurement/:id', function(req, res) {
   let id = req.params.id ;
+  let start = parseInt(req.query.start || "0");
 
   if (!id) {
     return res.status(400).send("missing parameter");
   }
 
-  m.list(id).then(function(values){
-    res.send(values);
+  m.list(id, start, end).then(function(values){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(values));
   }).fail(function(error) {
     res.status(500).send(error);
   });
