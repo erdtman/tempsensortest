@@ -53,6 +53,9 @@ $(document).ready(function() {
     var min = json[0].measurement;
     var max = json[0].measurement;
     json.forEach(function(value) {
+      if(parseInt(value.measurement) < -50 && parseInt(value.measurement) > 50) {
+        return deferred.reject(new Error("ignoring unresonable value"));
+      }
       data.push(value.measurement);
       labels.push(value.time);
       min = Math.min(min, value.measurement);
