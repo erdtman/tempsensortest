@@ -38,7 +38,7 @@ function draw(labels, data, min, max) {
                 }
             }]
         },
-      responsive: true,
+      responsive: false,
     }
   });
 }
