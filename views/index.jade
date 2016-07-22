@@ -1,19 +1,27 @@
 html
  head
   link(rel="stylesheet" href="public/bootstrap-3.3.6-dist/css/bootstrap.min.css")
-  title hello world
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title Temperatur
  body
-  ul(class="nav nav-tabs nav-justified")
-   li(class="active")
-    a(href="#" id="hour") Hour
-   li
-    a(href="#" id="day") Day
-   li
-    a(href="#" id="week") Week
-   li
-    a(href="#" id="month") Month
+  div(class="container")
+   div(class="page-header")
+    h1(id="current") Loading current temperature...
 
-    
+
+   ul(class="nav nav-tabs nav-justified")
+    li(class="active")
+     a(href="#" id="hour") Hour
+    li
+     a(href="#" id="day") Day
+    li
+     a(href="#" id="week") Week
+    li
+     a(href="#" id="month") Month
+
+
   canvas(id="myChart" width="400" height="400")
   script(src="public/jquery.min.js")
   script(src="public/bootstrap-3.3.6-dist/js/bootstrap.min.js")

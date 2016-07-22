@@ -1,3 +1,6 @@
+
+// http://www.chartjs.org
+
 function draw(labels, data, min, max) {
   var ctx = $("#myChart");
   var myChart = new Chart(ctx, {
@@ -87,14 +90,14 @@ $("#hour").click(function(e) {
 });
 
 $("#day").click(function(e) {
-  interval = WEEK;
+  interval = DAY;
   e.preventDefault();
   $(this).tab('show');
   load();
 });
 
 $("#week").click(function(e) {
-  interval = HOUR;
+  interval = WEEK;
   e.preventDefault();
   $(this).tab('show');
   load();
@@ -107,6 +110,21 @@ $("#month").click(function(e) {
   load();
 });
 
+var getCurrentTemperature = function() {
+  $.getJSON("/measurement/sensor2/now")
+  .done(function( json ) {
+    if(json && json.measurement) {
+        $("#current").text(json.measurement + " °C");
+    }
+  })
+  .fail(function( jqxhr, textStatus, error ) {
+    var err = textStatus + ", " + error;
+    console.log( "Request Failed: " + err );
+  });
+};
+
 $(document).ready(function() {
   load();
+  setInterval(getCurrentTemperature, 10000);
+
 });

@@ -43,3 +43,18 @@ exports.list = function(id, start, end) {
   });
   return deferred.promise;
 };
+
+exports.now = function(id, start, end) {
+  let deferred = Q.defer();
+  let collection = db.get().collection('measurement');
+
+//time : {$gte: new Date().getTime()-(10*60*1000) }
+  collection.find({id:id}).sort({"measurement":-1}).limit(1).each(function(err, doc) {
+    if (err) {
+      return deferred.reject(new Error(err));
+    }
+
+    deferred.resolve(doc);
+  });
+  return deferred.promise;
+};

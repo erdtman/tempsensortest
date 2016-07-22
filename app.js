@@ -38,7 +38,7 @@ app.post('/measurement/:id', function(req, res) {
   }).fail(function(error) {
     res.status(500).send(error);
   });
-})
+});
 
 app.get('/measurement/:id', function(req, res) {
   let id = req.params.id ;
@@ -51,6 +51,21 @@ app.get('/measurement/:id', function(req, res) {
   m.list(id, start).then(function(values){
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(values));
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+});
+
+app.get('/measurement/:id/now', function(req, res) {
+  let id = req.params.id ;
+
+  if (!id) {
+    return res.status(400).send("missing parameter");
+  }
+
+  m.now(id).then(function(value) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(value));
   }).fail(function(error) {
     res.status(500).send(error);
   });
