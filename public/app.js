@@ -114,7 +114,7 @@ var getCurrentTemperature = function() {
   $.getJSON("/measurement/sensor2/now")
   .done(function( json ) {
     if(json && json.measurement) {
-        $("#current").text(json.measurement + " °C");
+        $("#current").text(json.measurement.toFixed(1) + " °C");
     }
   })
   .fail(function( jqxhr, textStatus, error ) {
