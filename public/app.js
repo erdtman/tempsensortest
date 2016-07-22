@@ -39,6 +39,7 @@ function draw(labels, data, min, max) {
             }]
         },
       responsive: false,
+      maintainAspectRatio: true
     }
   });
 }
