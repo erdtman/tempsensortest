@@ -71,7 +71,7 @@ exports.listAgregate = function(id, interval) {
     { "$match": { "id": id, time : {$gte: start }}},
     { "$group": {
         '_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
-        "measurement": { "$avg": "$measurement" }
+        //"measurement": { "$avg": "$measurement" }
     }}
   ]).toArray(function(err, docs) {
     if (err) {
