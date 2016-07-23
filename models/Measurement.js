@@ -75,6 +75,7 @@ exports.listAgregate = function(id, interval) {
     }}
   ]).toArray(function(err, docs) {
     if (err) {
+      console.log("err: " err);
       return deferred.reject(new Error(err));
     }
     console.log(docs);
