@@ -42,13 +42,13 @@ app.post('/measurement/:id', function(req, res) {
 
 app.get('/measurement/:id', function(req, res) {
   let id = req.params.id ;
-  let start = parseInt(req.query.start || "0");
+  let interval = req.query.interval || "HOUR";
 
   if (!id) {
     return res.status(400).send("missing parameter");
   }
 
-  m.list(id, start).then(function(values){
+  m.listAgregate(id, interval).then(function(values){
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(values));
   }).fail(function(error) {
@@ -56,15 +56,14 @@ app.get('/measurement/:id', function(req, res) {
   });
 });
 
-app.get('/measurement/:id/test', function(req, res) {
+app.get('/measurement/:id/trans', function(req, res) {
   let id = req.params.id ;
-  let start = parseInt(req.query.start || "0");
 
   if (!id) {
     return res.status(400).send("missing parameter");
   }
 
-  m.listAgregate(id, start).then(function(values){
+  m.transform(id).then(function(values){
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(values));
   }).fail(function(error) {

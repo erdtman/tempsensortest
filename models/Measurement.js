@@ -8,13 +8,13 @@ let Q = require('q');
 exports.create = function(id, value) {
   let deferred = Q.defer();
 
-  if(parseInt(value) < -50 || parseInt(value) > 50) {
+  if(parseFloat(value) < -50 || parseFloat(value) > 50) {
     return deferred.reject(new Error("ignoring unresonable value"));
   }
 
   let measurement = {
     "id" : id,
-    "measurement" : value,
+    "measurement" : parseFloat(value),
     "time": new Date().getTime()
   };
 
@@ -30,46 +30,77 @@ exports.create = function(id, value) {
   return deferred.promise;
 };
 
-exports.list = function(id, start, end) {
+var SECOND = 1000;
+var MINUTE = SECOND*60;
+var HOUR = MINUTE*60;
+var DAY = HOUR*24;
+var WEEK = DAY*7
+var MONTH = DAY*30;
+var interval = HOUR;
+
+exports.listAgregate = function(id, interval) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
+  let start = 0;
+  let chunk = 0;
+  let now = new Date().getTime()
 
-  collection.find({id:id, time : {$gte: start }}).toArray(function(err, docs) {
+  if (interval === "HOUR") {
+    start = now - HOUR;
+    chunk = MINUTE * 3;
+  } else if (interval === "DAY") {
+    start = now - DAY;
+    chunk = HOUR;
+  } else if (interval === "WEEK") {
+    start = now - WEEK;
+    chunk = HOUR * 4;
+  } else if (interval === "MONTH") {
+    start = now - MONTH;
+    chunk = HOUR * 8;
+  } else {
+    deferred.reject(new Error("Unknown interval, " + interval));
+    return deferred.promise;
+  }
+
+  collection.aggregate([
+    { "$match": { "id": id, time : {$gte: start }}},
+    { "$group": {
+        '_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
+        "measurement": { "$avg": "$measurement" }
+    }}
+  ]).toArray(function(err, docs) {
     if (err) {
       return deferred.reject(new Error(err));
     }
+    console.log(docs);
+    deferred.resolve(docs);
+  });
+  return deferred.promise;
+}
+
+exports.transform = function(id) {
+  let deferred = Q.defer();
+  let collection = db.get().collection('measurement');
+
+  collection.find({id:id}).toArray(function(err, docs) {
+    if (err) {
+      return deferred.reject(new Error(err));
+    }
+
+    docs.forEach(function(doc){
+      doc.measurement = parseFloat(doc.measurement);
+      collection.save(doc);
+    })
 
     deferred.resolve(docs);
   });
   return deferred.promise;
 };
 
-exports.listAgregate = function(id, start) {
-  let deferred = Q.defer();
-  let collection = db.get().collection('measurement');
-
-  collection.aggregate([
-    { "$match": { "id": id, time : {$gte: start }}},
-    { "$group": {
-        "_id": null,
-        "measurement": { "$avg": "$measurement" },
-        "count": { "$sum": 1 }
-    }}
-  ]).toArray(function(err, docs) {
-    if (err) {
-      return deferred.reject(new Error(err));
-    }
-       console.log(docs);
-       deferred.resolve(docs);
-  });
-  return deferred.promise;
-}
-
 exports.now = function(id, start, end) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
 
-//time : {$gte: new Date().getTime()-(10*60*1000) }
   collection.find({id:id}).sort({"time":-1}).limit(1).each(function(err, doc) {
     if (err) {
       return deferred.reject(new Error(err));

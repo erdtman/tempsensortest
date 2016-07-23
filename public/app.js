@@ -43,9 +43,8 @@ function draw(labels, data, min, max) {
   });
 }
 
-function load() {
-  var now = new Date().getTime();
-  $.getJSON("/measurement/sensor2", {start: now - interval})
+function load(interval) {
+  $.getJSON("/measurement/sensor2", {"interval": interval})
   .done(function( json ) {
     var data = [];
     var labels = [];
@@ -74,40 +73,28 @@ function load() {
   });
 }
 
-var SECOND = 1000;
-var MINUTE = SECOND*60;
-var HOUR = MINUTE*60;
-var DAY = HOUR*24;
-var WEEK = DAY*7
-var MONTH = DAY*30;
-var interval = HOUR;
-
 $("#hour").click(function(e) {
-  interval = HOUR;
   e.preventDefault();
   $(this).tab('show');
-  load();
+  load("HOUR");
 });
 
 $("#day").click(function(e) {
-  interval = DAY;
   e.preventDefault();
   $(this).tab('show');
-  load();
+  load("DAY");
 });
 
 $("#week").click(function(e) {
-  interval = WEEK;
   e.preventDefault();
   $(this).tab('show');
-  load();
+  load("WEEK");
 });
 
 $("#month").click(function(e) {
-  interval = MONTH;
   e.preventDefault();
   $(this).tab('show');
-  load();
+  load("MONTH");
 });
 
 var getCurrentTemperature = function() {
@@ -124,7 +111,7 @@ var getCurrentTemperature = function() {
 };
 
 $(document).ready(function() {
-  load();
+  load("HOUR");
   setInterval(getCurrentTemperature, 10000);
   getCurrentTemperature();
 });
