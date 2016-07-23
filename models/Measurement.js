@@ -45,6 +45,8 @@ exports.listAgregate = function(id, interval) {
   let chunk = 0;
   let now = new Date().getTime()
 
+  console.log("interval: " + interval);
+
   if (interval === "HOUR") {
     start = now - HOUR;
     chunk = MINUTE * 3;
@@ -61,6 +63,9 @@ exports.listAgregate = function(id, interval) {
     deferred.reject(new Error("Unknown interval, " + interval));
     return deferred.promise;
   }
+
+  console.log("start: " + start);
+  console.log("chunk: " + chunk);
 
   collection.aggregate([
     { "$match": { "id": id, time : {$gte: start }}},
