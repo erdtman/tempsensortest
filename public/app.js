@@ -8,7 +8,7 @@ function draw(labels, data, min, max) {
     data: {
         labels: labels,
         datasets: [{
-            label: "Ute temperatur",
+            label: "Utetemperatur",
             fill: false,
             lineTension: 0.5,
             backgroundColor: "rgba(75,192,192,0.4)",

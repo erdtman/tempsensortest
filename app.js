@@ -56,6 +56,23 @@ app.get('/measurement/:id', function(req, res) {
   });
 });
 
+app.get('/measurement/:id/test', function(req, res) {
+  let id = req.params.id ;
+  let start = parseInt(req.query.start || "0");
+
+  if (!id) {
+    return res.status(400).send("missing parameter");
+  }
+
+  m.listAgregate(id, start).then(function(values){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(values));
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+});
+
+
 app.get('/measurement/:id/now', function(req, res) {
   let id = req.params.id ;
 

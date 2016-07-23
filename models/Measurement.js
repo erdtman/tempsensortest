@@ -44,6 +44,27 @@ exports.list = function(id, start, end) {
   return deferred.promise;
 };
 
+exports.listAgregate = function(id, start) {
+  let deferred = Q.defer();
+  let collection = db.get().collection('measurement');
+
+  collection.aggregate([
+    { "$match": { "id": id, time : {$gte: start }}},
+    { "$group": {
+        "_id": null,
+        "measurement": { "$avg": "$measurement" },
+        "count": { "$sum": 1 }
+    }}
+  ]).toArray(function(err, docs) {
+    if (err) {
+      return deferred.reject(new Error(err));
+    }
+       console.log(docs);
+       deferred.resolve(docs);
+  });
+  return deferred.promise;
+}
+
 exports.now = function(id, start, end) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
