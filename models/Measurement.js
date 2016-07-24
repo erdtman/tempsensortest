@@ -42,6 +42,7 @@ exports.list = function(id, interval) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
   let start = 0;
+  let now = new Date().getTime();
 
   if (interval === "HOUR") {
     start = now - HOUR;
@@ -74,7 +75,7 @@ exports.listAgregate = function(id, interval) {
   let collection = db.get().collection('measurement');
   let start = 0;
   let chunk = 0;
-  let now = new Date().getTime()
+  let now = new Date().getTime();
 
   console.log("interval: " + interval);
 
