@@ -81,10 +81,10 @@ exports.listAgregate = function(id, interval) {
 
   if (interval === "HOUR") {
     start = now - HOUR;
-    chunk = MINUTE;
+    chunk = MINUTE * 2;
   } else if (interval === "DAY") {
     start = now - DAY;
-    chunk = MINUTE;
+    chunk = MINUTE * 30;
   } else if (interval === "WEEK") {
     start = now - WEEK;
     chunk = HOUR * 3;
