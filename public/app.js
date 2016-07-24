@@ -35,10 +35,8 @@ function draw(labels, data, min, max) {
                 ticks: {
                     max: max + 1,
                     min: min - 1,
-                    ticks: {
-                      callback: function(label, index, labelsArray) {
-                         return (index%2)==0?null:true;
-                      }
+                    callback: function(label, index, labelsArray) {
+                       return (index%2)==0?null:true;
                     }
                 }
             }]
