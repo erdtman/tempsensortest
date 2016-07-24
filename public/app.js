@@ -75,12 +75,16 @@ function load(interval, format) {
   });
 }
 
+var padWithZero = function(in) {
+  return (in<10) ? ("0"+in) : in;
+}
+
 $("#hour").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("HOUR", function(date) {
-    var hour = date.getHours();
-    var minute = date.getMinutes();
+    var hour = padWithZero(date.getHours());
+    var minute = padWithZero(date.getMinutes());
     return hour + ":" + minute;
   });
 });
@@ -98,8 +102,8 @@ $("#day").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("DAY", function(date) {
-    var hour = date.getHours();
-    var minute = date.getMinutes();
+    var hour = padWithZero(date.getHours());
+    var minute = padWithZero(date.getMinutes());
     return hour + ":" + minute;
   });
 });
@@ -108,8 +112,8 @@ $("#week").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("WEEK", function(date) {
-    var hour = date.getHours();
-    var minute = date.getMinutes();
+    var hour = padWithZero(date.getHours());
+    var minute = padWithZero(date.getMinutes());
     var day = date.getDay();
     return weekDays[day] + ", " + hour + ":" + minute;
   });
@@ -119,10 +123,10 @@ $("#month").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("MONTH", function(date) {
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var month = date.getMonth();
-    var date = date.getDate();
+    var hour = padWithZero(date.getHours());
+    var minute = padWithZero(date.getMinutes());
+    var month = padWithZero(date.getMonth());
+    var date = padWithZero(date.getDate());
     return  date + "/" + month +", " + hour + ":" + minute;
   });
 });
