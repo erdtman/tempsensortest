@@ -109,7 +109,7 @@ $("#week").click(function(e) {
   load("WEEK", function(date) {
     var hour = date.getHours();
     var minute = date.getMinutes();
-    var day = date.getMinutes();
+    var day = date.getDay();
     return weekDays[day] + ", " + hour + ":" + minute;
   });
 });
