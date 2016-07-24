@@ -72,7 +72,8 @@ exports.listAgregate = function(id, interval) {
     { "$group": {
         //'_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
         '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
-        "measurement": { "$avg": "$measurement" }
+        "measurement" : { "$avg" : "$measurement" },
+        "count": {"$sum" : 1}
     }}
   ]).toArray(function(err, docs) {
     if (err) {
