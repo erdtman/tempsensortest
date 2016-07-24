@@ -96,24 +96,18 @@ exports.listAgregate = function(id, interval) {
     return deferred.promise;
   }
 
-  console.log("start: " + start);
-  console.log("chunk: " + chunk);
-
   collection.aggregate([
     { "$match": { "id": id, time : {$gte: start }}},
     { "$group": {
         //'_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
         '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
-        "measurement" : { "$avg" : "$measurement" },
-        "count": {"$sum" : 1}
+        "measurement" : { "$avg" : "$measurement" }
     }},
-    { "$sort" : {'_id' : -1}}
+    { "$sort" : {'_id' : 1}}
   ]).toArray(function(err, docs) {
     if (err) {
-      console.log("err: " + err);
       return deferred.reject(new Error(err));
     }
-    console.log(docs);
     deferred.resolve(docs);
   });
   return deferred.promise;
