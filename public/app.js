@@ -36,7 +36,7 @@ function draw(labels, data, min, max) {
                     max: max + 1,
                     min: min - 1,
                     callback: function(label, index, labelsArray) {
-                       return (index%2)==0?null:true;
+                       return (index%2)==0?null:label;
                     }
                 }
             }]
