@@ -60,7 +60,9 @@ function load(interval) {
         return;
       }
       data.push(value.measurement);
-      labels.push(value._id);
+      var date = new Date(value._id);
+      labels.push(date);
+
       min = Math.min(min, value.measurement);
       max = Math.max(max, value.measurement);
     });

@@ -55,10 +55,10 @@ exports.listAgregate = function(id, interval) {
     chunk = HOUR;
   } else if (interval === "WEEK") {
     start = now - WEEK;
-    chunk = HOUR * 4;
+    chunk = HOUR * 3;
   } else if (interval === "MONTH") {
     start = now - MONTH;
-    chunk = HOUR * 8;
+    chunk = HOUR * 6;
   } else {
     deferred.reject(new Error("Unknown interval, " + interval));
     return deferred.promise;
