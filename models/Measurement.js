@@ -52,7 +52,7 @@ exports.listAgregate = function(id, interval) {
     chunk = MINUTE;
   } else if (interval === "DAY") {
     start = now - DAY;
-    chunk = HOUR;
+    chunk = MINUTE;
   } else if (interval === "WEEK") {
     start = now - WEEK;
     chunk = HOUR * 3;
