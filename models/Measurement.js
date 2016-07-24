@@ -38,6 +38,37 @@ var WEEK = DAY*7
 var MONTH = DAY*30;
 var interval = HOUR;
 
+exports.list = function(id, interval) {
+  let deferred = Q.defer();
+  let collection = db.get().collection('measurement');
+  let start = 0;
+
+  if (interval === "HOUR") {
+    start = now - HOUR;
+  } else if (interval === "DAY") {
+    start = now - DAY;
+  } else if (interval === "WEEK") {
+    start = now - WEEK;
+  } else if (interval === "MONTH") {
+    start = now - MONTH;
+  } else {
+    deferred.reject(new Error("Unknown interval, " + interval));
+    return deferred.promise;
+  }
+
+  collection.find({id:id, time : {$gte: start }}).toArray(function(err, docs) {
+    if (err) {
+      return deferred.reject(new Error(err));
+    }
+
+    deferred.resolve(docs);
+  });
+  return deferred.promise;
+};
+
+
+
+
 exports.listAgregate = function(id, interval) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');

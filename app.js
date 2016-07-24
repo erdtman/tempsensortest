@@ -40,6 +40,22 @@ app.post('/measurement/:id', function(req, res) {
   });
 });
 
+app.get('/measurement/:id/list', function(req, res) {
+  let id = req.params.id ;
+  let interval = req.query.interval || "HOUR";
+
+  if (!id) {
+    return res.status(400).send("missing parameter");
+  }
+
+  m.list(id, interval).then(function(values){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(values));
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+});
+
 app.get('/measurement/:id', function(req, res) {
   let id = req.params.id ;
   let interval = req.query.interval || "HOUR";
