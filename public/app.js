@@ -43,7 +43,7 @@ function draw(labels, data, min, max) {
   });
 }
 
-function load(interval) {
+function load(interval, format) {
   $.getJSON("/measurement/sensor2", {"interval": interval})
   .done(function( json ) {
     var data = [];
@@ -61,7 +61,7 @@ function load(interval) {
       }
       data.push(value.measurement);
       var date = new Date(value._id);
-      labels.push(date);
+      labels.push(format(date));
 
       min = Math.min(min, value.measurement);
       max = Math.max(max, value.measurement);
@@ -78,25 +78,52 @@ function load(interval) {
 $("#hour").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
-  load("HOUR");
+  load("HOUR", function(date) {
+    var hour = data.getHours()
+    var minute = data.getMinutes()
+    return hour + ":" + minute;
+  });
 });
 
+var weekDays = [
+  "mon",
+  "tis",
+  "ons",
+  "tor",
+  "lör",
+  "sön"
+]
 $("#day").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
-  load("DAY");
+  load("DAY", function(date) {
+    var hour = data.getHours();
+    var minute = data.getMinutes();
+    return hour + ":" + minute;
+  });
 });
 
 $("#week").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
-  load("WEEK");
+  load("WEEK", function(date) {
+    var hour = data.getHours();
+    var minute = data.getMinutes();
+    var day = data.getMinutes();
+    return weekDays[day] + ", " + hour + ":" + minute;
+  });
 });
 
 $("#month").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
-  load("MONTH");
+  load("MONTH", function(date) {
+    var hour = data.getHours();
+    var minute = data.getMinutes();
+    var month = data.getMonth();
+    var date = data.getDate();
+    return  date + "/" + month +", " + hour + ":" + minute;
+  });
 });
 
 var getCurrentTemperature = function() {
