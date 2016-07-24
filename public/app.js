@@ -75,8 +75,8 @@ function load(interval, format) {
   });
 }
 
-var padWithZero = function(in) {
-  return (in<10) ? ("0"+in) : in;
+var padWithZero = function(value) {
+  return (value<10) ? ("0"+value) : value;
 }
 
 $("#hour").click(function(e) {
