@@ -86,12 +86,13 @@ $("#hour").click(function(e) {
 });
 
 var weekDays = [
+  "sön",
   "mon",
   "tis",
   "ons",
   "tor",
-  "lör",
-  "sön"
+  "fre",
+  "lör"
 ]
 $("#day").click(function(e) {
   e.preventDefault();
