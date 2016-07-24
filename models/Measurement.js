@@ -70,7 +70,8 @@ exports.listAgregate = function(id, interval) {
   collection.aggregate([
     { "$match": { "id": id, time : {$gte: start }}},
     { "$group": {
-        '_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
+        //'_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
+        '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
         "measurement": { "$avg": "$measurement" }
     }}
   ]).toArray(function(err, docs) {
