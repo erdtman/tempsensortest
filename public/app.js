@@ -79,8 +79,8 @@ $("#hour").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("HOUR", function(date) {
-    var hour = data.getHours()
-    var minute = data.getMinutes()
+    var hour = date.getHours();
+    var minute = date.getMinutes();
     return hour + ":" + minute;
   });
 });
@@ -97,8 +97,8 @@ $("#day").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("DAY", function(date) {
-    var hour = data.getHours();
-    var minute = data.getMinutes();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
     return hour + ":" + minute;
   });
 });
@@ -107,9 +107,9 @@ $("#week").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("WEEK", function(date) {
-    var hour = data.getHours();
-    var minute = data.getMinutes();
-    var day = data.getMinutes();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var day = date.getMinutes();
     return weekDays[day] + ", " + hour + ":" + minute;
   });
 });
@@ -118,10 +118,10 @@ $("#month").click(function(e) {
   e.preventDefault();
   $(this).tab('show');
   load("MONTH", function(date) {
-    var hour = data.getHours();
-    var minute = data.getMinutes();
-    var month = data.getMonth();
-    var date = data.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var month = date.getMonth();
+    var date = date.getDate();
     return  date + "/" + month +", " + hour + ":" + minute;
   });
 });
@@ -140,7 +140,11 @@ var getCurrentTemperature = function() {
 };
 
 $(document).ready(function() {
-  load("HOUR");
+  load("HOUR", function(date) {
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    return hour + ":" + minute;
+  });
   setInterval(getCurrentTemperature, 10000);
   getCurrentTemperature();
 });
