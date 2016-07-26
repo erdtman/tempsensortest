@@ -34,11 +34,7 @@ function draw(labels, data, min, max) {
             yAxes: [{
                 ticks: {
                     max: max + 1,
-                    min: min - 1,
-                    //callback: function(label, index, labelsArray) {
-                      //TODO fix fewer labels
-                      // return (index%2)==0?null:label;
-                    //}
+                    min: min - 1
                 }
             }]
         },

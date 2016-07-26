@@ -23,6 +23,17 @@ app.set('view engine', 'jade');
 
 app.get('/', function(request, response) {
   response.render('index');
+
+  var id = "sensor2"; // TODO change this hardcoded value
+  m.now(id).then(function(value) {
+    res.render('index', value);
+  }).fail(function(error) {
+    response.render('index', {
+      "id" : "",
+      "measurement" : "",
+      "time": ""
+    });
+  });
 });
 
 app.post('/measurement/:id', function(req, res) {
