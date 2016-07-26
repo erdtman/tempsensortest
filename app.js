@@ -22,8 +22,6 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 app.get('/', function(request, response) {
-  response.render('index');
-
   var id = "sensor2"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
     res.render('index', value);
