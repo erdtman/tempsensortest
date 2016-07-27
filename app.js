@@ -27,6 +27,7 @@ app.get('/', function(request, response) {
     console.log(value);
     res.render('index', value);
   }).fail(function(error) {
+    console.log(error);
     response.render('index', {
       "id" : "",
       "measurement" : "",
