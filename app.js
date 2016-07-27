@@ -24,9 +24,9 @@ app.set('view engine', 'jade');
 app.get('/', function(request, response) {
   var id = "sensor2"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
-    console.log(value);
     value.measurement = value.measurement.toFixed(1);
-    res.render('index', value);
+    console.log(value);
+    res.render('index', { measurement : 'Home' });
   }).fail(function(error) {
     console.log(error);
     response.render('index', {
