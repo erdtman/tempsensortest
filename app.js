@@ -24,6 +24,7 @@ app.set('view engine', 'jade');
 app.get('/', function(request, response) {
   var id = "sensor2"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
+    console.log(value);
     res.render('index', value);
   }).fail(function(error) {
     response.render('index', {
@@ -103,7 +104,7 @@ app.get('/measurement/:id/now', function(req, res) {
   if (!id) {
     return res.status(400).send("missing parameter");
   }
-
+  console.log("now: "+id);
   m.now(id).then(function(value) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(value));
