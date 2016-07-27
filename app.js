@@ -25,6 +25,7 @@ app.get('/', function(request, response) {
   var id = "sensor2"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
     console.log(value);
+    value.measurement = value.measurement.toFixed(1);
     res.render('index', value);
   }).fail(function(error) {
     console.log(error);
