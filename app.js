@@ -7,6 +7,7 @@ let app = express();
 let bodyParser = require('body-parser');
 
 let m = require('./models/Measurement.js');
+let c = require('./models/Config.js');
 let db = require('./db.js');
 
 let url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
@@ -35,6 +36,26 @@ app.get('/', function(request, response) {
   });
 });
 
+app.get('/config', function(req, res) {
+  c.read().then(function(config) {
+    res.render('config', config);
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+});
+
+app.post('/config', function(req, res) {
+  c.read().then(function(config) {
+    config.username = req.body.username || config.username;
+    config.password = req.body.password || config.password;
+    return config.save();
+  }).then(function() {
+    return res.redirect('/config');
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+});
+
 app.post('/measurement/:id', function(req, res) {
   let id = req.params.id;
   let value = req.body.value;
@@ -42,7 +63,7 @@ app.post('/measurement/:id', function(req, res) {
   if (!id || !value) {
     return res.status(400).send("missing parameter");
   }
-
+  // TODO emit timer event to scheduler
   m.create(id, value).then(function(measurement) {
     res.status(201).send();
   }).fail(function(error) {
@@ -50,21 +71,6 @@ app.post('/measurement/:id', function(req, res) {
   });
 });
 
-app.get('/measurement/:id/list', function(req, res) {
-  let id = req.params.id ;
-  let interval = req.query.interval || "HOUR";
-
-  if (!id) {
-    return res.status(400).send("missing parameter");
-  }
-
-  m.list(id, interval).then(function(values){
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(values));
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-});
 
 app.get('/measurement/:id', function(req, res) {
   let id = req.params.id ;
@@ -75,21 +81,6 @@ app.get('/measurement/:id', function(req, res) {
   }
 
   m.listAgregate(id, interval).then(function(values){
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(values));
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-});
-
-app.get('/measurement/:id/trans', function(req, res) {
-  let id = req.params.id ;
-
-  if (!id) {
-    return res.status(400).send("missing parameter");
-  }
-
-  m.transform(id).then(function(values){
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(values));
   }).fail(function(error) {
