@@ -34,13 +34,13 @@ exports.ticker = function (req, res, next) {
   console.log("Running notifier...");
   let now = new Date();
 
-  if(now.getHours() !== 22) { //TODO make it configurable?
+  if(now.getHours() !== 3) { //TODO make it configurable?
     console.log("Time is not right, " + now.getHours());
     return next();
   }
 
   C.read().then(function(config) {
-    if (false&&config.lastSent &&
+    if (config.lastSent &&
         config.lastSent.getFullYear() === now.getFullYear() &&
         config.lastSent.getMonth() === now.getMonth() &&
         config.lastSent.getDate() === now.getDate()) {
