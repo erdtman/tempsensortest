@@ -34,20 +34,19 @@ exports.ticker = function (req, res, next) {
   console.log("Running notifier...");
   let now = new Date();
 
-  if(now.getHours() !== 16) { //TODO make it configurable?
+  if(now.getHours() !== 14) { //TODO make it configurable?
     console.log("Time is not right, " + now.getHours());
     return next();
   }
 
   C.read().then(function(config) {
-    /*
     if (config.lastSent &&
         config.lastSent.getFullYear() === now.getFullYear() &&
         config.lastSent.getMonth() === now.getMonth() &&
         config.lastSent.getDate() === now.getDate()) {
       throw new Error("Has already notified today");
     }
-    */
+
     // TODO fix hardcoded value
     m.now("sensor2").then(function(value){
       return send(config, value);
