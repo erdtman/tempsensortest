@@ -40,7 +40,7 @@ exports.ticker = function (req, res, next) {
   }
 
   C.read().then(function(config) {
-    if (config.lastSent &&
+    if (false&&config.lastSent &&
         config.lastSent.getFullYear() === now.getFullYear() &&
         config.lastSent.getMonth() === now.getMonth() &&
         config.lastSent.getDate() === now.getDate()) {
