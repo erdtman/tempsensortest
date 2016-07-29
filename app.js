@@ -8,6 +8,7 @@ let bodyParser = require('body-parser');
 
 let m = require('./models/Measurement.js');
 let c = require('./models/Config.js');
+let Notifier = require('./Notifier.js');
 let db = require('./db.js');
 
 let url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
@@ -16,6 +17,7 @@ let port = process.env.PORT || 5000;
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(Notifier.ticker);
 
 app.set('port', port);
 app.set('etag', false);
@@ -48,6 +50,7 @@ app.post('/config', function(req, res) {
   c.read().then(function(config) {
     config.username = req.body.username || config.username;
     config.password = req.body.password || config.password;
+    config.tel = req.body.tel || config.tel;
     return config.save();
   }).then(function() {
     return res.redirect('/config');

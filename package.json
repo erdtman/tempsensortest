@@ -12,7 +12,8 @@
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "mongodb": "^2.2.2",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "superagent": "^2.1.0"
   },
   "repository": {
     "type": "git",
