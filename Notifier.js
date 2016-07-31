@@ -31,11 +31,9 @@ function send(config, value) {
 }
 
 exports.ticker = function (req, res, next) {
-  console.log("Running notifier...");
   let now = new Date();
 
-  if(now.getHours() !== 3) { //TODO make it configurable?
-    console.log("Time is not right, " + now.getHours());
+  if(now.getHours() !== 3) { // 05:00 //TODO make it configurable?
     return next();
   }
 
