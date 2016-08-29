@@ -106,6 +106,19 @@ app.get('/measurement/:id/now', function(req, res) {
   });
 })
 
+app.get('/measurement/:id/clean', function(req, res) {
+  let id = req.params.id ;
+
+  if (!id) {
+    return res.status(400).send("missing parameter");
+  }
+  m.now(id).then(function(value) {
+    res.send(value.toFixed(0));
+  }).fail(function(error) {
+    res.status(500).send(error);
+  });
+})
+
 db.connect(url, function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.');
