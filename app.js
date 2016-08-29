@@ -113,7 +113,7 @@ app.get('/measurement/:id/clean', function(req, res) {
     return res.status(400).send("missing parameter");
   }
   m.now(id).then(function(value) {
-    res.send(value.toFixed(0));
+    res.send(value.measurement.toFixed(0));
   }).fail(function(error) {
     res.status(500).send(error);
   });
