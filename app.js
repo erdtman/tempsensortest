@@ -63,6 +63,9 @@ app.post('/measurement/:id', function(req, res) {
   let id = req.params.id;
   let value = req.body.value;
 
+  console.log('id: ' + id);
+  console.log('value: ' + value);
+
   if (!id || !value) {
     return res.status(400).send("missing parameter");
   }
