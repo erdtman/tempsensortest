@@ -42,31 +42,47 @@ function draw(labels, data, min, max) {
     }
   });
 }
-// 45005c000351353530373132
+
 function load(interval, format) {
   $.getJSON("/measurement/2c001f000147353138383138", {"interval": interval})
   .done(function( json ) {
+    $.getJSON("/measurement/45005c000351353530373132", {"interval": interval})
+    .done(function( json2 ) {
+      var data = [];
+      var data2 = [];
+      var labels = [];
+      var labels2 = [];
 
-    var data = [];
-    var labels = [];
-
-    if(json.length < 1) {
-      return; // TODO error handling
-    }
-
-    json.forEach(function(value) {
-      if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
-        return;
+      if(json.length < 1 || json2.length < 1) {
+        return; // TODO error handling
       }
-      data.push(value.measurement);
-      var date = new Date(value._id);
-      labels.push(format(date));
+
+      json.forEach(function(value) {
+        if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
+          return;
+        }
+        data.push(value.measurement);
+        var date = new Date(value._id);
+        labels.push(format(date));
+      });
+
+      json2.forEach(function(value) {
+        if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
+          return;
+        }
+        data2.push(value.measurement);
+        var date = new Date(value._id);
+        labels2.push(format(date));
+      });
+
+      const min = Math.min(Math.min(...data), Math.min(...data2));
+      const max = Math.max(Math.max(...data), Math.max(...data2));
+
+      draw(labels, data, min, max, labels2, data2);
+    }).fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ", " + error;
+      console.log( "Request Failed: " + err );
     });
-
-    const min = Math.min(...data);
-    const max = Math.max(...data);
-
-    draw(labels, data, min, max);
   })
   .fail(function( jqxhr, textStatus, error ) {
     var err = textStatus + ", " + error;
