@@ -42,11 +42,11 @@ function draw(labels, data, min, max) {
     }
   });
 }
-
+// 45005c000351353530373132
 function load(interval, format) {
-
   $.getJSON("/measurement/2c001f000147353138383138", {"interval": interval})
   .done(function( json ) {
+
     var data = [];
     var labels = [];
 
@@ -54,8 +54,6 @@ function load(interval, format) {
       return; // TODO error handling
     }
 
-    var min = json[0].measurement;
-    var max = json[0].measurement;
     json.forEach(function(value) {
       if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
         return;
@@ -63,10 +61,10 @@ function load(interval, format) {
       data.push(value.measurement);
       var date = new Date(value._id);
       labels.push(format(date));
-
-      min = Math.min(min, value.measurement);
-      max = Math.max(max, value.measurement);
     });
+
+    const min = Math.min(...data);
+    const max = Math.max(...data);
 
     draw(labels, data, min, max);
   })
