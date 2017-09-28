@@ -9,8 +9,7 @@ exports.create = function(id, value) {
   let deferred = Q.defer();
 
   if(parseFloat(value) < -50 || parseFloat(value) > 50) {
-    deferred.reject(new Error("ignoring unresonable value"));
-    return deferred.promise;
+    return deferred.reject(new Error("ignoring unresonable value"));
   }
 
   let measurement = {
@@ -22,8 +21,7 @@ exports.create = function(id, value) {
   let collection = db.get().collection('measurement');
   collection.save(measurement, function(err, doc) {
     if (err) {
-      deferred.reject(new Error(err));
-      return deferred.promise;
+      return deferred.reject(new Error(err));
     }
 
     deferred.resolve(doc);
@@ -76,8 +74,7 @@ exports.listAgregate = function(id, interval) {
     { "$sort" : {'_id' : 1}}
   ]).toArray(function(err, docs) {
     if (err) {
-      deferred.reject(new Error(err));
-      return deferred.promise;
+      return deferred.reject(new Error(err));
     }
     deferred.resolve(docs);
   });
@@ -90,8 +87,7 @@ exports.now = function(id, start, end) {
 
   collection.find({id:id}).sort({"time":-1}).limit(1).each(function(err, doc) {
     if (err) {
-      deferred.reject(new Error(err));
-      return deferred.promise;
+      return deferred.reject(new Error(err));
     }
 
     deferred.resolve(doc);
