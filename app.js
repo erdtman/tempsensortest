@@ -184,6 +184,11 @@ app.get('/measurement/:id/clean', function(req, res) {
   if (!id) {
     return res.status(400).send("missing parameter");
   }
+
+  if (id === '2c001f000147353138383138'){ // Temporary hack
+    id = sensor2;
+  }
+
   m.now(id).then(function(value) {
     res.send(value.measurement.toFixed(0));
   }).fail(function(error) {

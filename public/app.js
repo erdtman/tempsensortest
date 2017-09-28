@@ -44,7 +44,8 @@ function draw(labels, data, min, max) {
 }
 
 function load(interval, format) {
-  $.getJSON("/measurement/sensor2", {"interval": interval})
+
+  $.getJSON("/measurement/2c001f000147353138383138", {"interval": interval})
   .done(function( json ) {
     var data = [];
     var labels = [];
@@ -132,7 +133,7 @@ $("#month").click(function(e) {
 });
 
 var getCurrentTemperature = function() {
-  $.getJSON("/measurement/sensor2/now")
+  $.getJSON("/measurement/2c001f000147353138383138/now")
   .done(function( json ) {
     if(json && json.measurement) {
         $("#current").text(parseFloat(json.measurement).toFixed(1) + " °C");
