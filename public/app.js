@@ -28,7 +28,7 @@ function draw(labels, data, min, max, labels2, data2) {
             pointHitRadius: 1,
             data: data,
         },{
-            label: "innetemperatur",
+            label: "Innetemperatur",
             fill: false,
             lineTension: 0.5,
             backgroundColor: "rgba(75,0,192,0.4)",

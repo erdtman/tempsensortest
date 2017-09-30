@@ -27,7 +27,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 app.get('/', function(request, response) {
-  var id = "sensor2"; // TODO change this hardcoded value
+  var id = "2c001f000147353138383138"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
     value.measurement = value.measurement.toFixed(1);
     response.render('index',value);
@@ -185,8 +185,8 @@ app.get('/measurement/:id/clean', function(req, res) {
     return res.status(400).send("missing parameter");
   }
 
-  if (id === '2c001f000147353138383138'){ // Temporary hack
-    id = sensor2;
+  if (id === 'sensor2'){ // Temporary hack
+    id = '2c001f000147353138383138';
   }
 
   m.now(id).then(function(value) {
