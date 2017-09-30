@@ -12,6 +12,7 @@ const d = require('./models/Device.js');
 const wd = require('./models/WaitingDevice.js');
 const Notifier = require('./Notifier.js');
 const db = require('./db.js');
+const appv2 = require('./appv2.js');
 
 const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
 const port = process.env.PORT || 5000;
@@ -162,6 +163,8 @@ app.get('/measurement/:id', function(req, res) {
     res.status(500).send(error);
   });
 });
+
+app.get('/v2/measurement/:id', appv2.measurements);
 
 
 app.get('/measurement/:id/now', function(req, res) {

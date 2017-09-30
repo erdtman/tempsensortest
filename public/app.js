@@ -1,112 +1,95 @@
 
 // http://www.chartjs.org
 
-function draw(labels, data, min, max, labels2, data2) {
+function draw(datasets, min, max, labels) {
   var ctx = $("#myChart");
   var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: labels,
-        datasets: [{
-            label: "Utetemperatur",
-            fill: false,
-            lineTension: 0.5,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 1,
-            data: data,
-        },{
-            label: "Innetemperatur",
-            fill: false,
-            lineTension: 0.5,
-            backgroundColor: "rgba(75,0,192,0.4)",
-            borderColor: "rgba(75,0,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,0,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,0,192,1)",
-            pointHoverBorderColor: "rgba(220,0,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 1,
-            data: data2,
-        }]
+    'type': 'line',
+    'data': {
+        'labels': labels,
+        'datasets': datasets
     },
-    options: {
-      scales: {
-            yAxes: [{
-                ticks: {
-                    max: max + 1,
-                    min: min - 1
+    'options': {
+      'scales': {
+            'yAxes': [{
+                'ticks': {
+                    'max': max + 1,
+                    'min': min - 1
                 }
             }]
         },
-      responsive: true,
+      'responsive': true,
     }
   });
 }
 
-function load(interval, format) {
-  $.getJSON("/measurement/2c001f000147353138383138", {"interval": interval})
+function loadDataset(id, interval, format) {
+  let deferred = Q.defer();
+  $.getJSON("/v2/measurement/" + id, {"interval": interval})
   .done(function( json ) {
-    $.getJSON("/measurement/45005c000351353530373132", {"interval": interval})
-    .done(function( json2 ) {
-      var data = [];
-      var data2 = [];
-      var labels = [];
-      var labels2 = [];
+    var data = [];
+    var labels = [];
 
-      if(json.length < 1 || json2.length < 1) {
-        return; // TODO error handling
+    json.measurements.forEach(function(value) {
+      if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
+        return;
       }
-
-      json.forEach(function(value) {
-        if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
-          return;
-        }
-        data.push(value.measurement);
-        var date = new Date(value._id);
-        labels.push(format(date));
-      });
-
-      json2.forEach(function(value) {
-        if(parseInt(value.measurement) < -50 || parseInt(value.measurement) > 50) {
-          return;
-        }
-        data2.push(value.measurement);
-        var date = new Date(value._id);
-        labels2.push(format(date));
-      });
-
-      const min = Math.min(Math.min(...data), Math.min(...data2));
-      const max = Math.max(Math.max(...data), Math.max(...data2));
-
-      draw(labels, data, min, max, labels2, data2);
-    }).fail(function( jqxhr, textStatus, error ) {
-      var err = textStatus + ", " + error;
-      console.log( "Request Failed: " + err );
+      data.push(value.measurement);
+      var date = new Date(value._id);
+      labels.push(format(date));
     });
-  })
-  .fail(function( jqxhr, textStatus, error ) {
+
+    const min = Math.min(...data);
+    const max = Math.max(...data);
+
+    const dataset = {
+        'label': json.device.name, // does not exist yet
+        'fill': false,
+        'lineTension': 0.5,
+        'backgroundColor': "rgba(75,0,192,0.4)",
+        'borderColor': "rgba(75,0,192,1)",
+        'borderCapStyle': 'butt',
+        'borderDash': [],
+        'borderDashOffset': 0.0,
+        'borderJoinStyle': 'miter',
+        'pointBorderColor': "rgba(75,0,192,1)",
+        'pointBackgroundColor': "#fff",
+        'pointBorderWidth': 1,
+        'pointHoverRadius': 5,
+        'pointHoverBackgroundColor': "rgba(75,0,192,1)",
+        'pointHoverBorderColor': "rgba(220,0,220,1)",
+        'pointHoverBorderWidth': 2,
+        'pointRadius': 1,
+        'pointHitRadius': 1,
+        'data': data,
+    };
+    deferred.resolve(dataset);
+  }).fail(function( jqxhr, textStatus, error ) {
     var err = textStatus + ", " + error;
     console.log( "Request Failed: " + err );
+    return deferred.reject(new Error(err));
+  });
+  return deferred.promise;
+}
+
+function load(interval, format) {
+  const devices = ['2c001f000147353138383138', '45005c000351353530373132'];
+  const promises = [];
+
+  devices.forEach( (deviceId) => {
+    promises.push(loadDataset(deviceId, interval, format));
+  })
+
+  Q.allSettled(promises).then(function (results) {
+    const datasets = [];
+    results.forEach(function (result) {
+        if (result.state === "fulfilled") {
+            datasets.push(result.value);
+        } else {
+          throw new Error('promis not fullfilled');
+        }
+    });
+    draw(datasets, -20, 40, labels);
   });
 }
 
