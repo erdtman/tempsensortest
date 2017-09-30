@@ -95,7 +95,6 @@ function load(interval, format) {
     const min = datasets.reduce(function(a, b) {
       return Math.min(a.min, b.min);
     });
-    datasets.forEach((dataset))
     draw(datasets, min, max, datasets[0].labels);
   });
 }
