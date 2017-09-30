@@ -38,7 +38,7 @@ function loadDataset(id, interval, format) {
       var date = new Date(value._id);
       labels.push(format(date));
     });
-    
+
     const dataset = {
         'label': json.device.name, // does not exist yet
         'fill': false,
@@ -90,7 +90,7 @@ function load(interval, format) {
         }
     });
 
-    draw(datasets, -20, 40, datasets[0]labels);
+    draw(datasets, -20, 40, datasets[0].labels);
   });
 }
 
