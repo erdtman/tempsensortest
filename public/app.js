@@ -89,8 +89,14 @@ function load(interval, format) {
           throw new Error('promis not fullfilled');
         }
     });
-
-    draw(datasets, -20, 40, datasets[0].labels);
+    const max = datasets.reduce(function(a, b) {
+      return Math.max(a, b.max);
+    });
+    const min = datasets.reduce(function(a, b) {
+      return Math.min(a, b.min);
+    });
+    datasets.forEach((dataset))
+    draw(datasets, min, max, datasets[0].labels);
   });
 }
 
