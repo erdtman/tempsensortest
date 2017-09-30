@@ -38,10 +38,7 @@ function loadDataset(id, interval, format) {
       var date = new Date(value._id);
       labels.push(format(date));
     });
-
-    const min = Math.min(...data);
-    const max = Math.max(...data);
-
+    
     const dataset = {
         'label': json.device.name, // does not exist yet
         'fill': false,
@@ -62,6 +59,9 @@ function loadDataset(id, interval, format) {
         'pointRadius': 1,
         'pointHitRadius': 1,
         'data': data,
+        'min': Math.min(...data),
+        'max': Math.max(...data),
+        'labels': labels
     };
     deferred.resolve(dataset);
   }).fail(function( jqxhr, textStatus, error ) {
@@ -89,7 +89,8 @@ function load(interval, format) {
           throw new Error('promis not fullfilled');
         }
     });
-    draw(datasets, -20, 40, labels);
+
+    draw(datasets, -20, 40, datasets[0]labels);
   });
 }
 
