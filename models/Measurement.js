@@ -20,7 +20,7 @@ exports.create = function(id, value) {
   };
 
   let collection = db.get().collection('measurement');
-  console.log(creating); 
+  console.log("creating"); 
   console.log(measurement);
   
   
