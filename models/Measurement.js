@@ -30,9 +30,12 @@ exports.create = function(id, value) {
     console.log("deleting");
     console.log(doc);
     
-    collection.remove({id : doc.id}, function(err, obj) {
-      if (err) throw err;
-      console.log(obj.result.n + " document(s) deleted");
+    collection.remove({_id : {$eq: doc._id}}, function(err, obj) {
+      if (err) {
+        throw err;
+      }
+      console.log("deleted");
+      console.log(obj);
     });
   });
 
