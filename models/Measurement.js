@@ -19,11 +19,9 @@ exports.create = function(id, value) {
     "time": new Date().getTime()
   };
 
-
-
   let collection = db.get().collection('measurement');
   
-  collection.find({id:id}).sort({"time":1}).limit(1).each(function(err, doc) {
+  collection.find({id:id}).sort({"time":-1}).limit(1).each(function(err, doc) {
     if (err) {
       return deferred.reject(new Error(err));
     }
