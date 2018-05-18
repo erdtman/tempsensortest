@@ -7,10 +7,9 @@ let Q = require('q');
 
 exports.create = function(id, value) {
   let deferred = Q.defer();
-  
+
   if(parseFloat(value) < -50 || parseFloat(value) > 50) {
-    deferred.reject(new Error("ignoring unresonable value"));
-    return deferred.promise;
+    return deferred.reject(new Error("ignoring unresonable value"));
   }
 
   let measurement = {
@@ -20,28 +19,9 @@ exports.create = function(id, value) {
   };
 
   let collection = db.get().collection('measurement');
-  console.log("creating"); 
-  console.log(measurement);
-  
-  
-  //collection.find({id:id}).sort({"time":-1}).limit(1).each(function(err, doc) {
-  collection.find({id:id}).sort({"time":1}).limit(10).each(function(err, doc) {
-    if (err) {
-      return deferred.reject(new Error(err));
-    }
-    if(!doc) {
-      return;
-    }
-    console.log("deleting");
-    console.log(doc);
-  });
-
   collection.save(measurement, function(err, doc) {
     if (err) {
-      console.log("====== error ======");
-      console.log(err);
-      deferred.reject(new Error(err));
-      return deferred.promise;
+      return deferred.reject(new Error(err));
     }
 
     deferred.resolve(doc);
