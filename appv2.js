@@ -53,5 +53,5 @@ exports.timer = function(req, res) {
     operation.state = "OFF";
   }
 
-  res.send(JSON.stringify(operation));
+  res.send(operation.state);
 };
