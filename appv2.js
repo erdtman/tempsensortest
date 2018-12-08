@@ -3,9 +3,8 @@
 'use strict';
 
 const m = require('./models/Measurement.js');
-const c = require('./models/Config.js');
 const d = require('./models/Device.js');
-const wd = require('./models/WaitingDevice.js');
+const moment = require('moment');
 
 exports.measurements = function(req, res) {
   let id = req.params.id ;
@@ -29,4 +28,30 @@ exports.measurements = function(req, res) {
     console.log(error);
     res.status(500).send(error);
   });
+};
+
+
+exports.timer = function(req, res) {
+  const now = moment();
+  const nowString = now.format("YYYY-MM-DD");
+  const tOOOO = moment(nowString + " 00:00:00.000+01:00"); 
+  const t0500 = moment(nowString + " 05:00:00.000+01:00");
+  const t0800 = moment(nowString + " 08:00:00.000+01:00");
+  const t1530 = moment(nowString + " 13:30:00.000+01:00");
+  const t2400 = moment(nowString + " 24:00:00.000+01:00");
+
+  const operation = {};
+  if (now.isBetween(tOOOO, t0500)) {        // 00:00 -> 05:00 - OFF
+    operation.state = "OFF";
+  } else if (now.isBetween(t0500, t0800)) { // 05:00 -> 08:00 - ON
+    operation.state = "ON";
+  } else if (now.isBetween(t0800, t1530)) { // 08:00 -> 15:00 - OFF
+    operation.state = "OFF";
+  } else if (now.isBetween(t1530, t2400)) { // 15:00 -> 24:00 - ON
+    operation.state = "ON";
+  } else { // off
+    operation.state = "OFF";
+  }
+
+  res.send(JSON.stringify(operation));
 };

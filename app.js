@@ -41,6 +41,8 @@ app.get('/', function(request, response) {
   });
 });
 
+app.get('/timer/', appv2.timer);
+
 app.get('/config', function(req, res) {
   c.read().then(function(config) {
     res.render('config', config);

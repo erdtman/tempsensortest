@@ -7,10 +7,11 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.18.3",
     "content-security-policy": "^0.3.2",
-    "express": "^4.13.3",
+    "express": "^4.16.4",
     "jade": "^1.11.0",
+    "moment": "^2.22.2",
     "mongodb": "^2.2.2",
     "q": "^1.4.1",
     "superagent": "^3.8.1"
