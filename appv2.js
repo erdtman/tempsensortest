@@ -48,7 +48,7 @@ exports.timer = function(req, res) {
   } else if (now.isBetween(t0800, t1530)) { // 08:00 -> 15:00 - OFF
     operation.state = "OFF";
   } else if (now.isBetween(t1530, t2400)) { // 15:00 -> 24:00 - ON
-    operation.state = "ON";
+    operation.state = "OFF";
   } else { // off
     operation.state = "OFF";
   }
