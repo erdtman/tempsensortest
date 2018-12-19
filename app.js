@@ -42,6 +42,8 @@ app.get('/', function(request, response) {
 });
 
 app.get('/timer/', appv2.timer);
+app.post('/timer/settings/', appv2.timerSettings);
+app.get('/timer/settings/', appv2.timerView);
 
 app.get('/config', function(req, res) {
   c.read().then(function(config) {
