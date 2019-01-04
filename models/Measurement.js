@@ -8,8 +8,9 @@ let Q = require('q');
 exports.create = function(id, value) {
   let deferred = Q.defer();
 
-  if(parseFloat(value) < -50 || parseFloat(value) > 50) {
-    return deferred.reject(new Error("ignoring unresonable value"));
+  if (parseFloat(value) < -50 || parseFloat(value) > 50) {
+    deferred.reject(new Error("ignoring unresonable value, " + value));
+    return deferred.promise;
   }
 
   let measurement = {
@@ -21,7 +22,8 @@ exports.create = function(id, value) {
   let collection = db.get().collection('measurement');
   collection.save(measurement, function(err, doc) {
     if (err) {
-      return deferred.reject(new Error(err));
+      deferred.reject(new Error(err));
+      return;
     }
 
     deferred.resolve(doc);
