@@ -86,8 +86,14 @@ exports.listAgregate = function(id, interval) {
 exports.now = function(id, start, end) {
   let deferred = Q.defer();
   let collection = db.get().collection('measurement');
+  const TwentyFourHour = 24*60*60*1000;
+  const yesterday = new Date().getTime() - TwentyFourHour;
 
-  collection.find({id:id}).sort({"time":-1}).limit(1).each(function(err, doc) {
+  collection
+   .find({id:id, time:{$gte:yesterday}})
+   .sort({"time":-1})
+   .limit(1)
+   .each(function(err, doc) {
     if (err) {
       return deferred.reject(new Error(err));
     }
