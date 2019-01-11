@@ -11,8 +11,8 @@ exports.tick = function(req, res) {
         return res.status(400).send("missing parameter");
     }
   
-    t.create(id).then(function(tick) {
-        res.send(tick);
+    t.create(id).then(function() {
+        res.send();
     }).fail(function(error) {
         res.status(500).send(error);
     });
@@ -20,13 +20,14 @@ exports.tick = function(req, res) {
 
 exports.powerConsumption = function(req, res){
     const id = req.params.id ;
+    const interval = req.query.interval || "HOUR";
   
     if (!id) {
         return res.status(400).send("missing parameter");
     }
     console.log("power id: " + id);
     
-    t.readLast(id, "MINUTE").then(function(value) {
+    t.readLast(id, interval).then(function(value) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(value));
     }).fail(function(error) {
