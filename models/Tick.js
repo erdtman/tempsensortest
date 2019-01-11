@@ -5,22 +5,16 @@
 let db = require('../db');
 let Q = require('q');
 
-exports.create = function(id, value) {
-  let deferred = Q.defer();
+exports.create = function(id) {
+  const deferred = Q.defer();
 
-  if (parseFloat(value) < -50 || parseFloat(value) > 50) {
-    deferred.reject(new Error("ignoring unresonable value, " + value));
-    return deferred.promise;
-  }
-
-  let measurement = {
+  const tick = {
     "id" : id,
-    "measurement" : parseFloat(value),
     "time": new Date().getTime()
   };
 
-  let collection = db.get().collection('measurement');
-  collection.save(measurement, function(err, doc) {
+  const collection = db.get().collection('ticks');
+  collection.save(tick, function(err, doc) {
     if (err) {
       deferred.reject(new Error(err));
       return;
@@ -39,12 +33,39 @@ const DAY = HOUR*24;
 const WEEK = DAY*7
 const MONTH = DAY*30;
 
+const mapping = {
+  "MINUTE": MINUTE,
+  "HOUR": HOUR,
+  "DAY": DAY,
+  "WEEK": WEEK,
+  "MONTH": MONTH,
+}
+
+exports.readLast = function(id, interval) {
+  const deferred = Q.defer();
+  if (!mapping[interval]) {
+    deferred.reject(new Error("Unknown interval, " + interval));
+    return deferred.promise;
+  }
+  console.log("tick interval: " + interval);
+  
+  const now = new Date().getTime();
+  const start = now - mapping[interval];
+  const collection = db.get().collection('ticks');
+  collection.count({id:id, time:{"$gte":start}}).then(function(count){
+    console.log("tick count: " + count);
+    deferred.resolve(count);
+  });
+  
+  return deferred.promise;
+}
+
 exports.listAgregate = function(id, interval) {
-  let deferred = Q.defer();
-  let collection = db.get().collection('measurement');
+  const deferred = Q.defer();
+  const collection = db.get().collection('tick');
   let start = 0;
   let chunk = 0;
-  let now = new Date().getTime();
+  const now = new Date().getTime();
 
   console.log("interval: " + interval);
 
@@ -81,21 +102,3 @@ exports.listAgregate = function(id, interval) {
   });
   return deferred.promise;
 }
-
-exports.now = function(id, start, end) {
-  let deferred = Q.defer();
-  let collection = db.get().collection('measurement');
-
-  collection
-   .find({id:id})
-   .sort({"time":-1})
-   .limit(1)
-   .each(function(err, doc) {
-    if (err) {
-      return deferred.reject(new Error(err));
-    }
-
-    deferred.resolve(doc);
-  });
-  return deferred.promise;
-};

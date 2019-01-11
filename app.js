@@ -12,7 +12,9 @@ const d = require('./models/Device.js');
 const wd = require('./models/WaitingDevice.js');
 const Notifier = require('./Notifier.js');
 const db = require('./db.js');
-const appv2 = require('./appv2.js');
+const temp = require('./temp.js');
+const timer = require('./timer.js');
+const power = require('./power.js');
 
 const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
 const port = process.env.PORT || 5000;
@@ -27,6 +29,19 @@ app.set('etag', false);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
+app.get('/timer/', timer.timer);
+app.get('/timer/settings/', timer.timerView);
+app.post('/timer/settings/', timer.timerSettings);
+
+app.get('/v2/measurement/:id', temp.measurements);
+app.get('/measurement/:id/now', temp.now);
+app.get('/measurement/:id/clean', temp.clean);
+app.get('/measurement/:id', temp.readId);
+app.post('/measurement/:id', temp.writeId);
+
+app.post("/power/tick/:id", power.tick);
+app.get("/power/last/:id", power.powerConsumption);
+
 app.get('/', function(request, response) {
   var id = "2c001f000147353138383138"; // TODO change this hardcoded value
   m.now(id).then(function(value) {
@@ -40,10 +55,6 @@ app.get('/', function(request, response) {
     });
   });
 });
-
-app.get('/timer/', appv2.timer);
-app.post('/timer/settings/', appv2.timerSettings);
-app.get('/timer/settings/', appv2.timerView);
 
 app.get('/config', function(req, res) {
   c.read().then(function(config) {
@@ -135,73 +146,6 @@ app.post('/config', function(req, res) {
     res.status(500).send(error);
   });
 });
-
-app.post('/measurement/:id', function(req, res) {
-  let id = req.params.id;
-  let value = req.body.value;
-
-  if (!id || !value) {
-    return res.status(400).send("missing parameter");
-  }
-  // TODO emit timer event to scheduler
-  m.create(id, value).then(function(measurement) {
-    res.status(201).send();
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-});
-
-
-app.get('/measurement/:id', function(req, res) {
-  let id = req.params.id ;
-  let interval = req.query.interval || "HOUR";
-
-  if (!id) {
-    return res.status(400).send("missing parameter");
-  }
-
-  m.listAgregate(id, interval).then(function(values){
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(values));
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-});
-
-app.get('/v2/measurement/:id', appv2.measurements);
-
-
-app.get('/measurement/:id/now', function(req, res) {
-  let id = req.params.id ;
-
-  if (!id) {
-    return res.status(400).send("missing parameter");
-  }
-  m.now(id).then(function(value) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(value));
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-})
-
-app.get('/measurement/:id/clean', function(req, res) {
-  let id = req.params.id ;
-
-  if (!id) {
-    return res.status(400).send("missing parameter");
-  }
-
-  if (id === 'sensor2'){ // Temporary hack
-    id = '2c001f000147353138383138';
-  }
-
-  m.now(id).then(function(value) {
-    res.send(value.measurement.toFixed(0));
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-})
 
 db.connect(url, function(err) {
   if (err) {
