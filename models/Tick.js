@@ -60,9 +60,9 @@ exports.readLast = function(id, interval) {
   return deferred.promise;
 }
 
-exports.listAgregate = function(id, interval) {
+exports.history = function(id, interval) {
   const deferred = Q.defer();
-  const collection = db.get().collection('tick');
+  const collection = db.get().collection('ticks');
   let start = 0;
   let chunk = 0;
   const now = new Date().getTime();
@@ -89,9 +89,8 @@ exports.listAgregate = function(id, interval) {
   collection.aggregate([
     { "$match": { "id": id, time : {$gte: start }}},
     { "$group": {
-        //'_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]} }, chunk]},
-        '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
-        "measurement" : { "$avg" : "$measurement" }
+        '_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]}}, chunk]},
+        "count": { "$sum": 1 }
     }},
     { "$sort" : {'_id' : 1}}
   ]).toArray(function(err, docs) {

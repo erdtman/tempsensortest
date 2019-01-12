@@ -25,9 +25,25 @@ exports.powerConsumption = function(req, res){
     if (!id) {
         return res.status(400).send("missing parameter");
     }
-    console.log("power id: " + id);
     
     t.readLast(id, interval).then(function(value) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(value));
+    }).fail(function(error) {
+        res.status(500).send(error);
+    });
+}
+
+exports.powerGraph = function(req, res){
+    const id = req.params.id;
+    const interval = req.query.interval || "HOUR";
+  
+    if (!id) {
+        return res.status(400).send("missing parameter");
+    }
+    console.log("power id: " + id);
+    
+    t.history(id, interval).then(function(value) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(value));
     }).fail(function(error) {

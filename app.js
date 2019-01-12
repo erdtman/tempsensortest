@@ -41,6 +41,7 @@ app.post('/measurement/:id', temp.writeId);
 
 app.post("/power/tick/:id", power.tick);
 app.get("/power/last/:id", power.powerConsumption);
+app.get("/power/graph/:id", power.powerGraph);
 
 app.get('/', function(request, response) {
   var id = "2c001f000147353138383138"; // TODO change this hardcoded value
