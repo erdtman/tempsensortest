@@ -69,7 +69,7 @@ function loadDataset(id, interval, format) {
 }
 
 function load(interval, format) {
-  loadDataset("123", interval, format).then(function (data) {
+  loadDataset("stationsgatan", interval, format).then(function (data) {
     draw(data);
   });
 }
