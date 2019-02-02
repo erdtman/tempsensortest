@@ -4,7 +4,7 @@
 function draw(data) {
   var ctx = $("#myChart");
   var myChart = new Chart(ctx, {
-    'type': 'line',
+    'type': 'bar',
     'data': {
         'labels': data.labels,
         'datasets': [data]
@@ -13,8 +13,8 @@ function draw(data) {
       'scales': {
             'yAxes': [{
                 'ticks': {
-                    'max': data.max + 1,
-                    'min': data.min - 1
+                    'max': data.max + (data.max *0.1),
+                    'min': data.min
                 }
             }]
         },
@@ -23,7 +23,7 @@ function draw(data) {
   });
 }
 
-function loadDataset(id, interval, format) {
+function loadDataset(id, interval) {
   let deferred = Q.defer();
   $.getJSON("/power/graph/" + id, {"interval": interval})
   .done(function(json) {
@@ -31,8 +31,8 @@ function loadDataset(id, interval, format) {
     const labels = [];
 
     json.forEach(function(value) {
-      data.push(value.count);
-      labels.push(format(new Date(value._id)));
+      data.push(value.kwh);
+      labels.push(value.label);
     });
 
     const dataset = {
@@ -68,8 +68,8 @@ function loadDataset(id, interval, format) {
   return deferred.promise;
 }
 
-function load(interval, format) {
-  loadDataset("stationsgatan", interval, format).then(function (data) {
+function load(interval) {
+  loadDataset("stationsgatan", interval).then(function (data) {
     draw(data);
   });
 }
@@ -78,21 +78,30 @@ function padWithZero(value) {
   return (value<10) ? ("0"+value) : value;
 }
 
-$(document).ready(function() {
-  const weekDays = [
-    "sön",
-    "mon",
-    "tis",
-    "ons",
-    "tor",
-    "fre",
-    "lör"
-  ]
+$("#hour").click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+  load("HOUR");
+});
 
-  load("WEEK", function(date) {
-    var hour = padWithZero(date.getHours());
-    var minute = padWithZero(date.getMinutes());
-    var day = date.getDay();
-    return weekDays[day] + ", " + hour + ":" + minute;
-  });
+$("#day").click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+  load("DAY");
+});
+
+$("#month").click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+  load("MONTH");
+});
+
+$("#year").click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+  load("YEAR");
+});
+
+$(document).ready(function() {
+  load("MONTH");
 });

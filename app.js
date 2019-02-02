@@ -16,7 +16,8 @@ const temp = require('./temp.js');
 const timer = require('./timer.js');
 const power = require('./power.js');
 
-const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
+//const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
+const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://local:loca123!@ds023325.mlab.com:23325/heroku_w1wkbjcz';
 const port = process.env.PORT || 5000;
 
 app.use('/public', express.static(__dirname + '/public'));
@@ -40,9 +41,10 @@ app.get('/measurement/:id', temp.readId);
 app.post('/measurement/:id', temp.writeId);
 
 app.post("/power/tick/:id", power.tick);
-app.get("/power", power.display);
+app.get("/power/:id", power.display);
 app.get("/power/last/:id", power.powerConsumption);
 app.get("/power/graph/:id", power.powerGraph);
+app.get("/power/graph2/:id", power.powerGraph2);
 
 
 app.get('/', function(request, response) {
