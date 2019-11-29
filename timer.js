@@ -10,7 +10,7 @@ function getTimerValue() {
     const nowString = now.format("YYYY-MM-DD");
     const tOOOO = moment(nowString + " 00:00:00.000+01:00"); 
     const t0500 = moment(nowString + " 05:00:00.000+01:00");
-    const t0800 = moment(nowString + " 08:00:00.000+01:00");
+    const t0800 = moment(nowString + " 09:00:00.000+01:00");
     const t1530 = moment(nowString + " 15:00:00.000+01:00");
     const t2400 = moment(nowString + " 24:00:00.000+01:00");
   
