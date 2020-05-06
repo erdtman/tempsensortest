@@ -10,8 +10,8 @@ function getTimerValue() {
     const nowString = now.format("YYYY-MM-DD");
     const tOOOO = moment(nowString + " 00:00:00.000+01:00");
     const t0500 = moment(nowString + " 05:00:00.000+01:00");
-    const t0800 = moment(nowString + " 09:00:00.000+01:00");
-    const t1530 = moment(nowString + " 15:00:00.000+01:00");
+    const t0800 = moment(nowString + " 07:30:00.000+01:00");
+    const t1530 = moment(nowString + " 17:00:00.000+01:00");
     const t2400 = moment(nowString + " 24:00:00.000+01:00");
 
     if (now.isBetween(tOOOO, t0500)) {  // 00:00 -> 05:00 - OFF
@@ -86,6 +86,7 @@ exports.saveTimerSettings = async function(req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
+
 }
 
 exports.readTimerSettings = async function(req, res) {
