@@ -32,7 +32,6 @@ app.set('view engine', 'jade');
 
 app.get('/timer/', timer.timer);
 app.get('/timer/settings/', timer.timerView);
-app.post('/timer/settings/', timer.timerSettings);
 app.get('/timer/settings/read', timer.readTimerSettings);
 app.post('/timer/settings/save', timer.saveTimerSettings);
 

@@ -5,76 +5,38 @@
 const c = require('./models/Config.js');
 const moment = require('moment');
 
-function getTimerValue() {
-    const now = moment();
-    const nowString = now.format("YYYY-MM-DD");
-    const tOOOO = moment(nowString + " 00:00:00.000+01:00");
-    const t0500 = moment(nowString + " 05:00:00.000+01:00");
-    const t0800 = moment(nowString + " 07:30:00.000+01:00");
-    const t1530 = moment(nowString + " 17:00:00.000+01:00");
-    const t2400 = moment(nowString + " 24:00:00.000+01:00");
-
-    if (now.isBetween(tOOOO, t0500)) {  // 00:00 -> 05:00 - OFF
-      return "OFF";
-    }
-    if (now.isBetween(t0500, t0800)) {  // 05:00 -> 08:00 - ON
-      return "ON";
-    }
-    if (now.isBetween(t0800, t1530)) {  // 08:00 -> 15:00 - OFF
-      return "OFF";
-    }
-    if (now.isBetween(t1530, t2400)) {  // 15:00 -> 24:00 - ON
-      return "ON";
-    }
-
-    return "OFF";
+const timeIndex = () => {
+  const now = moment();
+  const hour = now.format("HH");
+  const minute = parseInt(now.format("mm"), 10);
+  const fullOrHalfPast = minute >= 30 ? "5" : "0";
+  return `${hour}.${fullOrHalfPast}`;
 }
 
-exports.timer = function(req, res) {
-    c.read().then(function(config) {
-      if(config.timer_state === "ON") {
-        return res.send("ON");
-      }
-      if(config.timer_state === "OFF") {
-        return res.send("OFF");
-      }
-      res.send(getTimerValue());
-    }).fail(function(error) {
-      res.send(getTimerValue());
-    });
+exports.timer = async function(req, res) {
+  try {
+    const config = await c.read();
+    if(config.timer_state_v2.state === "ON") {
+      return res.send("ON");
+    }
+    if(config.timer_state_v2.state === "OFF") {
+      return res.send("OFF");
+    }
+    const index = timeIndex();
+
+    if(config.timer_state_v2.schedule[index]) {
+      return res.send("ON");
+    } else {
+      return res.send("OFF");
+    }
+  } catch (error) {
+    console.log(error);
+    return res.send("OFF");
+  }
 };
 
-function getNextState(currentState) {
-  if (currentState === "ON") {
-    return "OFF"
-  }
-  if (currentState === "OFF") {
-    return "timer"
-  }
-  if (currentState === "timer") {
-    return "ON"
-  }
-
-  return "timer"
-}
-
-exports.timerSettings = function(req, res) {
-  c.read().then(function(config) {
-    config.timer_state = getNextState(config.timer_state);
-    return config.save();
-  }).then(function() {
-    return res.redirect('/timer/settings');
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
-}
-
 exports.timerView = function(req, res) {
-  c.read().then(function(config) {
-    res.render('timer', config);
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
+  res.render('timer', config);
 }
 
 exports.saveTimerSettings = async function(req, res) {
@@ -86,10 +48,13 @@ exports.saveTimerSettings = async function(req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-
 }
 
 exports.readTimerSettings = async function(req, res) {
-  const config = await c.read();
-  res.send(config.timer_state_v2);
+  try {
+    const config = await c.read();
+    res.send(config.timer_state_v2);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 }
