@@ -10,7 +10,7 @@ let REF = "adfhaskdjadsjkfhasdfjhasldkfhaskd";
 function Config(config) {
   config = config || { "ref" : REF };
 
-  config.save = function(username, password) {
+  config.save = function() {
     let deferred = Q.defer();
 
     let collection = db.get().collection('config');
