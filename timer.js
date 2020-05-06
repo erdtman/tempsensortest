@@ -3,10 +3,10 @@
 'use strict';
 
 const c = require('./models/Config.js');
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const timeIndex = () => {
-  const now = moment();
+  const now = moment().tz("Europe/Stockholm");
   const hour = now.format("HH");
   const minute = parseInt(now.format("mm"), 10);
   const fullOrHalfPast = minute >= 30 ? "5" : "0";
@@ -36,7 +36,7 @@ exports.timer = async function(req, res) {
 };
 
 exports.timerView = function(req, res) {
-  res.render('timer', config);
+  res.render('timer');
 }
 
 exports.saveTimerSettings = async function(req, res) {
