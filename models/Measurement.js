@@ -2,34 +2,29 @@
 /*jslint node: true */
 'use strict';
 
-let db = require('../db');
-let Q = require('q');
+const db = require('../db');
 
 exports.create = function(id, value) {
-  let deferred = Q.defer();
-
-  if (parseFloat(value) < -50 || parseFloat(value) > 50) {
-    deferred.reject(new Error("ignoring unresonable value, " + value));
-    return deferred.promise;
-  }
-
-  let measurement = {
-    "id" : id,
-    "measurement" : parseFloat(value),
-    "time": new Date().getTime()
-  };
-
-  let collection = db.get().collection('measurement');
-  collection.save(measurement, function(err, doc) {
-    if (err) {
-      deferred.reject(new Error(err));
-      return;
+  return new Promise((resolve, reject) => {
+    if (parseFloat(value) < -50 || parseFloat(value) > 50) {
+      reject(new Error(`Ignoring unresonable value, ${value}`));
     }
 
-    deferred.resolve(doc);
-  });
+    const measurement = {
+      "id" : id,
+      "measurement" : parseFloat(value),
+      "time": new Date().getTime()
+    };
 
-  return deferred.promise;
+    const collection = db.get().collection('measurement');
+    collection.save(measurement, function(err, doc) {
+      if (err) {
+        return reject(new Error(err));
+      }
+
+      resolve(doc);
+    });
+  });
 };
 
 const SECOND = 1000;
@@ -40,62 +35,61 @@ const WEEK = DAY*7
 const MONTH = DAY*30;
 
 exports.listAgregate = function(id, interval) {
-  let deferred = Q.defer();
-  let collection = db.get().collection('measurement');
-  let start = 0;
-  let chunk = 0;
-  let now = new Date().getTime();
+  return new Promise((resolve, reject) => {
+    const collection = db.get().collection('measurement');
+    const now = new Date().getTime();
+    let start = 0;
+    let chunk = 0;
 
-  console.log("interval: " + interval);
+    console.log(`Measurement:listAgregate - interval: ${interval}`);
 
-  if (interval === "HOUR") {
-    start = now - HOUR;
-    chunk = MINUTE * 2;
-  } else if (interval === "DAY") {
-    start = now - DAY;
-    chunk = MINUTE * 30;
-  } else if (interval === "WEEK") {
-    start = now - WEEK;
-    chunk = HOUR * 3;
-  } else if (interval === "MONTH") {
-    start = now - MONTH;
-    chunk = HOUR * 6;
-  } else {
-    deferred.reject(new Error("Unknown interval, " + interval));
-    return deferred.promise;
-  }
-
-  collection.aggregate([
-    { "$match": { "id": id, time : {$gte: start }}},
-    { "$group": {
-        //'_id' : {"$multiply" : [{ "$trunc" : {'$divide' : ['$time', chunk ]}}, chunk]},
-        '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
-        "measurement" : { "$avg" : "$measurement" }
-    }},
-    { "$sort" : {'_id' : 1}}
-  ]).toArray(function(err, docs) {
-    if (err) {
-      return deferred.reject(new Error(err));
+    if (interval === "HOUR") {
+      start = now - HOUR;
+      chunk = MINUTE * 2;
+    } else if (interval === "DAY") {
+      start = now - DAY;
+      chunk = MINUTE * 30;
+    } else if (interval === "WEEK") {
+      start = now - WEEK;
+      chunk = HOUR * 3;
+    } else if (interval === "MONTH") {
+      start = now - MONTH;
+      chunk = HOUR * 6;
+    } else {
+      deferred.reject(new Error("Unknown interval, " + interval));
+      return deferred.promise;
     }
-    deferred.resolve(docs);
+
+    collection.aggregate([
+      { "$match": { "id": id, time : {$gte: start }}},
+      { "$group": {
+          '_id' : {"$multiply" : [{'$subtract' :[{'$divide' : ['$time', chunk ]},{ '$mod' : [{'$divide' : ['$time', chunk ]},1] } ] }, chunk]},
+          "measurement" : { "$avg" : "$measurement" }
+      }},
+      { "$sort" : {'_id' : 1}}
+    ]).toArray(function(err, docs) {
+      if (err) {
+        return reject(new Error(err));
+      }
+      resolve(docs);
+    });
   });
-  return deferred.promise;
 }
 
-exports.now = function(id, start, end) {
-  let deferred = Q.defer();
-  let collection = db.get().collection('measurement');
+exports.now = function(id) {
+  return new Promise((resolve, reject) => {
+    const collection = db.get().collection('measurement');
 
-  collection
-   .find({id:id})
-   .sort({"time":-1})
-   .limit(1)
-   .each(function(err, doc) {
-    if (err) {
-      return deferred.reject(new Error(err));
-    }
+    collection
+    .find({id:id})
+    .sort({"time": -1})
+    .limit(1)
+    .each(function(err, doc) {
+      if (err) {
+        return reject(new Error(err));
+      }
 
-    deferred.resolve(doc);
+      resolve(doc);
+    });
   });
-  return deferred.promise;
 };

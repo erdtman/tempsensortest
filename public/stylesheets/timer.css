@@ -57,7 +57,7 @@ div.half_hour {
   width: 12px;
 }
 
-
+/* created using http://nobitagit.github.io/radial/ */
 div.child:nth-child(1){ left: 135px; top: 15px; }
 div.child:nth-child(2){ left: 166px; top: 19px; }
 div.child:nth-child(3){ left: 195px; top: 31px; }

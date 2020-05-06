@@ -4,6 +4,8 @@
 
 const c = require('./models/Config.js');
 const moment = require('moment-timezone');
+const express = require('express');
+const router = express.Router();
 
 const timeIndex = () => {
   const now = moment().tz("Europe/Stockholm");
@@ -13,7 +15,7 @@ const timeIndex = () => {
   return `${hour}.${fullOrHalfPast}`;
 }
 
-exports.timer = async function(req, res) {
+router.get('/', async (req, res) => {
   try {
     const config = await c.read();
     if(config.timer_state_v2.state === "ON") {
@@ -33,13 +35,22 @@ exports.timer = async function(req, res) {
     console.log(error);
     return res.send("OFF");
   }
-};
+});
 
-exports.timerView = function(req, res) {
+router.get('/settings/', (req, res) => {
   res.render('timer');
-}
+});
 
-exports.saveTimerSettings = async function(req, res) {
+router.get('/settings/read', async function(req, res) {
+  try {
+    const config = await c.read();
+    res.send(config.timer_state_v2);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.post('/settings/save', async function(req, res) {
   try {
     const config = await c.read();
     config.timer_state_v2 = req.body;
@@ -48,13 +59,6 @@ exports.saveTimerSettings = async function(req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-}
+});
 
-exports.readTimerSettings = async function(req, res) {
-  try {
-    const config = await c.read();
-    res.send(config.timer_state_v2);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-}
+module.exports = router;

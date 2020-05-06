@@ -30,10 +30,7 @@ app.set('etag', false);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-app.get('/timer/', timer.timer);
-app.get('/timer/settings/', timer.timerView);
-app.get('/timer/settings/read', timer.readTimerSettings);
-app.post('/timer/settings/save', timer.saveTimerSettings);
+app.use('/timer', require('./timer.js'));
 
 app.get('/v2/measurement/:id', temp.measurements);
 app.get('/measurement/:id/now', temp.now);
@@ -48,26 +45,31 @@ app.get("/power/graph/:id", power.powerGraph);
 app.get("/power/graph2/:id", power.powerGraph2);
 
 
-app.get('/', function(request, response) {
+app.get('/', async (req, resp) => {
   var id = "2c001f000147353138383138"; // TODO change this hardcoded value
-  m.now(id).then(function(value) {
+
+  try {
+    const value = await m.now(id)
     value.measurement = value.measurement.toFixed(1);
-    response.render('index',value);
-  }).fail(function(error) {
-    response.render('index', {
+    resp.render('index', value);
+  } catch (error) {
+    console.log(error);
+    resp.render('index', {
       "id" : "",
       "measurement" : "",
       "time": ""
     });
-  });
+  }
 });
 
-app.get('/config', function(req, res) {
-  c.read().then(function(config) {
-    res.render('config', config);
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
+app.get('/config', async (req, resp) => {
+  try {
+    const config = await c.read();
+    resp.render('config', config);
+  } catch(error) {
+    console.log(error);
+    resp.send(500);
+  }
 });
 
 app.get('/deviceconfig', function(req, res) {
@@ -140,28 +142,29 @@ app.get('/deviceconfig/:id/delete', function(req, res) {
   });
 });
 
-app.post('/config', function(req, res) {
-  c.read().then(function(config) {
+app.post('/config', async (req, res) => {
+  try {
+    const config = await c.read();
     config.username = req.body.username || config.username;
     config.password = req.body.password || config.password;
     config.tel = req.body.tel || config.tel;
-    return config.save();
-  }).then(function() {
-    return res.redirect('/config');
-  }).fail(function(error) {
-    res.status(500).send(error);
-  });
+    await config.save();
+    res.redirect('/config');
+  } catch (error) {
+    console.log(error);
+    res.send(500);
+  }
 });
 
-db.connect(url, function(err) {
+db.connect(url, (err) => {
   if (err) {
     console.log('Unable to connect to Mongo.');
   } else {
     console.log('Connection established to', url);
-    let server = app.listen(port, function() {
-      let host = server.address().address;
-      let port = server.address().port;
-      console.log("Listening at http://%s:%s", host, port);
+    const server = app.listen(port, function() {
+      const host = server.address().address;
+      const port = server.address().port;
+      console.log(`Listening at http://${host}:${port}`);
     });
   }
 });
