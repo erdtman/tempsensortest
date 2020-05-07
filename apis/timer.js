@@ -2,7 +2,7 @@
 /*jslint node: true */
 'use strict';
 
-const c = require('./models/Config.js');
+const c = require('../models/Config.js');
 const moment = require('moment-timezone');
 const express = require('express');
 const router = express.Router();
