@@ -43,13 +43,13 @@ export default {
           fontStyle: "bold",
           fontSize: 20
         },
-        responsive: true,
+        responsive: false,
         scales: {
           yAxes: [
             {
               ticks: {
-                suggestedMin: -10,
-                suggestedMax: 50
+                suggestedMin: 0,
+                suggestedMax: 30
               },
               scaleLabel: {
                 display: true,

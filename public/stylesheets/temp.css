@@ -12,9 +12,19 @@ body {
 }
 .child {
   scroll-snap-align: start;
-  height: 100vh;
   min-width: 100vw;
+}
+.last_child {
+  scroll-snap-align: start;
+  min-width: 100vw;
+  height: 100vh;
 }
 .section_title {
   padding-top: 20px;
+}
+
+.date {
+  opacity: 70%;
+  font-weight: lighter;
+  font-size: smaller;
 }

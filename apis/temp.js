@@ -7,21 +7,10 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, resp) => {
-    const id = "outdoor"; // TODO change this hardcoded value
-
-    try {
-        const value = await m.now(id)
-        value.measurement = value.measurement.toFixed(1);
-        resp.render('temp', value);
-    } catch (error) {
-        console.log(error);
-        resp.render('index', {
-        "id" : "",
-        "measurement" : "",
-        "time": ""
-        });
-    }
+    resp.render('temp');
 });
+
+
 
 router.get('/:id/now', async (req, res) => {
     try {
@@ -31,11 +20,16 @@ router.get('/:id/now', async (req, res) => {
             return res.status(400).send("missing parameter");
         }
 
-        if (id === 'sensor2'){ // Temporary hack
-            id = 'outdoor';
-        }
+        const value = {
+            "now" : await m.now(id),
+            "day_min" : await m.min(id, "DAY"),
+            "day_max" : await m.max(id, "DAY"),
+            "week_min" : await m.min(id, "WEEK"),
+            "week_max" : await m.max(id, "WEEK"),
+            "month_min" : await m.min(id, "MONTH"),
+            "month_max" : await m.max(id, "MONTH"),
+        };
 
-        const value = await m.now(id);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(value));
     } catch (error) {

@@ -43,8 +43,6 @@ exports.listAgregate = function(id, interval) {
     let start = 0;
     let chunk = 0;
 
-    console.log(`Measurement:listAgregate - interval: ${interval}`);
-
     if (interval === "HOUR") {
       start = now - HOUR;
       chunk = MINUTE * 2;
@@ -58,8 +56,7 @@ exports.listAgregate = function(id, interval) {
       start = now - MONTH;
       chunk = HOUR * 6;
     } else {
-      deferred.reject(new Error("Unknown interval, " + interval));
-      return deferred.promise;
+      reject(new Error("Unknown interval, " + interval));
     }
 
     collection.aggregate([
@@ -76,7 +73,6 @@ exports.listAgregate = function(id, interval) {
       const augumented = docs.map(doc => ({
         'measurement': doc.measurement,
         'label': moment(doc._id).format('HH:mm')}));
-      console.log(augumented);
 
       resolve(augumented);
     });
@@ -88,7 +84,7 @@ exports.now = function(id) {
     const collection = db.get().collection('measurement');
 
     collection
-    .find({id:id})
+    .find({"id": id})
     .sort({"time": -1})
     .limit(1)
     .each(function(err, doc) {
@@ -96,7 +92,61 @@ exports.now = function(id) {
         return reject(new Error(err));
       }
 
-      resolve(doc);
+      if(!doc) {
+        return;
+      }
+
+      resolve({
+        measurement: doc.measurement.toFixed(1),
+        time: moment(doc.time).format("HH:mm")
+      });
     });
   });
+};
+
+const min_max = function(id, interval, min) {
+  return new Promise((resolve, reject) => {
+    const collection = db.get().collection('measurement');
+    const now = new Date().getTime();
+    let start = 0;
+
+    if (interval === "HOUR") {
+      start = now - HOUR;
+    } else if (interval === "DAY") {
+      start = now - DAY;
+    } else if (interval === "WEEK") {
+      start = now - WEEK;
+    } else if (interval === "MONTH") {
+      start = now - MONTH;
+    } else {
+      reject(new Error("Unknown interval, " + interval));
+    }
+
+    collection
+    .find({id:id, time: {$gte: start }})
+    .sort({"measurement": min ? 1 : -1})
+    .limit(1)
+    .each(function(err, doc) {
+      if (err) {
+        return reject(new Error(err));
+      }
+
+      if(!doc) {
+        return;
+      }
+
+      resolve({
+        measurement: doc.measurement.toFixed(1),
+        time: moment(doc.time).format("YYYY-MM-DD HH:mm")
+      });
+    });
+  });
+}
+
+exports.min = function(id, interval) {
+  return min_max(id, interval, true);
+};
+
+exports.max = function(id, interval) {
+  return min_max(id, interval, false);
 };

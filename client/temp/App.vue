@@ -1,17 +1,25 @@
 <template>
-  <div class="container scroll">
+  <div class="container scroll" v-if="data !== null">
     <div class="first_child">
-      <h1>8.5 °C 22:16</h1>
+      <h1>Nu {{data.now.measurement}} °C <span class="date">({{data.now.time}})</span></h1>
+    </div>
+    <div class="first_child">
+      <h2>Senaste dygnet</h2>
+      <h4>Min: {{data.day_min.measurement}} °C <span class="date">({{data.day_min.time}})</span></h4>
+      <h4>Max: {{data.day_max.measurement}} °C <span class="date">({{data.day_max.time}})</span></h4>
+      <chart :interval="'DAY'" height="300px"></chart>
     </div>
     <div class="child">
-      <h1>Last 24 hours</h1>
-      <chart :interval="'DAY'" height="450px"></chart>
+      <h2>Senaste veckan</h2>
+      <h4>Min: {{data.week_min.measurement}} °C <span class="date">({{data.week_min.time}})</span></h4>
+      <h4>Max: {{data.week_max.measurement}} °C <span class="date">({{data.week_max.time}})</span></h4>
+      <chart :interval="'WEEK'" height="300px"></chart>
     </div>
-    <div class="child">
-      <h1>Last 7 days</h1>
-    </div>
-    <div class="child">
-      <h1>Last 30 days</h1>
+    <div class="last_child">
+      <h2>Senaste månaden</h2>
+      <h4>Min: {{data.month_min.measurement}} °C <span class="date">({{data.month_min.time}})</span></h4>
+      <h4>Max: {{data.month_max.measurement}} °C <span class="date">({{data.month_max.time}})</span></h4>
+      <chart :interval="'MONTH'" height="300px"></chart>
     </div>
   </div>
 </template>
@@ -35,12 +43,12 @@ export default {
   methods: {
     async update() {
       try {
-        //const response = await axios.get("/timer/settings/read");
-        //this.data = response.data;
+        const response = await axios.get(`/measurement/outdoor/now?interval=${this.interval}`);
+        this.data = response.data;
       } catch (error) {
         console.log(`error: ${error.message}`);
       }
-      //setTimeout(this.update, 60000);
+      setTimeout(this.update, 60000);
     }
   },
 };
