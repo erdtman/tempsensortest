@@ -1,6 +1,7 @@
 html
  head
   link(rel="stylesheet" href="public/bootstrap-3.3.6-dist/css/bootstrap.min.css")
+  link(rel="stylesheet" href="/public/stylesheets/temp.css")
   link(rel="apple-touch-icon" href="public/images/touch-icon-iphone.png")
   link(rel="apple-touch-icon" sizes="76x76" href="public/images/touch-icon-ipad.png")
   link(rel="apple-touch-icon" sizes="120x120" href="public/images/touch-icon-iphone-retina.png")
@@ -12,24 +13,5 @@ html
   meta(name="viewport" content="width=device-width, initial-scale=1")
   title Temperatur
  body
-  div(class="container")
-   div(class="page-header")
-    h1(id="current") #{measurement} °C
-
-   ul(class="nav nav-tabs nav-justified")
-    li(class="active")
-     a(href="#" id="hour") Hour
-    li
-     a(href="#" id="day") Day
-    li
-     a(href="#" id="week") Week
-    li
-     a(href="#" id="month") Month
-
-   canvas(id="myChart" style="width:100%; height:400px")
-
-  script(src="public/jquery.min.js")
-  script(src="public/q.js")
-  script(src="public/bootstrap-3.3.6-dist/js/bootstrap.min.js")
-  script(src="public/Chart.js")
-  script(src="public/app.js")
+  div(id="app")
+  script(src="/public/temp.js")

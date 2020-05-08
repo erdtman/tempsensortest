@@ -3,6 +3,8 @@
 'use strict';
 
 const db = require('../db');
+const moment = require('moment-timezone');
+moment.tz.setDefault("Europe/Stockholm");
 
 exports.create = function(id, value) {
   return new Promise((resolve, reject) => {
@@ -71,7 +73,12 @@ exports.listAgregate = function(id, interval) {
       if (err) {
         return reject(new Error(err));
       }
-      resolve(docs);
+      const augumented = docs.map(doc => ({
+        'measurement': doc.measurement,
+        'label': moment(doc._id).format('HH:mm')}));
+      console.log(augumented);
+
+      resolve(augumented);
     });
   });
 }

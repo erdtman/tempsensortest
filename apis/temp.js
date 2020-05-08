@@ -6,6 +6,23 @@ const m = require('../models/Measurement.js');
 const express = require('express');
 const router = express.Router();
 
+router.get('/', async (req, resp) => {
+    const id = "outdoor"; // TODO change this hardcoded value
+
+    try {
+        const value = await m.now(id)
+        value.measurement = value.measurement.toFixed(1);
+        resp.render('temp', value);
+    } catch (error) {
+        console.log(error);
+        resp.render('index', {
+        "id" : "",
+        "measurement" : "",
+        "time": ""
+        });
+    }
+});
+
 router.get('/:id/now', async (req, res) => {
     try {
         const id = req.params.id ;

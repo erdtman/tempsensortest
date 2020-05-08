@@ -29,23 +29,6 @@ app.use('/timer', require('./apis/timer.js'));
 app.use('/measurement', require('./apis/temp.js'));
 app.use('/measurement', require('./apis/power.js'));
 
-app.get('/', async (req, resp) => {
-  var id = "2c001f000147353138383138"; // TODO change this hardcoded value
-
-  try {
-    const value = await m.now(id)
-    value.measurement = value.measurement.toFixed(1);
-    resp.render('index', value);
-  } catch (error) {
-    console.log(error);
-    resp.render('index', {
-      "id" : "",
-      "measurement" : "",
-      "time": ""
-    });
-  }
-});
-
 app.get('/config', async (req, resp) => {
   try {
     const config = await c.read();

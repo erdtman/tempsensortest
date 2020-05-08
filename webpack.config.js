@@ -5,12 +5,13 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   mode: 'development',
   entry: {
-    mobile: './client/timer/app.js',
+    timer: './client/timer/app.js',
+    temp: './client/temp/app.js',
   },
   output: {
     path: __dirname + '/public',
     publicPath: '/',
-    filename: './timer.js'
+    filename: '[name].js'
   },
   module: {
     rules: [

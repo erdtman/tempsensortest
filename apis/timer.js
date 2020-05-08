@@ -4,6 +4,7 @@
 
 const c = require('../models/Config.js');
 const moment = require('moment-timezone');
+moment.tz.setDefault("Europe/Stockholm");
 const express = require('express');
 const router = express.Router();
 

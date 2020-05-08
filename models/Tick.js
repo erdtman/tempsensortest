@@ -4,7 +4,8 @@
 
 let db = require('../db');
 let Q = require('q');
-const moment = require('moment');
+const moment = require('moment-timezone');
+moment.tz.setDefault("Europe/Stockholm");
 
 exports.create = function(id) {
   const deferred = Q.defer();
@@ -51,7 +52,7 @@ exports.readLast = function(id, interval) {
     return deferred.promise;
   }
   console.log("tick interval: " + interval);
-  
+
   const now = new Date().getTime();
   const start = now - mapping[interval];
   const collection = db.get().collection('ticks');
@@ -59,7 +60,7 @@ exports.readLast = function(id, interval) {
     console.log("tick count: " + count);
     deferred.resolve((count/500).toFixed(2));
   });
-  
+
   return deferred.promise;
 }
 
@@ -72,7 +73,7 @@ exports.history = function(id, interval) {
   let now = new Date().getTime();
 
   console.log("interval: " + interval);
-  
+
   let stepsize = 0;
   let steps = 0;
   let format = ""
@@ -91,12 +92,12 @@ exports.history = function(id, interval) {
   } else if (interval === "YEAR") {
     stepsize = WEEK;
     steps = 52;
-    format = "w ww";    
+    format = "w ww";
   }
-  
+
   now -= (now % stepsize);
   start = now - (steps * stepsize)
-  
+
   const boundaries = [];
   for(let i = 0; i <= steps; i++) {
     boundaries.push(start + (i*stepsize));

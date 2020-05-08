@@ -1,0 +1,20 @@
+body {
+  position: fixed;
+}
+.scroll {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.first_child {
+  scroll-snap-align: start;
+  min-width: 100vw;
+}
+.child {
+  scroll-snap-align: start;
+  height: 100vh;
+  min-width: 100vw;
+}
+.section_title {
+  padding-top: 20px;
+}
