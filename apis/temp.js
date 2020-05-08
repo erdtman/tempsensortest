@@ -46,7 +46,7 @@ router.get('/:id/now', async (req, res) => {
 
 router.get('/:id/clean', async (req, res) => {
     try {
-        const id = req.params.id ;
+        let id = req.params.id ;
         if (!id) {
             return res.status(400).send("missing parameter");
         }
