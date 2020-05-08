@@ -51,6 +51,9 @@ router.get('/:id/clean', async (req, res) => {
             return res.status(400).send("missing parameter");
         }
 
+        if (id === 'sensor2'){ // Temporary hack
+            id = 'outdoor';
+        }
 
         const value = await m.now(id)
         res.send(value.measurement.toFixed(0));
