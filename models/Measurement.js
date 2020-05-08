@@ -36,6 +36,18 @@ const DAY = HOUR*24;
 const WEEK = DAY*7
 const MONTH = DAY*30;
 
+const getLabel = function(time, interval) {
+  if(interval === "HOUR" || interval === "DAY") {
+    return moment(time).format('HH:mm');
+  }
+
+  if(interval === "WEEK") {
+    return moment(time).format('dddd HH:mm');
+  }
+
+  return moment(time).format("YYYY-MM-DD HH:mm");
+}
+
 exports.listAgregate = function(id, interval) {
   return new Promise((resolve, reject) => {
     const collection = db.get().collection('measurement');
@@ -72,7 +84,7 @@ exports.listAgregate = function(id, interval) {
       }
       const augumented = docs.map(doc => ({
         'measurement': doc.measurement,
-        'label': moment(doc._id).format('HH:mm')}));
+        'label': getLabel(doc._id, interval)}));
 
       resolve(augumented);
     });
