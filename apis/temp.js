@@ -25,10 +25,14 @@ router.get('/', async (req, resp) => {
 
 router.get('/:id/now', async (req, res) => {
     try {
-        const id = req.params.id ;
+        let id = req.params.id ;
 
         if (!id) {
             return res.status(400).send("missing parameter");
+        }
+
+        if (id === 'sensor2'){ // Temporary hack
+            id = 'outdoor';
         }
 
         const value = await m.now(id);
@@ -46,9 +50,7 @@ router.get('/:id/clean', async (req, res) => {
         if (!id) {
             return res.status(400).send("missing parameter");
         }
-        if (id === 'sensor2'){ // Temporary hack
-            id = 'outdoor';
-        }
+
 
         const value = await m.now(id)
         res.send(value.measurement.toFixed(0));
