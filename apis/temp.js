@@ -50,7 +50,7 @@ router.get('/:id/clean', async (req, res) => {
         }
 
         const value = await m.now(id)
-        res.send(value.measurement.toFixed(0));
+        res.send(value.measurement_raw.toFixed(0));
     } catch (error) {
         console.log(error);
         res.status(500);
