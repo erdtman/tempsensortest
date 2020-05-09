@@ -103,7 +103,7 @@ export default {
         console.log(`error: ${error.message}`);
       }
 
-      //setTimeout(this.update, 30000);
+      setTimeout(this.update, 60000);
     }
   }
 };
