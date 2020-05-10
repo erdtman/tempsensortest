@@ -27,7 +27,7 @@ app.set('view engine', 'jade');
 
 app.use('/timer', require('./apis/timer.js'));
 app.use('/measurement', require('./apis/temp.js'));
-app.use('/measurement', require('./apis/power.js'));
+app.use('/power', require('./apis/power.js'));
 
 app.get('/config', async (req, resp) => {
   try {
