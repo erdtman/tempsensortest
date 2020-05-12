@@ -8,7 +8,7 @@ import Chart from "chart.js";
 import axios from "axios";
 
 export default {
-  props: ["interval", "height"],
+  props: ["interval", "height", "lookback"],
   data() {
     return {
       chart: null,
@@ -17,21 +17,11 @@ export default {
         datasets: [
           {
             data: [],
-            label: "Inne",
-            backgroundColor: "#FF0000",
-            borderColor: "#FF0000",
-            fill: false
-          },
-          {
-            data: [],
-            label: "Ute",
-            backgroundColor: "#00FF00",
-            borderColor: "#00FF00",
-            fill: false
+            backgroundColor: []
           }
         ]
       },
-      chartType: "line",
+      chartType: "bar",
       chartOptions: {
         maintainAspectRatio: false,
         animation: {
@@ -43,17 +33,17 @@ export default {
           fontStyle: "bold",
           fontSize: 20
         },
-        responsive: false,
+        responsive: true,
         scales: {
           yAxes: [
             {
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 30
+              stacked: true,
+              kwh: {
+                beginAtZero: true
               },
               scaleLabel: {
                 display: true,
-                labelString: "°C"
+                labelString: "kWh"
               }
             }
           ]
@@ -78,24 +68,22 @@ export default {
   methods: {
     async update() {
       try {
-        const [indoor, outdoor] = await Promise.all([
-        axios.get(`/measurement/indoor?interval=${this.interval}`),
-        axios.get(`/measurement/outdoor?interval=${this.interval}`)]);
+        const stationsgatan = await axios.get(`/power/stationsgatan/graph?interval=${this.interval}&lookback=${this.lookback}`);
 
-        this.chartOptions.title.text = indoor.data.label;
+        this.chartOptions.title.text = stationsgatan.data.label;
         this.chartData.labels = [];
-        indoor.data.forEach(element => {
-          this.chartData.labels.push(element.label);
-        });
 
         this.chartData.datasets[0].data = [];
-        indoor.data.forEach(element => {
-          this.chartData.datasets[0].data.push(element.measurement);
-        });
+        stationsgatan.data.history.forEach(element => {
+          this.chartData.labels.push(element.label);
+          this.chartData.datasets[0].data.push(element.kwh);
 
-        this.chartData.datasets[1].data = [];
-        outdoor.data.forEach(element => {
-          this.chartData.datasets[1].data.push(element.measurement);
+          const pGreen = 1 - element.kwh/1.5;
+          const pRed = element.kwh/1.5;
+          const green = 255 * pGreen;
+          const red = 255 * pRed;
+
+          this.chartData.datasets[0].backgroundColor.push(`rgba(${red}, ${green}, 0, 1.0)`);
         });
 
         this.chart.update();
@@ -103,7 +91,10 @@ export default {
         console.log(`error: ${error.message}`);
       }
 
-      setTimeout(this.update, 60000);
+      if (this.lookback !== '0') {
+        return; // we only refresh the view for last DAY, MONTH or YEAR
+      }
+      //setTimeout(this.update, 30000);
     }
   }
 };

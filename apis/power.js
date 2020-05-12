@@ -8,6 +8,8 @@ moment.tz.setDefault("Europe/Stockholm");
 const express = require('express');
 const router = express.Router();
 
+
+
 router.post("/tick/:id", async (req, res) => {
     try {
         const id = req.params.id ;
@@ -29,47 +31,121 @@ router.post("/tick/:id", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
+    res.render('power');
+});
+
+router.get("/:id/now", async (req, res) => {
     try {
         const id = req.params.id ;
         if (!id) {
             return res.status(400).send("missing parameter");
         }
-        const now = moment();
+
         const data = {
-            "hour_consumption" : await t.readLast(id, "HOUR"),
-            "day_consumption": await t.readLast(id, "DAY"),
-            "month": now.format("MMMM"),
-            "month_consumption": await t.readLast(id, "MONTH"),
-            "year": now.format("YYYY"),
-            "year_consumption": await t.readLast(id, "YEAR")
+            "now": (await t.readLast(id, '5_MIN', 12)).toFixed(3)
         }
 
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(data));
+        res.json(data);
     } catch (error) {
         console.log(error);
         res.send(500);
     }
 });
 
-router.get("/:id/last", async (req, res) => {
-    try {
-        const id = req.params.id ;
-        const interval = req.query.interval || "HOUR";
+const sweDay = {
+    "Sunday":     "Söndag",
+    "Saturday":   "Lördag",
+    "Friday":     "Fredag",
+    "Thursday":   "Torsdag",
+    "Wednesday":  "Onsdag",
+    "Tuesday":    "Tisdag",
+    "Monday":     "Måndag"
+  }
 
-        if (!id) {
-            return res.status(400).send("missing parameter");
-        }
+  const sweMonth = {
+    "January":    "January",
+    "February":   "Februari",
+    "March":      "Mars",
+    "April":      "April",
+    "May":        "Maj",
+    "June":       "Juni",
+    "July":       "Juli",
+    "August":     "Augusti",
+    "September":  "September",
+    "October":    "Oktober",
+    "November":   "November",
+    "December":   "December"
+  }
 
-        const value = await t.readLast(id, interval);
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(value));
-    } catch (error) {
-        console.log(error);
-        res.send(500);
+  const title = {
+    DAY(date, lookback) {
+      return lookback === 0 ? `Idag` : sweDay[date.format("dddd")];
+    },
+    MONTH(date) {
+      return sweMonth[date.format('MMMM')];
+    },
+    YEAR(date) {
+      return date.format('YYYY')
     }
+  }
+
+const lookback_unit = {
+    DAY: 'days',
+    MONTH: 'months',
+    YEAR: 'years',
+}
+
+router.get('/:id/period', async (req, res) => {
+    const lookback = Number(req.query.lookback || 0);
+    const interval = req.query.interval || "DAY";
+    const id = req.params.id ;
+    if (!id) {
+        return res.status(400).send("missing parameter");
+    }
+
+    if(!title[interval] || !lookback_unit[interval]) {
+        throw new Error(`Unhandeled intervall ${interval}`);
+      }
+
+    const date = moment().subtract(lookback, lookback_unit[interval]);
+
+    const peak = (await t.readPeriodMax(id, interval, date)).toFixed(3)
+
+    const data = {
+        total: (await t.readPeriod(id, interval, date)).toFixed(3),
+        peak: peak.peak,
+        peak_time: peak.time,
+        title: title[interval](date, lookback)
+    };
+
+    res.json(data);
 });
+
+
+router.get('/:id/graph', async (req, res) => {
+    const lookback = Number(req.query.lookback || 0);
+    const interval = req.query.interval || "DAY";
+    const id = req.params.id;
+
+    if (!id) {
+      throw new Error({ code: 400, message: 'Missing id parameter' });
+    }
+
+    if(!title[interval] || !lookback_unit[interval]) {
+      throw new Error(`Unhandeled intervall ${interval}`);
+    }
+
+    const date = moment().subtract(lookback, lookback_unit[interval]);
+    const history = await t.history(id, interval, date);
+
+    res.json({
+      label: title[interval](date, lookback),
+      history: history
+    });
+  });
+
+
 
 router.get("/:id/raw", async (req, res) => {
     try {
@@ -78,7 +154,7 @@ router.get("/:id/raw", async (req, res) => {
         if (!id) {
             return res.status(400).send("missing parameter");
         }
-        const value = t.read(id, interval)
+        const value = await t.read(id, interval)
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(value));
     } catch (error) {

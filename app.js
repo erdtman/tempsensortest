@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 
 const m = require('./models/Measurement.js');
 const c = require('./models/Config.js');
-const Notifier = require('./Notifier.js');
 const db = require('./db.js');
 
 //const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
@@ -18,7 +17,6 @@ const port = process.env.PORT || 5000;
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(Notifier.ticker);
 
 app.set('port', port);
 app.set('etag', false);

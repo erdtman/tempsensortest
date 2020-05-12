@@ -57,7 +57,7 @@ exports.create = function (id, tick_count) {
     "time": new Date().getTime()
   };
 
-  if (tick_count && tick_count !== '1') {
+  if (tick_count) {
     tick.tick_count = parseInt(tick_count, 10);
   }
 
@@ -70,9 +70,9 @@ exports.read = function (id, interval) {
     const localInterval = translateInterval(interval);
     const start = getStart(localInterval);
     const collection = db.get().collection('ticks');
-
     const list = await collection.aggregate([
       { $match: { "id": id, time: { $gte: start } } }]).toArray();
+
     resolve(list); // TODO set correct divition
   });
 }
@@ -129,6 +129,23 @@ exports.readPeriod = function (id, interval, start_date) {
     }
 
     resolve(count.ticks / 1000); // TODO set correct divition
+  });
+}
+
+exports.readPeriodMax = function (id, interval, start_date) {
+  return new Promise(async (resolve, reject) => {
+    const localInterval = translateInterval(interval)
+    const start = start_date.startOf(localInterval).valueOf();
+    const end = start_date.endOf(localInterval).valueOf();
+    const collection = db.get().collection('ticks');
+
+    const count = await collection.aggregate([
+      { $match: { "id": id, $and: [
+        {time: { $gte: start }},
+        {time: { $lte: end }}]}},
+      { $sort: {"tick_count": -1 }}]).next();
+
+    resolve(count.tick_count * 60 / 1000); // value for one minute so multiply with 60
   });
 }
 

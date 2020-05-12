@@ -81,92 +81,128 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./client/temp/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./client/power/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/temp/App.vue":
+/***/ "./client/power/App.vue":
+/*!******************************!*\
+  !*** ./client/power/App.vue ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=0e59aac1& */ \"./client/power/App.vue?vue&type=template&id=0e59aac1&\");\n/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ \"./client/power/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"client/power/App.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./client/power/App.vue?");
+
+/***/ }),
+
+/***/ "./client/power/App.vue?vue&type=script&lang=js&":
+/*!*******************************************************!*\
+  !*** ./client/power/App.vue?vue&type=script&lang=js& ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./client/power/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./client/power/App.vue?");
+
+/***/ }),
+
+/***/ "./client/power/App.vue?vue&type=template&id=0e59aac1&":
+/*!*************************************************************!*\
+  !*** ./client/power/App.vue?vue&type=template&id=0e59aac1& ***!
+  \*************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=0e59aac1& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/App.vue?vue&type=template&id=0e59aac1&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_0e59aac1___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./client/power/App.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Chart.vue":
+/*!********************************!*\
+  !*** ./client/power/Chart.vue ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chart.vue?vue&type=template&id=22695ffe& */ \"./client/power/Chart.vue?vue&type=template&id=22695ffe&\");\n/* harmony import */ var _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue?vue&type=script&lang=js& */ \"./client/power/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"client/power/Chart.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./client/power/Chart.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Chart.vue?vue&type=script&lang=js&":
+/*!*********************************************************!*\
+  !*** ./client/power/Chart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./client/power/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./client/power/Chart.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Chart.vue?vue&type=template&id=22695ffe&":
+/*!***************************************************************!*\
+  !*** ./client/power/Chart.vue?vue&type=template&id=22695ffe& ***!
+  \***************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=template&id=22695ffe& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/Chart.vue?vue&type=template&id=22695ffe&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_22695ffe___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./client/power/Chart.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Section.vue":
+/*!**********************************!*\
+  !*** ./client/power/Section.vue ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Section.vue?vue&type=template&id=807dacf6& */ \"./client/power/Section.vue?vue&type=template&id=807dacf6&\");\n/* harmony import */ var _Section_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Section.vue?vue&type=script&lang=js& */ \"./client/power/Section.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Section_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"client/power/Section.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./client/power/Section.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Section.vue?vue&type=script&lang=js&":
+/*!***********************************************************!*\
+  !*** ./client/power/Section.vue?vue&type=script&lang=js& ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./Section.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./client/power/Section.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./client/power/Section.vue?");
+
+/***/ }),
+
+/***/ "./client/power/Section.vue?vue&type=template&id=807dacf6&":
+/*!*****************************************************************!*\
+  !*** ./client/power/Section.vue?vue&type=template&id=807dacf6& ***!
+  \*****************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./Section.vue?vue&type=template&id=807dacf6& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/Section.vue?vue&type=template&id=807dacf6&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_template_id_807dacf6___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./client/power/Section.vue?");
+
+/***/ }),
+
+/***/ "./client/power/app.js":
 /*!*****************************!*\
-  !*** ./client/temp/App.vue ***!
+  !*** ./client/power/app.js ***!
   \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=f1c86628& */ \"./client/temp/App.vue?vue&type=template&id=f1c86628&\");\n/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ \"./client/temp/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"client/temp/App.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./client/temp/App.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/App.vue?vue&type=script&lang=js&":
-/*!******************************************************!*\
-  !*** ./client/temp/App.vue?vue&type=script&lang=js& ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./client/temp/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./client/temp/App.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/App.vue?vue&type=template&id=f1c86628&":
-/*!************************************************************!*\
-  !*** ./client/temp/App.vue?vue&type=template&id=f1c86628& ***!
-  \************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=f1c86628& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/temp/App.vue?vue&type=template&id=f1c86628&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f1c86628___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./client/temp/App.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/Chart.vue":
-/*!*******************************!*\
-  !*** ./client/temp/Chart.vue ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chart.vue?vue&type=template&id=732ba369& */ \"./client/temp/Chart.vue?vue&type=template&id=732ba369&\");\n/* harmony import */ var _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue?vue&type=script&lang=js& */ \"./client/temp/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"client/temp/Chart.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./client/temp/Chart.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/Chart.vue?vue&type=script&lang=js&":
-/*!********************************************************!*\
-  !*** ./client/temp/Chart.vue?vue&type=script&lang=js& ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./client/temp/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./client/temp/Chart.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/Chart.vue?vue&type=template&id=732ba369&":
-/*!**************************************************************!*\
-  !*** ./client/temp/Chart.vue?vue&type=template&id=732ba369& ***!
-  \**************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=template&id=732ba369& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/temp/Chart.vue?vue&type=template&id=732ba369&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_732ba369___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./client/temp/Chart.vue?");
-
-/***/ }),
-
-/***/ "./client/temp/app.js":
-/*!****************************!*\
-  !*** ./client/temp/app.js ***!
-  \****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue */ \"./client/temp/App.vue\");\n\n\n\nnew vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n  el: '#app',\n  render: h => h(_App_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]),\n});\n\n//# sourceURL=webpack:///./client/temp/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue */ \"./client/power/App.vue\");\n\n\n\nnew vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n  el: '#app',\n  render: h => h(_App_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]),\n});\n\n//# sourceURL=webpack:///./client/power/app.js?");
 
 /***/ }),
 
@@ -1900,51 +1936,75 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/index.js?!./client/temp/App.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./client/temp/App.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/index.js?!./client/power/App.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./client/power/App.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue */ \"./client/temp/Chart.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    Chart: _Chart_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  },\n  data () {\n    return {\n      data: null,\n    }\n  },\n  async mounted() {\n    this.update();\n  },\n  methods: {\n    async update() {\n      try {\n        const response = await axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(`/measurement/outdoor/now?interval=${this.interval}`);\n        this.data = response.data;\n      } catch (error) {\n        console.log(`error: ${error.message}`);\n      }\n      setTimeout(this.update, 60000);\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./client/temp/App.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Section_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Section.vue */ \"./client/power/Section.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    Section: _Section_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  },\n  data () {\n    return {\n      data: null,\n    }\n  },\n  async mounted() {\n    this.update();\n  },\n  methods: {\n    async update() {\n      try {\n        const response = await axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(\"/power/stationsgatan/now\");\n        this.data = response.data;\n      } catch (error) {\n        console.log(`error: ${error.message}`);\n      }\n      //setTimeout(this.update, 60000);\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./client/power/App.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/index.js?!./client/temp/Chart.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./client/temp/Chart.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/index.js?!./client/power/Chart.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./client/power/Chart.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ \"./node_modules/chart.js/dist/Chart.js\");\n/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: [\"interval\", \"height\"],\n  data() {\n    return {\n      chart: null,\n      chartData: {\n        labels: [],\n        datasets: [\n          {\n            data: [],\n            label: \"Inne\",\n            backgroundColor: \"#FF0000\",\n            borderColor: \"#FF0000\",\n            fill: false\n          },\n          {\n            data: [],\n            label: \"Ute\",\n            backgroundColor: \"#00FF00\",\n            borderColor: \"#00FF00\",\n            fill: false\n          }\n        ]\n      },\n      chartType: \"line\",\n      chartOptions: {\n        maintainAspectRatio: false,\n        animation: {\n          duration: 0\n        },\n        title: {\n          display: true,\n          position: \"top\",\n          fontStyle: \"bold\",\n          fontSize: 20\n        },\n        responsive: false,\n        scales: {\n          yAxes: [\n            {\n              ticks: {\n                suggestedMin: 0,\n                suggestedMax: 30\n              },\n              scaleLabel: {\n                display: true,\n                labelString: \"°C\"\n              }\n            }\n          ]\n        },\n        legend: {\n          display: false\n        },\n        tooltips: {\n          enabled: false\n        }\n      }\n    };\n  },\n  async mounted() {\n    this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(this.$refs.canvas, {\n        type: this.chartType,\n        data: this.chartData,\n        options: this.chartOptions\n      });\n    this.update();\n  },\n  methods: {\n    async update() {\n      try {\n        const [indoor, outdoor] = await Promise.all([\n        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/measurement/indoor?interval=${this.interval}`),\n        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/measurement/outdoor?interval=${this.interval}`)]);\n\n        this.chartOptions.title.text = indoor.data.label;\n        this.chartData.labels = [];\n        indoor.data.forEach(element => {\n          this.chartData.labels.push(element.label);\n        });\n\n        this.chartData.datasets[0].data = [];\n        indoor.data.forEach(element => {\n          this.chartData.datasets[0].data.push(element.measurement);\n        });\n\n        this.chartData.datasets[1].data = [];\n        outdoor.data.forEach(element => {\n          this.chartData.datasets[1].data.push(element.measurement);\n        });\n\n        this.chart.update();\n      } catch (error) {\n        console.log(`error: ${error.message}`);\n      }\n\n      setTimeout(this.update, 60000);\n    }\n  }\n});\n\n\n//# sourceURL=webpack:///./client/temp/Chart.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ \"./node_modules/chart.js/dist/Chart.js\");\n/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: [\"interval\", \"height\", \"lookback\"],\n  data() {\n    return {\n      chart: null,\n      chartData: {\n        labels: [],\n        datasets: [\n          {\n            data: [],\n            backgroundColor: []\n          }\n        ]\n      },\n      chartType: \"bar\",\n      chartOptions: {\n        maintainAspectRatio: false,\n        animation: {\n          duration: 0\n        },\n        title: {\n          display: true,\n          position: \"top\",\n          fontStyle: \"bold\",\n          fontSize: 20\n        },\n        responsive: true,\n        scales: {\n          yAxes: [\n            {\n              stacked: true,\n              kwh: {\n                beginAtZero: true\n              },\n              scaleLabel: {\n                display: true,\n                labelString: \"kWh\"\n              }\n            }\n          ]\n        },\n        legend: {\n          display: false\n        },\n        tooltips: {\n          enabled: false\n        }\n      }\n    };\n  },\n  async mounted() {\n    this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(this.$refs.canvas, {\n        type: this.chartType,\n        data: this.chartData,\n        options: this.chartOptions\n      });\n    this.update();\n  },\n  methods: {\n    async update() {\n      try {\n        const stationsgatan = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/power/stationsgatan/graph?interval=${this.interval}&lookback=${this.lookback}`);\n\n        this.chartOptions.title.text = stationsgatan.data.label;\n        this.chartData.labels = [];\n\n        this.chartData.datasets[0].data = [];\n        stationsgatan.data.history.forEach(element => {\n          this.chartData.labels.push(element.label);\n          this.chartData.datasets[0].data.push(element.kwh);\n\n          const pGreen = 1 - element.kwh/1.5;\n          const pRed = element.kwh/1.5;\n          const green = 255 * pGreen;\n          const red = 255 * pRed;\n\n          this.chartData.datasets[0].backgroundColor.push(`rgba(${red}, ${green}, 0, 1.0)`);\n        });\n\n        this.chart.update();\n      } catch (error) {\n        console.log(`error: ${error.message}`);\n      }\n\n      if (this.lookback !== '0') {\n        return; // we only refresh the view for last DAY, MONTH or YEAR\n      }\n      //setTimeout(this.update, 30000);\n    }\n  }\n});\n\n\n//# sourceURL=webpack:///./client/power/Chart.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/temp/App.vue?vue&type=template&id=f1c86628&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./client/temp/App.vue?vue&type=template&id=f1c86628& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/index.js?!./client/power/Section.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./client/power/Section.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chart.vue */ \"./client/power/Chart.vue\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    Chart: _Chart_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  },\n  props: [\"interval\", \"lookback\"],\n  data () {\n    return {\n      data: null,\n    }\n  },\n  async mounted() {\n    this.update();\n  },\n  methods: {\n    async update() {\n      try {\n        const response = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/power/stationsgatan/period?lookback=${this.lookback}&interval=${this.interval}`);\n        this.data = response.data;\n      } catch (error) {\n        console.log(`error: ${error.message}`);\n      }\n\n      if (this.lookback !== '0') {\n        return; // we only refresh the view for last DAY, MONTH or YEAR\n      }\n      //setTimeout(this.update, 30000);\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./client/power/Section.vue?./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/App.vue?vue&type=template&id=0e59aac1&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./client/power/App.vue?vue&type=template&id=0e59aac1& ***!
+  \*******************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm.data !== null\n    ? _c(\"div\", { staticClass: \"container scroll\" }, [\n        _c(\"div\", { staticClass: \"first_child\" }, [\n          _c(\"h1\", [\n            _vm._v(\"Nu \" + _vm._s(_vm.data.now.measurement) + \" °C \"),\n            _c(\"span\", { staticClass: \"date\" }, [\n              _vm._v(\"(\" + _vm._s(_vm.data.now.time) + \")\")\n            ])\n          ])\n        ]),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"first_child\" },\n          [\n            _c(\"h2\", [_vm._v(\"Senaste dygnet\")]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Min: \" + _vm._s(_vm.data.day_min.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.day_min.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Max: \" + _vm._s(_vm.data.day_max.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.day_max.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"chart\", { attrs: { interval: \"DAY\", height: \"300px\" } })\n          ],\n          1\n        ),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"child\" },\n          [\n            _c(\"h2\", [_vm._v(\"Senaste veckan\")]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Min: \" + _vm._s(_vm.data.week_min.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.week_min.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Max: \" + _vm._s(_vm.data.week_max.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.week_max.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"chart\", { attrs: { interval: \"WEEK\", height: \"300px\" } })\n          ],\n          1\n        ),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"last_child\" },\n          [\n            _c(\"h2\", [_vm._v(\"Senaste månaden\")]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Min: \" + _vm._s(_vm.data.month_min.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.month_min.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"h4\", [\n              _vm._v(\"Max: \" + _vm._s(_vm.data.month_max.measurement) + \" °C \"),\n              _c(\"span\", { staticClass: \"date\" }, [\n                _vm._v(\"(\" + _vm._s(_vm.data.month_max.time) + \")\")\n              ])\n            ]),\n            _vm._v(\" \"),\n            _c(\"chart\", { attrs: { interval: \"MONTH\", height: \"300px\" } })\n          ],\n          1\n        )\n      ])\n    : _vm._e()\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./client/temp/App.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm.data !== null\n    ? _c(\"div\", { staticClass: \"container scroll\" }, [\n        _c(\"div\", { staticClass: \"first_child\" }, [\n          _c(\"h1\", [_vm._v(\"Nu \" + _vm._s(_vm.data.now) + \" KW\")])\n        ]),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"child horisontal_scroll\" },\n          [\n            _c(\"Section\", { attrs: { interval: \"DAY\", lookback: \"0\" } }),\n            _vm._v(\" \"),\n            _c(\"Section\", { attrs: { interval: \"DAY\", lookback: \"1\" } })\n          ],\n          1\n        ),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"child horisontal_scroll\" },\n          [_c(\"Section\", { attrs: { interval: \"MONTH\", lookback: \"0\" } })],\n          1\n        ),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          { staticClass: \"child\" },\n          [_c(\"Section\", { attrs: { interval: \"YEAR\", lookback: \"0\" } })],\n          1\n        )\n      ])\n    : _vm._e()\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./client/power/App.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/temp/Chart.vue?vue&type=template&id=732ba369&":
-/*!********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./client/temp/Chart.vue?vue&type=template&id=732ba369& ***!
-  \********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/Chart.vue?vue&type=template&id=22695ffe&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./client/power/Chart.vue?vue&type=template&id=22695ffe& ***!
+  \*********************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"canvas\", { ref: \"canvas\", attrs: { height: _vm.height } })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./client/temp/Chart.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"canvas\", { ref: \"canvas\", attrs: { height: _vm.height } })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./client/power/Chart.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./client/power/Section.vue?vue&type=template&id=807dacf6&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./client/power/Section.vue?vue&type=template&id=807dacf6& ***!
+  \***********************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm.data !== null\n    ? _c(\"div\", { staticClass: \"child\" }, [\n        _c(\n          \"div\",\n          { staticClass: \"column col-12\" },\n          [\n            _c(\"h2\", { staticClass: \"section_title\" }, [\n              _vm._v(_vm._s(_vm.data.title))\n            ]),\n            _vm._v(\" \"),\n            _c(\"h4\", [_vm._v(\"Totalt: \" + _vm._s(_vm.data.total) + \" KWh\")]),\n            _vm._v(\" \"),\n            _c(\"h4\", [_vm._v(\"Peak: \" + _vm._s(_vm.data.peak) + \" KW\")]),\n            _vm._v(\" \"),\n            _c(\"chart\", {\n              attrs: {\n                lookback: this.lookback,\n                interval: this.interval,\n                height: \"400px\"\n              }\n            })\n          ],\n          1\n        )\n      ])\n    : _vm._e()\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./client/power/Section.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
