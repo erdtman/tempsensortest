@@ -6,11 +6,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const m = require('./models/Measurement.js');
 const c = require('./models/Config.js');
 const db = require('./db.js');
 
-//const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/my_database_name';
 const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://local:loca123!@ds023325.mlab.com:23325/heroku_w1wkbjcz';
 const port = process.env.PORT || 5000;
 

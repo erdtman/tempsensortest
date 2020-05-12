@@ -128,7 +128,7 @@ exports.readPeriod = function (id, interval, start_date) {
       return resolve(0)
     }
 
-    resolve(count.ticks / 1000); // TODO set correct divition
+    resolve(count.ticks / 1000);
   });
 }
 
@@ -145,7 +145,14 @@ exports.readPeriodMax = function (id, interval, start_date) {
         {time: { $lte: end }}]}},
       { $sort: {"tick_count": -1 }}]).next();
 
-    resolve(count.tick_count * 60 / 1000); // value for one minute so multiply with 60
+    if(count === null) {
+      return resolve(0)
+    }
+
+    resolve({
+      kw: count.tick_count * 60 / 1000, // value for one minute so multiply with 60
+      time: moment(count.time).format("YYYY-MM-DD HH:mm")
+    });
   });
 }
 

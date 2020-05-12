@@ -4,7 +4,7 @@
       <h2 class="section_title">{{data.title}}</h2>
       <h4>Totalt: {{data.total}} KWh</h4>
       <h4>Peak: {{data.peak}} KW</h4>
-      <chart :lookback="this.lookback" :interval="this.interval" height="400px"></chart>
+      <chart :lookback="this.lookback" :interval="this.interval" height="350px"></chart>
     </div>
   </div>
 </template>

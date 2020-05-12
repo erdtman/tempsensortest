@@ -110,11 +110,12 @@ router.get('/:id/period', async (req, res) => {
 
     const date = moment().subtract(lookback, lookback_unit[interval]);
 
-    const peak = (await t.readPeriodMax(id, interval, date)).toFixed(3)
+    const peak = await t.readPeriodMax(id, interval, date);
+    const total = await t.readPeriod(id, interval, date);
 
     const data = {
-        total: (await t.readPeriod(id, interval, date)).toFixed(3),
-        peak: peak.peak,
+        total: total.toFixed(3),
+        peak: peak.kw.toFixed(3),
         peak_time: peak.time,
         title: title[interval](date, lookback)
     };
