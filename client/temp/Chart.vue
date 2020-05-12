@@ -63,6 +63,11 @@ export default {
         },
         tooltips: {
           enabled: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
         }
       }
     };
