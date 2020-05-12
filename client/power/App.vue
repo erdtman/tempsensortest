@@ -40,7 +40,7 @@ export default {
       } catch (error) {
         console.log(`error: ${error.message}`);
       }
-      //setTimeout(this.update, 60000);
+      setTimeout(this.update, 60000);
     }
   },
 };

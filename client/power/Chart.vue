@@ -94,7 +94,7 @@ export default {
       if (this.lookback !== '0') {
         return; // we only refresh the view for last DAY, MONTH or YEAR
       }
-      //setTimeout(this.update, 30000);
+      setTimeout(this.update, 60000);
     }
   }
 };
