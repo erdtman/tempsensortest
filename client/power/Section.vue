@@ -2,9 +2,23 @@
   <div class="child" v-if="data !== null">
     <div class="column col-12">
       <h2 class="section_title">{{data.title}}</h2>
-      <h4>Totalt: {{data.total}} KWh</h4>
-      <h4>Peak: {{data.peak}} KW</h4>
-      <chart :lookback="this.lookback" :interval="this.interval" height="350px"></chart>
+      <div class="columns">
+        <div class="column col-6">
+          <h5>Totalt:</h5>
+        </div>
+        <div class="column col-6">
+          <h5>{{data.total}} KWh</h5>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column col-6">
+          <h5>Peak:</h5>
+        </div>
+        <div class="column col-6">
+          <h5>{{data.peak}} KW</h5>
+        </div>
+      </div>
+      <chart :lookback="this.lookback" :interval="this.interval" :color="this.color" height="350px"></chart>
     </div>
   </div>
 </template>
@@ -18,7 +32,7 @@ export default {
   components: {
     Chart
   },
-  props: ["interval", "lookback"],
+  props: ["interval", "lookback", "color"],
   data () {
     return {
       data: null,

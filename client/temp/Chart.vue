@@ -18,15 +18,15 @@ export default {
           {
             data: [],
             label: "Inne",
-            backgroundColor: "#FF0000",
-            borderColor: "#FF0000",
+            backgroundColor: "#CC2020",
+            borderColor: "#CC2020",
             fill: false
           },
           {
             data: [],
             label: "Ute",
-            backgroundColor: "#00FF00",
-            borderColor: "#00FF00",
+            backgroundColor: "#2010CC",
+            borderColor: "#2020CC",
             fill: false
           }
         ]
@@ -43,7 +43,7 @@ export default {
           fontStyle: "bold",
           fontSize: 20
         },
-        responsive: false,
+        responsive: true,
         scales: {
           yAxes: [
             {

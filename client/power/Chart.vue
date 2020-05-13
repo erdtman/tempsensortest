@@ -8,7 +8,7 @@ import Chart from "chart.js";
 import axios from "axios";
 
 export default {
-  props: ["interval", "height", "lookback"],
+  props: ["interval", "height", "lookback", "color"],
   data() {
     return {
       chart: null,
@@ -83,7 +83,9 @@ export default {
           const green = 255 * pGreen;
           const red = 255 * pRed;
 
-          this.chartData.datasets[0].backgroundColor.push(`rgba(${red}, ${green}, 0, 1.0)`);
+          const color = this.color === "GRADIENT" ? `rgba(${red}, ${green}, 0, 1.0)` : this.color;
+
+          this.chartData.datasets[0].backgroundColor.push(color);
         });
 
         this.chart.update();

@@ -1,21 +1,20 @@
 <template>
   <div class="container">
-      <div class="row"><br/></div>
-      <div class="row">
-        <div class="col-xs-4" v-on:click="stateChange('ON')" v-bind:class="{ active: activeState('ON'), inactive: !activeState('ON')}">
+      <div class="columns">
+        <div class="column col-4" v-on:click="stateChange('ON')" v-bind:class="{ active: activeState('ON'), inactive: !activeState('ON')}">
           <img src="/public/images/ON.png" alt="ON" class="img-rounded img-responsive state_image"/>
         </div>
-        <div class="col-xs-4" v-on:click="stateChange('TIMER')" v-bind:class="{ active: activeState('TIMER'), inactive: !activeState('TIMER')}">
+        <div class="column col-4" v-on:click="stateChange('TIMER')" v-bind:class="{ active: activeState('TIMER'), inactive: !activeState('TIMER')}">
           <img src="/public/images/timer.png" alt="timer" class="img-rounded img-responsive state_image"/>
         </div>
-        <div class="col-xs-4" v-on:click="stateChange('OFF')" v-bind:class="{ active: activeState('OFF'), inactive: !activeState('OFF')}">
+        <div class="column col-4" v-on:click="stateChange('OFF')" v-bind:class="{ active: activeState('OFF'), inactive: !activeState('OFF')}">
           <img src="/public/images/OFF.png" alt="OFF" class="img-rounded img-responsive state_image"/>
         </div>
       </div>
-      <div class="row">
+      <div class="columns">
          <h2>Morgon</h2>
       </div>
-      <div class="row">
+      <div class="columns">
          <div class="parent">
             <Hour text="12" hour="12.0" v-bind:active="isActive('12.0')" v-on:click="toggle" />
             <HalfHour hour="0.5" v-bind:active="isActive('0.5')" v-on:click="toggle" />
@@ -43,10 +42,10 @@
             <HalfHour hour="11.5" v-bind:active="isActive('11.5')" v-on:click="toggle" />
          </div>
       </div>
-      <div class="row">
+      <div class="columns">
          <h2>Kväll</h2>
       </div>
-      <div class="row">
+      <div class="columns">
          <div class="parent">
             <Hour text="24" hour="0.0" v-bind:active="isActive('0.0')" v-on:click="toggle" />
             <HalfHour hour="12.5" v-bind:active="isActive('12.5')" v-on:click="toggle" />

@@ -1,5 +1,7 @@
 body {
   position: fixed;
+  background-color: black;
+  color: white;
 }
 .scroll {
   scroll-snap-type: y mandatory;

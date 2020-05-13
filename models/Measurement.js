@@ -111,7 +111,7 @@ exports.now = function(id) {
       resolve({
         measurement: doc.measurement.toFixed(1),
         measurement_raw: doc.measurement,
-        time: moment(doc.time).format("HH:mm")
+        time: moment(doc.time).format("YYYY-MM-DD HH:mm")
       });
     });
   });

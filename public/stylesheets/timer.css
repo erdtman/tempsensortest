@@ -33,6 +33,9 @@ div.active {
 
 h2 {
   text-align: center;
+  width: 100%;
+  margin-bottom: 0em;
+  margin-top: .5em;
 }
 
 div.child {
@@ -41,8 +44,7 @@ div.child {
   height: 30px;
   width: 30px;
   text-align: center;
-  vertical-align: middle;
-  padding-top: 5px;
+  padding-top: 3px;
   border-style: solid;
   border-width: thin;
 }
