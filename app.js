@@ -2,6 +2,9 @@
 /*jslint node: true */
 'use strict';
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,7 +12,7 @@ const bodyParser = require('body-parser');
 const c = require('./models/Config.js');
 const db = require('./db.js');
 
-const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://local:loca123!@ds023325.mlab.com:23325/heroku_w1wkbjcz';
+const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || process.env.LOCAL_MONGO_URL;
 const port = process.env.PORT || 5000;
 
 app.use('/public', express.static(__dirname + '/public'));
