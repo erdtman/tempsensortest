@@ -13,21 +13,23 @@ const timeIndex = () => {
   const hour = now.format("HH");
   const minute = parseInt(now.format("mm"), 10);
   const fullOrHalfPast = minute >= 30 ? "5" : "0";
-  return `${hour}.${fullOrHalfPast}`;
+  return `${hour}_${fullOrHalfPast}`;
 }
 
-router.get('/', async (req, res) => {
+router.get('/:id/state', async (req, res) => {
   try {
-    const config = await c.read();
-    if(config.timer_state_v2.state === "ON") {
+    const id = req.params.id;
+    const config = await c.read(id);
+
+    if(config.state === "ON") {
       return res.send("ON");
     }
-    if(config.timer_state_v2.state === "OFF") {
+    if(config.state === "OFF") {
       return res.send("OFF");
     }
     const index = timeIndex();
 
-    if(config.timer_state_v2.schedule[index]) {
+    if(config.schedule[index]) {
       return res.send("ON");
     } else {
       return res.send("OFF");
@@ -38,27 +40,29 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/settings/', (req, res) => {
+router.get('/:id/', (req, res) => {
   res.render('timer');
 });
 
-router.get('/settings/read', async function(req, res) {
+router.get('/:id/read', async function(req, res) {
   try {
-    const config = await c.read();
-    res.send(config.timer_state_v2);
+    const id = req.params.id;
+    const config = await c.read(id);
+
+    res.send(config);
   } catch (error) {
-    res.status(500).send(error);
+    console.log(error);
+    res.sendStatus(500);
   }
 });
 
-router.post('/settings/save', async function(req, res) {
+router.post('/:id/write', async function(req, res) {
   try {
-    const config = await c.read();
-    config.timer_state_v2 = req.body;
-    await config.save(); // Just wait for the sake of it
+    await c.write(req.body);
     res.send();
   } catch (error) {
-    res.status(500).send(error);
+    console.log(error);
+    res.sendStatus(500);
   }
 });
 
