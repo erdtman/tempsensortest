@@ -58,6 +58,12 @@ const default_config = {
   }
 }
 
+
+
+exports.getDefaultConfig = () => {
+  return JSON.parse(JSON.stringify(default_config));
+}
+
 exports.write = function(timer_config) {
   return new Promise((resolve, reject) => {
     const collection = db.get().collection('timer_config');
