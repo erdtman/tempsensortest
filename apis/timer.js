@@ -40,6 +40,30 @@ router.get('/:id/state', async (req, res) => {
   }
 });
 
+router.get('/:id/state_v2', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const config = await c.read(id);
+
+    if(config.state === "ON") {
+      return res.json({"state": "ON", "wait": 5000});
+    }
+    if(config.state === "OFF") {
+      return res.json({"state": "OFF", "wait": 10000});
+    }
+    const index = timeIndex();
+
+    if(config.schedule[index]) {
+      return res.json({"state": "ON", "wait": 30000});
+    } else {
+      return res.json({"state": "OFF", "wait": 3000});
+    }
+  } catch (error) {
+    console.log(error);
+    return res.send("OFF");
+  }
+});
+
 router.get('/:id/', (req, res) => {
   res.render('timer');
 });
