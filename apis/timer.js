@@ -46,17 +46,17 @@ router.get('/:id/state_v2', async (req, res) => {
     const config = await c.read(id);
 
     if(config.state === "ON") {
-      return res.json({"state": "ON", "wait": 5000});
+      return res.json({"state": "ON", "wait": 60000});
     }
     if(config.state === "OFF") {
-      return res.json({"state": "OFF", "wait": 10000});
+      return res.json({"state": "OFF", "wait": 60000});
     }
     const index = timeIndex();
 
     if(config.schedule[index]) {
-      return res.json({"state": "ON", "wait": 30000});
+      return res.json({"state": "ON", "wait": 60000});
     } else {
-      return res.json({"state": "OFF", "wait": 3000});
+      return res.json({"state": "OFF", "wait": 60000});
     }
   } catch (error) {
     console.log(error);
@@ -73,7 +73,7 @@ router.get('/:id/read', async function(req, res) {
     const id = req.params.id;
     const config = await c.read(id);
 
-    res.send(config);
+    res.json(config);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

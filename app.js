@@ -48,7 +48,7 @@ app.post('/config', async (req, res) => {
     res.redirect('/config');
   } catch (error) {
     console.log(error);
-    res.send(500);
+    res.sendStatus(500);
   }
 });
 

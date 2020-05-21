@@ -30,11 +30,10 @@ router.get('/:id/now', async (req, res) => {
             "month_max" : await m.max(id, "MONTH"),
         };
 
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(value));
+        res.json(value);
     } catch (error) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 
@@ -66,11 +65,10 @@ router.get('/:id', async (req, res) => {
             return res.status(400).send("missing parameter");
         }
         const values = await m.listAgregate(id, interval)
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(values));
+        res.json(JSON.stringify(values));
     } catch (error) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 
@@ -84,10 +82,10 @@ router.post('/:id', async (req, res) => {
         }
 
         await m.create(id, value)
-        res.send(201);
+        res.sendStatus(201);
     } catch (errot) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 

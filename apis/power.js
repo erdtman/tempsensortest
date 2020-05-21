@@ -24,10 +24,10 @@ router.post("/tick/:id", async (req, res) => {
         const ticks = req.body.tick_count || 1;
 
         t.create(id, ticks);
-        res.send(201);
+        res.sendStatus(201);
     } catch (error) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 
@@ -49,7 +49,7 @@ router.get("/:id/now", async (req, res) => {
         res.json(data);
     } catch (error) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 
@@ -156,11 +156,10 @@ router.get("/:id/raw", async (req, res) => {
             return res.status(400).send("missing parameter");
         }
         const value = await t.read(id, interval)
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(value));
+        res.json(value);
     } catch (error) {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     }
 });
 

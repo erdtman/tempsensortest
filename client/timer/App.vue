@@ -73,6 +73,13 @@
             <HalfHour hour="23_5" v-bind:active="isActive('23_5')" v-on:click="toggle" />
          </div>
       </div>
+      <div class="columns">
+        <div class="column col-4"></div>
+        <div class="column col-4">
+          <img src="/public/images/training.png" alt="timer" class="img-rounded img-responsive state_image"/>
+        </div>
+        <div class="column col-4"></div>
+      </div>
    </div>
 </template>
 
