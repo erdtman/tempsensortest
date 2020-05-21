@@ -45,18 +45,20 @@ router.get('/:id/state_v2', async (req, res) => {
     const id = req.params.id;
     const config = await c.read(id);
 
+    const wait = config.training ? 3000 : 60000;
+
     if(config.state === "ON") {
-      return res.json({"state": "ON", "wait": 60000});
+      return res.json({"state": "ON", "wait": wait});
     }
     if(config.state === "OFF") {
-      return res.json({"state": "OFF", "wait": 60000});
+      return res.json({"state": "OFF", "wait": wait});
     }
     const index = timeIndex();
 
     if(config.schedule[index]) {
-      return res.json({"state": "ON", "wait": 60000});
+      return res.json({"state": "ON", "wait": wait});
     } else {
-      return res.json({"state": "OFF", "wait": 60000});
+      return res.json({"state": "OFF", "wait": wait});
     }
   } catch (error) {
     console.log(error);

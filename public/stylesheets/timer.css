@@ -18,12 +18,32 @@ img.state_image {
   margin-top: 15px;
 }
 
+img.training_image {
+  width: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
 img.active {
   width: 70px;
 }
 
 div.inactive {
   opacity: 30%;
+}
+
+div.training {
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+div.training_active {
+  background-color: lightcyan;
 }
 
 div.active {

@@ -75,8 +75,8 @@
       </div>
       <div class="columns">
         <div class="column col-4"></div>
-        <div class="column col-4">
-          <img src="/public/images/training.png" alt="timer" class="img-rounded img-responsive state_image"/>
+        <div class="column col-4 training" v-on:click="toogelTraining()" v-bind:class="{ training_active: trainingActive()}">
+          <img src="/public/images/training.png" alt="timer" class="img-rounded img-responsive training_image"/>
         </div>
         <div class="column col-4"></div>
       </div>
@@ -123,6 +123,24 @@ export default {
       }
 
       return state === this.data.state;
+    },
+    trainingActive(state) {
+      if(!this.data) {
+          return false;
+      }
+
+      return this.data.training;
+    },
+    async toogelTraining() {
+      try {
+        if(!this.data) {
+          return;
+        }
+        this.data.training = !this.data.training;
+        await axios.post("write", this.data, { headers: { 'Content-Type': 'application/json' } });
+      } catch (error) {
+        console.log(error);
+      }
     },
     isActive(index) {
       if(!this.data) {
