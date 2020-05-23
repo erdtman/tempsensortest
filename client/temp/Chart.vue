@@ -89,6 +89,7 @@ export default {
 
         this.chartOptions.title.text = indoor.data.label;
         this.chartData.labels = [];
+
         indoor.data.forEach(element => {
           this.chartData.labels.push(element.label);
         });

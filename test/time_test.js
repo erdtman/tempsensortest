@@ -16,8 +16,8 @@ test.serial('State ON', async t => {
 	on_config._id = "test"
 	on_config.state = "ON";
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, on_config, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state`);
-	t.is(resp.data, 'ON');
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	t.is(resp.data.state, 'ON');
 });
 
 test.serial('State OFF', async t => {
@@ -25,13 +25,13 @@ test.serial('State OFF', async t => {
 	off_config._id = "test"
 	off_config.state = "OFF";
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, off_config, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state`);
-	t.is(resp.data, 'OFF');
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	t.is(resp.data.state, 'OFF');
 });
 
 test.serial('Timer state OFF', async t => {
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state`);
-	t.is(resp.data, 'OFF');
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	t.is(resp.data.state, 'OFF');
 });
 
 test.serial('Timer state ON', async t => {
@@ -39,30 +39,30 @@ test.serial('Timer state ON', async t => {
 		"state": "TIMER",
 		"_id": "test",
 		"schedule": {
-			"0_0": true,
-			"0_5": true,
-			"1_0": true,
-			"6_0": true,
+			"00_0": true,
+			"00_5": true,
+			"01_0": true,
+			"06_0": true,
 			"11_5": true,
 			"11_0": true,
 			"10_5": true,
 			"10_0": true,
-			"9_5": true,
-			"9_0": true,
-			"8_5": true,
-			"8_0": true,
-			"7_5": true,
-			"7_0": true,
-			"6_5": true,
-			"5_5": true,
-			"5_0": true,
-			"4_5": true,
-			"4_0": true,
-			"3_5": true,
-			"3_0": true,
-			"2_5": true,
-			"2_0": true,
-			"1_5": true,
+			"09_5": true,
+			"09_0": true,
+			"08_5": true,
+			"08_0": true,
+			"07_5": true,
+			"07_0": true,
+			"06_5": true,
+			"05_5": true,
+			"05_0": true,
+			"04_5": true,
+			"04_0": true,
+			"03_5": true,
+			"03_0": true,
+			"02_5": true,
+			"02_0": true,
+			"01_5": true,
 			"13_0": true,
 			"13_5": true,
 			"14_0": true,
@@ -90,6 +90,6 @@ test.serial('Timer state ON', async t => {
 		}
 	}
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, timer_on_state, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state`);
-	t.is(resp.data, 'ON');
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	t.is(resp.data.state, 'ON');
 });

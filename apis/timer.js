@@ -16,30 +16,6 @@ const timeIndex = () => {
   return `${hour}_${fullOrHalfPast}`;
 }
 
-router.get('/:id/state', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const config = await c.read(id);
-
-    if(config.state === "ON") {
-      return res.send("ON");
-    }
-    if(config.state === "OFF") {
-      return res.send("OFF");
-    }
-    const index = timeIndex();
-
-    if(config.schedule[index]) {
-      return res.send("ON");
-    } else {
-      return res.send("OFF");
-    }
-  } catch (error) {
-    console.log(error);
-    return res.send("OFF");
-  }
-});
-
 router.get('/:id/state_v2', async (req, res) => {
   try {
     const id = req.params.id;

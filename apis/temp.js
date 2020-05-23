@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
             return res.status(400).send("missing parameter");
         }
         const values = await m.listAgregate(id, interval)
-        res.json(JSON.stringify(values));
+        res.json(values);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
