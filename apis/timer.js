@@ -38,7 +38,7 @@ router.get('/:id/state_v2', async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    return res.send("OFF");
+    return res.json({"state": "OFF", "wait": wait});
   }
 });
 
