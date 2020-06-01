@@ -32,7 +32,7 @@
         </div>
         <div class="columns">
           <div class="column col-3">
-            <h5>Min:</h5>
+            <h5>Max:</h5>
           </div>
           <div class="column col-3">
             <h5>{{data.day_max.measurement}} °C</h5>
@@ -60,7 +60,7 @@
         </div>
         <div class="columns">
           <div class="column col-3">
-            <h5>Min:</h5>
+            <h5>Max:</h5>
           </div>
           <div class="column col-3">
             <h5>{{data.week_max.measurement}} °C</h5>
@@ -88,7 +88,7 @@
         </div>
         <div class="columns">
           <div class="column col-3">
-            <h5>Min:</h5>
+            <h5>Max:</h5>
           </div>
           <div class="column col-3">
             <h5>{{data.month_max.measurement}} °C</h5>
