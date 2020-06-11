@@ -49,6 +49,29 @@ router.get('/:id/state_v2', async (req, res) => {
   }
 });
 
+router.get('/:id/state_v3', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const config = await c.read(id);
+
+    const wait = config.training ? 3000 : 60000;
+    const index = timeIndex();
+
+    if(config.state === "OFF") {
+      res.send(`${wait}`); // evern for OFF
+    } else if(config.state === "ON") {
+      res.send(`${wait + 1}`); // odd for ON :)
+    } else if (config.schedule[index]) {
+      res.send(`${wait + 1}`); // odd for ON :)
+    } else {
+      res.send(`${wait}`); // evern for OFF
+    }
+  } catch (error) {
+    console.log(error);
+    return res.send("10000"); // Try again in 10 seconds and OFF
+  }
+});
+
 router.get('/:id/', (req, res) => {
   res.render('timer');
 });
