@@ -16,8 +16,8 @@ test.serial('State ON', async t => {
 	on_config._id = "test"
 	on_config.state = "ON";
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, on_config, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
-	t.is(resp.data.state, 'ON');
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v3`);
+	t.is(resp.data, 'ON');
 });
 
 test.serial('State OFF', async t => {
@@ -25,12 +25,12 @@ test.serial('State OFF', async t => {
 	off_config._id = "test"
 	off_config.state = "OFF";
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, off_config, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v3`);
 	t.is(resp.data.state, 'OFF');
 });
 
 test.serial('Timer state OFF', async t => {
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v3`);
 	t.is(resp.data.state, 'OFF');
 });
 
@@ -90,6 +90,6 @@ test.serial('Timer state ON', async t => {
 		}
 	}
 	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, timer_on_state, { headers: { 'Content-Type': 'application/json' } });
-	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v2`);
+	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v3`);
 	t.is(resp.data.state, 'ON');
 });

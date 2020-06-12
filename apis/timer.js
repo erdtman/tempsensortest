@@ -16,39 +16,6 @@ const timeIndex = () => {
   return `${hour}_${fullOrHalfPast}`;
 }
 
-const getTimerStateObject = (state, wait) => {
-  return {
-    "state": state || "OFF",
-    "wait": wait || 10000
-  }
-}
-
-router.get('/:id/state_v2', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const config = await c.read(id);
-
-    const wait = config.training ? 3000 : 60000;
-
-    if(config.state === "ON") {
-      return res.json(getTimerStateObject("ON", wait));
-    }
-    if(config.state === "OFF") {
-      return res.json(getTimerStateObject("OFF", wait));
-    }
-    const index = timeIndex();
-
-    if(config.schedule[index]) {
-      return res.json(getTimerStateObject("ON", wait));
-    } else {
-      return res.json(getTimerStateObject("OFF", wait));
-    }
-  } catch (error) {
-    console.log(error);
-    return res.json(getTimerStateObject());
-  }
-});
-
 router.get('/:id/state_v3', async (req, res) => {
   try {
     const id = req.params.id;
