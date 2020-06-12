@@ -1,21 +1,12 @@
 const test = require('ava');
 const axios = require('axios');
-const config = require('../models/config.js')
 
 const HOST = "localhost";
 const PORT = 5000;
 
-test.before(async t => {
-	const initial_config = config.getDefaultConfig();
-	initial_config._id = "test"
-	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, initial_config, { headers: { 'Content-Type': 'application/json' } });
-});
+test.serial('get config', async t => {
 
-test.serial('State ON', async t => {
-	const on_config = config.getDefaultConfig();
-	on_config._id = "test"
-	on_config.state = "ON";
-	await axios.post(`http://${HOST}:${PORT}/timer/test/write`, on_config, { headers: { 'Content-Type': 'application/json' } });
+	await axios.post(`http://${HOST}:${PORT}/device/test/write`, on_config, { headers: { 'Content-Type': 'application/json' } });
 	const resp = await axios.get(`http://${HOST}:${PORT}/timer/test/state_v3`);
 	t.is(resp.data, 60001);
 });
