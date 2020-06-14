@@ -1,0 +1,6 @@
+[submodule "arduino/timer/esp8266_setup"]
+	path = arduino/timer/esp8266_setup
+	url = git@github.com:erdtman/esp8266_setup.git
+[submodule "arduino/power_meter/esp8266_setup"]
+	path = arduino/power_meter/esp8266_setup
+	url = git@github.com:erdtman/esp8266_setup.git
