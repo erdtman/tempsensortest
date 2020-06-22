@@ -47,7 +47,7 @@
       </div>
       <div class="columns">
          <div class="parent">
-            <Hour text="24" hour="0_0" v-bind:active="isActive('0_0')" v-on:click="toggle" />
+            <Hour text="24" hour="00_0" v-bind:active="isActive('00_0')" v-on:click="toggle" />
             <HalfHour hour="12_5" v-bind:active="isActive('12_5')" v-on:click="toggle" />
             <Hour text="13" hour="13_0" v-bind:active="isActive('13_0')" v-on:click="toggle" />
             <HalfHour hour="13_5" v-bind:active="isActive('13_5')" v-on:click="toggle" />
