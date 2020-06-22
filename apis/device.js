@@ -29,6 +29,8 @@ router.get('/:mac', async (req, res) => {
     }
     console.log("running wrong image");
 
+    console.log(bin_map[device_config.should_run]);
+
     res.json({
       update_url: bin_map[device_config.should_run],
     });

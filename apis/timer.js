@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 const timeIndex = () => {
-  const now = moment().tz("Europe/Stockholm");
+  const now = moment();
   const hour = now.format("HH");
   const minute = parseInt(now.format("mm"), 10);
   const fullOrHalfPast = minute >= 30 ? "5" : "0";

@@ -17,25 +17,25 @@
       <div class="columns">
          <div class="parent">
             <Hour text="12" hour="12_0" v-bind:active="isActive('12_0')" v-on:click="toggle" />
-            <HalfHour hour="0_5" v-bind:active="isActive('0_5')" v-on:click="toggle" />
-            <Hour text="1" hour="1_0" v-bind:active="isActive('1_0')" v-on:click="toggle" />
-            <HalfHour hour="1_5" v-bind:active="isActive('1_5')" v-on:click="toggle" />
-            <Hour text="2" hour="2_0" v-bind:active="isActive('2_0')" v-on:click="toggle" />
-            <HalfHour hour="2_5" v-bind:active="isActive('2_5')" v-on:click="toggle" />
-            <Hour text="3" hour="3_0" v-bind:active="isActive('3_0')" v-on:click="toggle" />
-            <HalfHour hour="3_5" v-bind:active="isActive('3_5')" v-on:click="toggle" />
-            <Hour text="4" hour="4_0" v-bind:active="isActive('4_0')" v-on:click="toggle" />
-            <HalfHour hour="4_5" v-bind:active="isActive('4_5')" v-on:click="toggle" />
-            <Hour text="5" hour="5_0" v-bind:active="isActive('5_0')" v-on:click="toggle" />
-            <HalfHour hour="5_5" v-bind:active="isActive('5_5')" v-on:click="toggle" />
-            <Hour text="6" hour="6_0" v-bind:active="isActive('6_0')" v-on:click="toggle" />
-            <HalfHour hour="6_5" v-bind:active="isActive('6_5')" v-on:click="toggle" />
-            <Hour text="7" hour="7_0" v-bind:active="isActive('7_0')" v-on:click="toggle" />
-            <HalfHour hour="7_5" v-bind:active="isActive('7_5')" v-on:click="toggle" />
-            <Hour text="8" hour="8_0" v-bind:active="isActive('8_0')" v-on:click="toggle" />
-            <HalfHour hour="8_5" v-bind:active="isActive('8_5')" v-on:click="toggle" />
-            <Hour text="9" hour="9_0" v-bind:active="isActive('9_0')" v-on:click="toggle" />
-            <HalfHour hour="9_5" v-bind:active="isActive('9_5')" v-on:click="toggle" />
+            <HalfHour hour="00_5" v-bind:active="isActive('00_5')" v-on:click="toggle" />
+            <Hour text="1" hour="01_0" v-bind:active="isActive('01_0')" v-on:click="toggle" />
+            <HalfHour hour="01_5" v-bind:active="isActive('01_5')" v-on:click="toggle" />
+            <Hour text="2" hour="02_0" v-bind:active="isActive('02_0')" v-on:click="toggle" />
+            <HalfHour hour="02_5" v-bind:active="isActive('02_5')" v-on:click="toggle" />
+            <Hour text="3" hour="03_0" v-bind:active="isActive('03_0')" v-on:click="toggle" />
+            <HalfHour hour="03_5" v-bind:active="isActive('03_5')" v-on:click="toggle" />
+            <Hour text="4" hour="04_0" v-bind:active="isActive('04_0')" v-on:click="toggle" />
+            <HalfHour hour="04_5" v-bind:active="isActive('04_5')" v-on:click="toggle" />
+            <Hour text="5" hour="05_0" v-bind:active="isActive('05_0')" v-on:click="toggle" />
+            <HalfHour hour="05_5" v-bind:active="isActive('05_5')" v-on:click="toggle" />
+            <Hour text="6" hour="06_0" v-bind:active="isActive('06_0')" v-on:click="toggle" />
+            <HalfHour hour="06_5" v-bind:active="isActive('06_5')" v-on:click="toggle" />
+            <Hour text="7" hour="07_0" v-bind:active="isActive('07_0')" v-on:click="toggle" />
+            <HalfHour hour="07_5" v-bind:active="isActive('07_5')" v-on:click="toggle" />
+            <Hour text="8" hour="08_0" v-bind:active="isActive('08_0')" v-on:click="toggle" />
+            <HalfHour hour="08_5" v-bind:active="isActive('08_5')" v-on:click="toggle" />
+            <Hour text="9" hour="09_0" v-bind:active="isActive('09_0')" v-on:click="toggle" />
+            <HalfHour hour="09_5" v-bind:active="isActive('09_5')" v-on:click="toggle" />
             <Hour text="10" hour="10_0" v-bind:active="isActive('10_0')" v-on:click="toggle" />
             <HalfHour hour="10_5" v-bind:active="isActive('10_5')" v-on:click="toggle" />
             <Hour text="11" hour="11_0" v-bind:active="isActive('11_0')" v-on:click="toggle" />
