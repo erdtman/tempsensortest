@@ -15,7 +15,7 @@ bool parent_setup_done = false;
 void setup() {
   Serial.begin(115200);
 
-  parent_setup_done = parentSetup("timer_v1");
+  parent_setup_done = parentSetup("timer_v2");
   Serial.print(parent_setup_done);
   if (!parent_setup_done) {
     Serial.println("FAIIIIIIILLL");
