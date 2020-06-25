@@ -16,6 +16,7 @@ const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || process.env.LO
 const port = process.env.PORT || 5000;
 
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/arduino', express.static(__dirname + '/arduino'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 

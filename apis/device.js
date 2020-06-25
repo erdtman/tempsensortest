@@ -10,9 +10,7 @@ const router = express.Router();
 
 
 const bin_map = {
-  slow_blink:"https://tempsensortest.herokuapp.com/public/device/slow_blink.bin",
-  fast_blink:"https://tempsensortest.herokuapp.com/public/device/fast_blink.bin",
-  timer_v2:"https://tempsensortest.herokuapp.com/public/device/timer.ino.adafruit"
+  timer_v2:"https://tempsensortest.herokuapp.com/arduino/timer/timer.ino.adafruit.bin"
 };
 
 router.get('/:mac', async (req, res) => {
