@@ -15,12 +15,15 @@ bool parent_setup_done = false;
 void setup() {
   Serial.begin(115200);
 
-  parent_setup_done = parentSetup("timer_v2");
+  parent_setup_done = parentSetup("timer_v3");
   Serial.print(parent_setup_done);
   if (!parent_setup_done) {
     Serial.println("FAIIIIIIILLL");
     return;
   }
+
+  Serial.print("action_url: ");
+  Serial.println(action_url);
 
   pinMode(0, OUTPUT);
   digitalWrite(0, HIGH);
@@ -44,16 +47,21 @@ void loop() {
   if(next_event < time(nullptr)) {
     // TODO get URL from env
     digitalWrite(0, LOW);
-    http.begin(client, "https://tempsensortest.herokuapp.com/timer/stationsgatan/state_v3");
+    // http.begin(client, "https://tempsensortest.herokuapp.com/timer/stationsgatan/state_v3");
+    http.begin(client, action_url);
     int httpCode = http.GET();
-    Serial.print("http response code: ");
+    Serial.print("Response code: ");
     Serial.println(httpCode);
     if (httpCode != 200) {
+      http.end();
       return;
     }
+
     String res = http.getString();
     int wait = atoi(res.c_str());
+
     http.end(); 
+    
     digitalWrite(0, HIGH);
   
     if ((wait % 2) == 1) { // odd for ON

@@ -3,10 +3,12 @@
 'use strict';
 
 const c = require('../models/Config.js');
+const d = require('../models/Device.js');
 const moment = require('moment-timezone');
 moment.tz.setDefault("Europe/Stockholm");
 const express = require('express');
 const router = express.Router();
+const shortid = require('shortid');
 
 const timeIndex = () => {
   const now = moment();
@@ -15,6 +17,32 @@ const timeIndex = () => {
   const fullOrHalfPast = minute >= 30 ? "5" : "0";
   return `${hour}_${fullOrHalfPast}`;
 }
+
+
+router.get('/', (req, res) => {
+  res.render('timer_create');
+});
+
+router.post('/', async (req, res) => {
+  try {
+    const id = shortid.generate();
+    const config = await c.read(id);
+    config.mac = req.body.mac || "AA:BB:CC:DD:EE:FF";
+    await c.write(req.body);
+    const device = await d.read(config.mac);
+    device.action_url = `https://tempsensortest.herokuapp.com/timer/${id}/state_v3`;
+    d.write(device);
+
+    res.redirect(`${id}/`);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+router.get('/:id/', (req, res) => {
+  res.render('timer');
+});
 
 router.get('/:id/state_v3', async (req, res) => {
   try {
@@ -39,9 +67,7 @@ router.get('/:id/state_v3', async (req, res) => {
   }
 });
 
-router.get('/:id/', (req, res) => {
-  res.render('timer');
-});
+
 
 router.get('/:id/read', async function(req, res) {
   try {

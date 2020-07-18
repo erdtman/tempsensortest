@@ -1,0 +1,32 @@
+html
+ head
+  link(rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css")
+  link(rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css")
+  link(rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css")
+  link(rel="stylesheet" href="/public/stylesheets/timer_create.css")
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title Timer
+body
+  form(action="/timer/" method="POST")
+    div(class="container")
+      div(class="columns section")
+        div(class="column col-12 center")
+          img(class="timer center" src="/public/images/timer.png" alt="timer" )
+
+      div(class="columns section")
+        div(class="column col-12")
+          h2(class="center") Timerapp setup
+
+      div(class="columns section")
+        div(class="column col-12")
+          p(class="center text") Fyll i ID på kontrollerenheten som kom med förpackningen på separat papper.
+
+      div(class="columns section")
+        div(class="column col-12 center")
+          input(class="center" placeholder="Kontroller ID t.ex 84:F3:EB:5A:9D:36" type="text" name="mac")
+
+      div(class="columns section")
+        div(class="column col-12")
+          input(class="center" type="submit" value="Skapa timer")
