@@ -29,8 +29,10 @@ router.post('/', async (req, res) => {
     const config = await c.read(id);
     config.mac = req.body.mac || "AA:BB:CC:DD:EE:FF";
     await c.write(req.body);
+
     const device = await d.read(config.mac);
     device.action_url = `https://tempsensortest.herokuapp.com/timer/${id}/state_v3`;
+    device.should_run = "timer_v3";
     d.write(device);
 
     res.redirect(`${id}/`);
