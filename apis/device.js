@@ -31,6 +31,7 @@ router.get('/:mac', async (req, res) => {
     console.log(bin_map[device_config.should_run]);
 
     res.json({
+      action_url: device_config.action_url,
       update_url: bin_map[device_config.should_run],
     });
   } catch (error) {
