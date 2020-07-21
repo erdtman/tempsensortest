@@ -45,9 +45,9 @@ void loop() {
   }
 
   if(next_event < time(nullptr)) {
-    // TODO get URL from env
+ 
     digitalWrite(0, LOW);
-    // http.begin(client, "https://tempsensortest.herokuapp.com/timer/stationsgatan/state_v3");
+    Serial.println(action_url);
     http.begin(client, action_url);
     int httpCode = http.GET();
     Serial.print("Response code: ");
@@ -58,7 +58,9 @@ void loop() {
     }
 
     String res = http.getString();
+    Serial.print(res);
     int wait = atoi(res.c_str());
+    wait = wait != 0 ? wait: 60000; // OFF and one minute if we get bad response
 
     http.end(); 
     
