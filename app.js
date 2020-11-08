@@ -13,6 +13,7 @@ const c = require('./models/Config.js');
 const db = require('./db.js');
 
 const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || process.env.LOCAL_MONGO_URL;
+const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 5000;
 
 app.use('/public', express.static(__dirname + '/public'));
@@ -54,15 +55,17 @@ app.post('/config', async (req, res) => {
   }
 });
 
-db.connect(url, (err) => {
+
+async function start() {
+  const err = await db.connect(url)
   if (err) {
-    console.log('Unable to connect to Mongo.');
-  } else {
-    console.log('Connection established to', url);
-    const server = app.listen(port, function() {
-      const host = server.address().address;
-      const port = server.address().port;
-      console.log(`Listening at http://${host}:${port}`);
-    });
+    return console.log('Unable to connect to Mongo');
   }
-});
+  console.log(`Connected to Mongo: ${url}`)
+
+  app.listen(port, function() {
+    console.log(`Listening at http://${host}:${port}`);
+  });
+}
+
+start();

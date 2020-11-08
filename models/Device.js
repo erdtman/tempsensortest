@@ -27,7 +27,7 @@ exports.read = function(id) {
       }
 
       if(!doc) {
-        const newConfig = {shoul_run: "baseline"};
+        const newConfig = {should_run: "baseline"};
         newConfig._id = id;
         return resolve(newConfig);
       }

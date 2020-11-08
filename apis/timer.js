@@ -51,7 +51,7 @@ router.get('/:id/state_v3', async (req, res) => {
     const id = req.params.id;
     const config = await c.read(id);
 
-    const wait = config.training ? 3000 : 60000;
+    const wait = config.training ? 1000 : 60000;
     const index = timeIndex();
 
     if(config.state === "OFF") {

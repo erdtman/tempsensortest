@@ -8,17 +8,21 @@ var state = {
   db: null,
 };
 
-exports.connect = function(url, done) {
-  if (state.db) {
-    return done();
-  }
-
-  MongoClient.connect(url, function(err, db) {
-    if (err) {
-      return done(err);
+exports.connect = async function(url) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (state.db) {
+        return resolve();
+      }
+      const client = await MongoClient.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+         retryWrites: false });
+      state.db = client.db();
+      resolve();
+    } catch (error) {
+      reject(error);
     }
-    state.db = db;
-    done();
   });
 };
 
