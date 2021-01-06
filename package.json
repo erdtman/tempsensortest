@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "ava": "^3.8.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "chart.js": "^2.9.3",
     "content-security-policy": "^0.3.2",
