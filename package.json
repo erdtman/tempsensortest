@@ -11,7 +11,7 @@
     "ava": "^3.8.2",
     "axios": "^0.21.1",
     "body-parser": "^1.18.3",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "content-security-policy": "^0.3.2",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
