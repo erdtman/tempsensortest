@@ -53,6 +53,22 @@ router.get("/:id/now", async (req, res) => {
     }
 });
 
+router.get("/:id/now/clean", async (req, res) => {
+  try {
+      const id = req.params.id;
+      if (!id) {
+          return res.status(400).send("missing parameter");
+      }
+
+      const now_clean = await t.readLast(id, '5_MIN', 12)*1000;
+
+      res.send(now_clean.toFixed(0));
+  } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+  }
+});
+
 const sweDay = {
     "Sunday":     "Söndag",
     "Saturday":   "Lördag",
