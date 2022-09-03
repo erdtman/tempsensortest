@@ -8,6 +8,7 @@ module.exports = {
     timer: './client/timer/app.js',
     temp: './client/temp/app.js',
     power: './client/power/app.js',
+    frezer: './client/frezer/app.js',
   },
   output: {
     path: __dirname + '/public',

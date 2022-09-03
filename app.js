@@ -30,6 +30,7 @@ app.use('/timer', require('./apis/timer.js'));
 app.use('/measurement', require('./apis/temp.js'));
 app.use('/power', require('./apis/power.js'));
 app.use('/noice', require('./apis/noice.js'));
+app.use('/frezer', require('./apis/frezer.js'));
 app.use('/device', require('./apis/device.js'));
 
 app.get('/config', async (req, resp) => {
