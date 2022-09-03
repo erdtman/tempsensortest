@@ -83,7 +83,7 @@ router.post('/:id', async (req, res) => {
 
         await m.create(id, value)
         res.sendStatus(201);
-    } catch (errot) {
+    } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
