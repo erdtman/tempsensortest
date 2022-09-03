@@ -19,7 +19,7 @@ exports.create = function(id, value) {
     };
 
     const collection = db.get().collection('measurement');
-    collection.save(measurement, function(err, doc) {
+    collection.insertOne(measurement, function(err, doc) {
       if (err) {
         return reject(new Error(err));
       }
