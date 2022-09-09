@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 
 router.post('/measurement', async (req, res) => {
   try {
-    console.log(req.body.temp);
     const temp = await frezer.read();
 
     if (temp.measurements.length > 1440) {
@@ -29,37 +28,42 @@ router.post('/measurement', async (req, res) => {
     };
 
     temp.measurements.push(value);
-    console.log(temp.measurements);
-    await frezer.write(temp)
+    await frezer.write(temp);
+    res.send(201);
   } catch (error) {
-    console.log("typiskt");
     console.log(error);
+    res.sendStatus(500);
   }
 
-  res.send();
+
 });
 
 router.get('/measurements', async (_, res) => {
-  const temp = await frezer.read();
+  try {
+    const temp = await frezer.read();
 
-  const labels = temp.measurements.filter(value => !Number.isNaN(value.parsed)).map(value => {
-    return moment(value.time).format("YYYY-MM-DD HH:mm");
-  });
+    const labels = temp.measurements.filter(value => !Number.isNaN(value.parsed)).map(value => {
+      return moment(value.time).format("YYYY-MM-DD HH:mm");
+    });
 
-  const dataset = temp.measurements.filter(value => !Number.isNaN(value.parsed)).map(value => {
-    return value.raw;
-  });
+    const dataset = temp.measurements.filter(value => !Number.isNaN(value.parsed)).map(value => {
+      return value.raw;
+    });
 
-  const latest = temp.measurements.at(-1)
+    const latest = temp.measurements.at(-1)
 
-  res.json({
-    labels:labels,
-    dataset:dataset,
-    latest: {
-      value: latest.raw,
-      time: moment(latest.time).format("YYYY-MM-DD HH:mm")
-    }
-  });
+    res.json({
+      labels: labels,
+      dataset: dataset,
+      latest: {
+        value: latest.raw,
+        time: moment(latest.time).format("YYYY-MM-DD HH:mm")
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 

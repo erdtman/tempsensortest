@@ -23,7 +23,6 @@ router.get('/:id/clean', async (req, res) => {
         }
 
         const data = await temp.read(id);
-        console.log(data);
         const latest = data.measurements.at(-1)
         res.send(Number(latest.raw).toFixed(0));
     } catch (error) {
