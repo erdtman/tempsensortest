@@ -2,7 +2,7 @@
 /*jslint node: true */
 'use strict';
 
-const m = require('../models/Measurement.js');
+const temp = require('../models/Temp.js');
 const express = require('express');
 const router = express.Router();
 
@@ -11,32 +11,6 @@ router.get('/', async (req, resp) => {
 });
 
 
-
-router.get('/:id/now', async (req, res) => {
-    try {
-        let id = req.params.id ;
-
-        if (!id) {
-            return res.status(400).send("missing parameter");
-        }
-
-        const value = {
-            "now" : await m.now(id),
-            "day_min" : await m.min(id, "DAY"),
-            "day_max" : await m.max(id, "DAY"),
-            "week_min" : await m.min(id, "WEEK"),
-            "week_max" : await m.max(id, "WEEK"),
-            "month_min" : await m.min(id, "MONTH"),
-            "month_max" : await m.max(id, "MONTH"),
-        };
-
-        res.json(value);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
-    }
-});
-
 router.get('/:id/clean', async (req, res) => {
     try {
         let id = req.params.id ;
@@ -44,49 +18,50 @@ router.get('/:id/clean', async (req, res) => {
             return res.status(400).send("missing parameter");
         }
 
-        if (id === 'sensor2'){ // Temporary hack
+        if (id === 'sensor2') { // Not very temporary hack
             id = 'outdoor';
         }
 
-        const value = await m.now(id)
-        res.send(value.measurement_raw.toFixed(0));
+        const data = await temp.read(id);
+        console.log(data);
+        const latest = data.measurements.at(-1)
+        res.send(Number(latest.raw).toFixed(0));
     } catch (error) {
         console.log(error);
         res.status(500);
     }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-        const id = req.params.id ;
-        const interval = req.query.interval || "HOUR";
-
-        if (!id) {
-            return res.status(400).send("missing parameter");
-        }
-        const values = await m.listAgregate(id, interval)
-        res.json(values);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
-    }
-});
 
 router.post('/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const value = req.body.value;
+        const rawValue = req.body.value;
 
-        if (!id || !value) {
+        if (!id || !rawValue) {
             return res.status(400).send("missing parameter");
         }
 
-        await m.create(id, value)
+        const data = await temp.read(id);
+
+        if (data.measurements.length > 1440) {
+            data.measurements.shift();
+        }
+
+        const value = {
+            raw: rawValue,
+            time: new Date().getTime()
+        };
+
+        data.measurements.push(value);
+
+        await temp.write(data, id);
         res.sendStatus(201);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 });
+
 
 module.exports = router;
