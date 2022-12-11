@@ -18,12 +18,13 @@ const config = {
 
 exports.getPower = async function() {
     return new Promise(async (resolve, reject) => {
+
         const tibberQuery = new TibberQuery(config);
         const tibberFeed = new TibberFeed(tibberQuery);
-
+        let value = 1;
         tibberFeed.on('data', data => {
             tibberFeed.close();
-            resolve(data);
+            value = data;
             console.log(data);
         });
 
@@ -41,6 +42,7 @@ exports.getPower = async function() {
 
         tibberFeed.on('disconnected', data => {
             console.log(data);
+            resolve(value);
         });
         await tibberFeed.connect();
     });
