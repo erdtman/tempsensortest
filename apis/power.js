@@ -3,6 +3,7 @@
 'use strict';
 
 const t = require('../models/Tick.js');
+const { getPower } = require('../utils/Tibber.js');
 const moment = require('moment-timezone');
 moment.tz.setDefault("Europe/Stockholm");
 const express = require('express');
@@ -60,9 +61,9 @@ router.get("/:id/now/clean", async (req, res) => {
           return res.status(400).send("missing parameter");
       }
 
-      const now_clean = await t.readLast(id, '5_MIN', 12)*1000;
+      const tibberData = await getPower();
 
-      res.send(now_clean.toFixed(0));
+      res.send('' + tibberData.power);
   } catch (error) {
       console.log(error);
       res.sendStatus(500);
