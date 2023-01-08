@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 
 const c = require('./models/Config.js');
 const db = require('./db.js');
+const { setup } = require('./utils/Tibber.js');
 
 const url = process.env.MONGODB_URI || process.env.MONGOHQ_URL || process.env.LOCAL_MONGO_URL;
 const host = process.env.HOST || '127.0.0.1';
@@ -63,7 +64,8 @@ async function start() {
   if (err) {
     return console.log('Unable to connect to Mongo');
   }
-  console.log(`Connected to Mongo: ${url}`)
+  console.log(`Connected to Mongo: ${url}`);
+  await setup();
 
   app.listen(port, function() {
     console.log(`Listening at http://${host}:${port}`);

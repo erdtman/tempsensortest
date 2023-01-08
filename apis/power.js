@@ -61,9 +61,9 @@ router.get("/:id/now/clean", async (req, res) => {
           return res.status(400).send("missing parameter");
       }
 
-      const tibberData = await getPower();
+      const power = await getPower();
 
-      res.send('' + tibberData.power);
+      res.send('' + power);
   } catch (error) {
       console.log(error);
       res.sendStatus(500);
