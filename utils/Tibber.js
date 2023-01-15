@@ -31,20 +31,23 @@ exports.setup = async function () {
     });
 
     tibberFeed.on('connecting', data => {
+        console.log("connecting");
         console.log(data);
     });
 
     tibberFeed.on('connected', data => {
+        console.log("connected");
         console.log(data);
     });
 
     tibberFeed.on('disconnecting', data => {
+        console.log("disconnecting");
         console.log(data);
     });
 
     tibberFeed.on('disconnected', data => {
+        console.log("disconnected");
         console.log(data);
-        resolve(value);
     });
     await tibberFeed.connect();
 }

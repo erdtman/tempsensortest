@@ -23,7 +23,7 @@
     "q": "^1.5.1",
     "shortid": "^2.2.16",
     "superagent": "^8.0.0",
-    "tibber-api": "^5.0.0",
+    "tibber-api": "^5.1.7",
     "vue": "^3.2.38"
   },
   "devDependencies": {
