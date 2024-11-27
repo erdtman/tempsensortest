@@ -27,6 +27,7 @@ app.set('etag', false);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
+app.use('/switch', require('./apis/switch.js'));
 app.use('/timer', require('./apis/timer.js'));
 app.use('/measurement', require('./apis/temp.js'));
 app.use('/power', require('./apis/power.js'));
