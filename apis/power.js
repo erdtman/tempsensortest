@@ -62,7 +62,7 @@ router.get("/:id/now/clean", async (req, res) => {
       }
 
       const power = await getPower();
-
+      console.log(`power now: ${power}`);
       res.send('' + power);
   } catch (error) {
       console.log(error);

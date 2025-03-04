@@ -14,6 +14,7 @@ const config = {
     },
     homeId: '03170558-a0e5-40ea-8ff0-c7e48d03744d',
     power: true,
+    powerProduction: true,
 };
 
 let latest_value = 1339;
