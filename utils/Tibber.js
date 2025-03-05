@@ -28,7 +28,12 @@ exports.setup = async function () {
     tibberFeed.on('data', data => {
         console.log(data);
         latest_time = moment();
-        latest_value = data.power;
+        if(data.power != 0) {
+            latest_value = data.power;
+        } else {
+            latest_value = -1 * data.powerProduction;
+        }
+
     });
 
     tibberFeed.on('connecting', data => {
