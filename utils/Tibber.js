@@ -61,11 +61,13 @@ exports.setup = async function () {
 
 
 exports.getPower = function () {
+    console.log(`latest_time: ${latest_time}, latest_value: ${latest_value}`);
     if (!latest_time) {
         return 1337;
     }
     const now = moment();
     const almost_now = now.subtract(5, 'minutes');
+    console.log(`almost_now: ${almost_now}, latest_time: ${latest_time}`);
     if (almost_now.isAfter(latest_time)) {
         return 1338;
     }
