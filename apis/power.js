@@ -10,6 +10,16 @@ const express = require('express');
 const router = express.Router();
 
 
+router.post("/dump", async (req, res) => {
+  try {
+      console.log(req.body.data);
+      res.sendStatus(200);
+  } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+  }
+});
+
 
 router.post("/tick/:id", async (req, res) => {
     try {
