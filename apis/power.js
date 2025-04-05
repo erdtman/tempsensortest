@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/dump", async (req, res) => {
   try {
-      console.log(req.body.data);
+      console.log(req.body);
       res.sendStatus(200);
   } catch (error) {
       console.log(error);
