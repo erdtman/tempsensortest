@@ -130,7 +130,8 @@ export default {
     return {
       manualPosition: true,
       myPosition: "58.5084012, 18.9067973",
-      watchId: null
+      watchId: null,
+      lastPlayedTime: 0
     };
   },
   async mounted() {
@@ -141,6 +142,12 @@ export default {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       this.myPosition = `${lat}, ${lon}`;
+
+      const now = new Date().getTime();
+      if ( this.lastPlayedTime < now - 1000 * 60 * 10) {
+        this.lastPlayedTime = now;
+        this.go();
+      }
     },
     async skipNext() {
       await axios.post("/shotgun/skip/next");
@@ -162,6 +169,7 @@ export default {
       alert("Sorry, no position available.");
     },
     async go() {
+      console.log("Go!");
       const parsed = this.myPosition.split(",").map(Number);
       const parsedPosition = {
         lat: parsed[0],
