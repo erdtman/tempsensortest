@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const redirect_uri = 'http://127.0.0.1:5000/shotgun/callback';
+const redirect_uri = process.env.SPOTIFY_RIDIRECT_URI;
 
 router.get('/', async (req, resp) => {
     resp.render('shotgun');
