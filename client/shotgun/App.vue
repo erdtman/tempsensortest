@@ -38,7 +38,7 @@
       <div class="column col-12 fixed_to_bottom">
         <div class="columns">
           <div class="column col-4">
-            <a href="http://127.0.0.1:5000/shotgun/login" class="btn btn-primary">Authorize</a>
+            <a href="/shotgun/login" class="btn btn-primary">Authorize</a>
           </div>
           <div class="column col-4">
             <button class="btn btn-primary" @click="skipNext()">Skip next</button>
