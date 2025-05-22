@@ -8,6 +8,7 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const c = require('./models/Config.js');
 const db = require('./db.js');
@@ -22,6 +23,8 @@ app.use('/arduino', express.static(__dirname + '/arduino'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
 app.set('port', port);
 app.set('etag', false);
 app.set('views', __dirname + '/views');
@@ -34,6 +37,7 @@ app.use('/power', require('./apis/power.js'));
 app.use('/noice', require('./apis/noice.js'));
 app.use('/frezer', require('./apis/frezer.js'));
 app.use('/device', require('./apis/device.js'));
+app.use('/shotgun', require('./apis/shotgun.js'));
 
 app.get('/config', async (req, resp) => {
   try {

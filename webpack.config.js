@@ -9,6 +9,7 @@ module.exports = {
     temp: './client/temp/app.js',
     power: './client/power/app.js',
     frezer: './client/frezer/app.js',
+    shotgun: './client/shotgun/app.js',
   },
   output: {
     path: __dirname + '/public',
