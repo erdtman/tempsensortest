@@ -306,10 +306,13 @@ export default {
     try {
       this.wakeLock = await navigator.wakeLock.request('screen');
       this.wakeLock.addEventListener('release', () => {
+        this.cardMessage += "Wake Lock was released";
         console.log('Wake Lock was released');
       });
+      this.cardMessage += "Wake Lock is active";
       console.log('Wake Lock is active');
     } catch (err) {
+      this.cardMessage += "Wake Lock error";
       console.error(`${err.name}, ${err.message}`);
     }
   },
@@ -342,7 +345,9 @@ export default {
         this.go();
       } else {
         const minutesLeft = 10 - Math.ceil((now - this.lastPlayedTime) / 60000);
-        this.cardMessage = `Waiting for a while with the next item to give you a bit of time to digest what you just heard. Will look for the next item in ${minutesLeft} minutes.`;
+        if(minutesLeft<5) {
+          this.cardMessage = `Waiting for a while with the next item to give you a bit of time to digest what you just heard. Will look for the next item in ${minutesLeft} minutes.`;
+        }
       }
     },
     async positionError() {
