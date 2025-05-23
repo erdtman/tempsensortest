@@ -326,8 +326,8 @@ export default {
         this.lastPlayedTime = now;
         this.go();
       } else {
-        const minutesLeft = Math.ceil((now - this.lastPlayedTime) / 60000);
-        this.cardMessage = `Waiting for a while with the next item to give you a bit of time to digest it.<br> will look for the next item in ${minutesLeft}.`;
+        const minutesLeft = 10 - Math.ceil((now - this.lastPlayedTime) / 60000);
+        this.cardMessage = `Waiting for a while with the next item to give you a bit of time to digest what you just heard. Will look for the next item in ${minutesLeft} minutes.`;
       }
     },
     async positionError() {
