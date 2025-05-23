@@ -47,10 +47,7 @@
           <div class="column col-2">
 
           </div>
-          <div class="column col-2">
-
-          </div>
-          <div class="column col-6">
+          <div class="column col-8">
             <div class="form-group">
               <label class="form-switch">
                 <input type="checkbox" v-model="keepUnlocked" @change="keepUnlockedChange()">
@@ -84,9 +81,9 @@ export default {
       keepUnlocked: false
     };
   },
-  beforeUnmount() {
+  async beforeUnmount() {
     if (this.wakeLock) {
-      this.wakeLock.release();
+      await this.wakeLock.release();
       this.wakeLock = null;
     }
   },
@@ -102,20 +99,24 @@ export default {
     },
     async keepUnlockedChange() {
       try {
-        this.wakeLock = await navigator.wakeLock.request('screen');
-        this.cardMessage += "Wake Lock is active";
+        if (this.keepUnlocked) {
+          this.wakeLock = await navigator.wakeLock.request('screen');
+          this.cardMessage = "Wake Lock is active";
+        } else if (this.wakeLock) {
+          await this.wakeLock.release();
+          this.wakeLock = null;
+          this.cardMessage = "Wake Lock is released";
+        }
       } catch (err) {
-        this.cardMessage += `${err.name}, ${err.message}`;
+        this.cardMessage = `${err.name}, ${err.message}`;
         console.error(`${err.name}, ${err.message}`);
       }
     },
     manualPositionChange() {
       if (this.manualPosition) {
-        console.log("Manual position enabled");
         this.cardMessage = "Pick a location and press Go!";
         navigator.geolocation.clearWatch(this.watchId);
       } else {
-        console.log("Automatic position enabled");
         this.cardMessage = "looking for interesting places close to you...";
         this.watchId = navigator.geolocation.watchPosition(this.gotPosition, this.positionError);
       }
@@ -138,7 +139,6 @@ export default {
     },
     async positionError() {
       this.cardMessage = "Failed to get position, please review your settings.";
-      alert("Sorry, no position available.");
     },
     async go() {
       console.log("Go!");
