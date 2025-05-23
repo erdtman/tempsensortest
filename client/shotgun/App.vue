@@ -313,6 +313,7 @@ export default {
       console.log('Wake Lock is active');
     } catch (err) {
       this.cardMessage += "Wake Lock error";
+      alert(error)
       console.error(`${err.name}, ${err.message}`);
     }
   },
