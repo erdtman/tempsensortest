@@ -293,10 +293,25 @@ export default {
       watchId: null,
       lastPlayedTime: 0,
       cardMessage: "Ready for a new adventure?",
+      wakeLock: null
     };
   },
+  beforeUnmount() {
+    if (this.wakeLock) {
+      this.wakeLock.release();
+      this.wakeLock = null;
+    }
+  },
   async mounted() {
-
+    try {
+      this.wakeLock = await navigator.wakeLock.request('screen');
+      this.wakeLock.addEventListener('release', () => {
+        console.log('Wake Lock was released');
+      });
+      console.log('Wake Lock is active');
+    } catch (err) {
+      console.error(`${err.name}, ${err.message}`);
+    }
   },
   methods: {
     async skipNext() {
