@@ -55,9 +55,6 @@
               </label>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </div>
@@ -172,7 +169,7 @@ export default {
       this.cardMessage = `Found ${distances.length} episodes close to you, will add ${selectedEpisode.name} `;
 
       await axios.post(`/shotgun/add/to/queue/${selectedEpisode.episode_id}`);
-      await axios.post("/shotgun/skip/next");
+
 
     }
   }
