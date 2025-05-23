@@ -144,7 +144,7 @@ router.get('/show', async function (req, res) {
         decrypted += decipher.final('utf8');
         const authstuff = JSON.parse(decrypted);
         const show_id = '5RkAV0qTjjskJEvYvFIvhJ';
-        const url = `https://api.spotify.com/v1/shows/${show_id}`;
+        const url = `https://api.spotify.com/v1/shows/${show_id}?limit=200&offset=50`;
         console.log('url', url);
 
         const resp = await fetch(url, {

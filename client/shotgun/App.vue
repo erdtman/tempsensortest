@@ -17,7 +17,6 @@
         </div>
       </div>
 
-
       <div class="column col-12">
         <div class="columns">
           <div class="column col-2"> </div>
@@ -39,20 +38,28 @@
         </div>
       </div>
 
-
-
-
       <div class="column col-12 fixed_to_bottom">
         <div class="columns">
-          <div class="column col-4">
+          <div class="column col-2">
             <a href="/shotgun/login" class="btn btn-primary">Authorize</a>
           </div>
-          <div class="column col-4">
-            <button class="btn btn-primary" @click="skipNext()">Skip next</button>
+          <div class="column col-2">
+
           </div>
-          <div class="column col-4">
-            <button class="btn btn-primary" @click="addToQueue()">Add to queue</button>
+          <div class="column col-2">
+
           </div>
+          <div class="column col-6">
+            <div class="form-group">
+              <label class="form-switch">
+                <input type="checkbox" v-model="keepUnlocked" @change="keepUnlockedChange()">
+                <i class="form-icon"></i>Keep phone unlocked
+              </label>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>
@@ -61,6 +68,7 @@
 
 <script>
 import axios from "axios";
+import { KeepAlive } from "vue";
 
 function calculateDistance(coord1, coord2) {
   const toRad = (value) => (value * Math.PI) / 180;
@@ -78,6 +86,228 @@ function calculateDistance(coord1, coord2) {
 }
 
 const episodes = [
+  {
+    "id": "0fsI6crcDV3AjcjoBcICXQ",
+    "name": "Observatory Museum",
+    "lat": 59.3415245,
+    "lon": 18.054717
+  },
+  {
+    "id": "0vMJUbiUMB4Sn0Rdq2BCaZ",
+    "name": "Gamla Stan (Old Town)",
+    "lat": 59.325,
+    "lon": 18.0708333
+  },
+  {
+    "id": "0KuRBhwUndN0VH2tkcC9P2",
+    "name": "Moderna Museet",
+    "lat": 59.3271619,
+    "lon": 18.0844863
+  },
+  {
+    "id": "2p1xWI5zyCcawDBMaMTplS",
+    "name": "Carl Eldh Studio Museum",
+    "lat": 59.3508029,
+    "lon": 18.0412587
+  },
+  {
+    "id": "5FJs7wBDyGCbFfA22MUO5L",
+    "name": "Åkeshov Castle",
+    "lat": 59.3408,
+    "lon": 17.9247
+  },
+  {
+    "id": "4hM6ONfofqwUtv8gKGJlWh",
+    "name": "Bellman Museum",
+    "lat": 59.3256163,
+    "lon": 18.0341635
+  },
+  {
+    "id": "126dUYMoMYuX3w77VQfxvw",
+    "name": "Swedish Army Museum",
+    "lat": 59.33472,
+    "lon": 18.08028
+  },
+  {
+    "id": "02Byoj4OAuuTq1WlyxHOe8",
+    "name": "Jewish Museum",
+    "lat": 59.3249174,
+    "lon": 18.0714691
+  },
+  {
+    "id": "2xDA99gNXpM1l3VvGHF7c5",
+    "name": "Strindberg Museum",
+    "lat": 59.3385,
+    "lon": 18.0565611
+  },
+  {
+    "id": "3AGdMbbrUEbrMjp2WwYSzD",
+    "name": "Färgfabriken",
+    "lat": 59.3119204,
+    "lon": 17.9859016
+  },
+  {
+    "id": "0XyldJWCs8u2pHWuoJYKCA",
+    "name": "Stockholm City Museum",
+    "lat": 59.31972,
+    "lon": 18.07056
+  },
+  {
+    "id": "1Y7dNexR34G0wem40V0LoA",
+    "name": "Postmuseum",
+    "lat": 59.3240164,
+    "lon": 18.0722787
+  },
+  {
+    "id": "5jIvcMvKd9As3UZUFnOtKX",
+    "name": "Living History Forum",
+    "lat": 59.325,
+    "lon": 18.067917
+  },
+  {
+    "id": "281PlxczDSduthQtjj8OiE",
+    "name": "Nobel Prize Museum",
+    "lat": 59.3250325,
+    "lon": 18.0706734
+  },
+  {
+    "id": "4pmK2LByPM2QE9VnCq49Nc",
+    "name": "The Royal Armoury",
+    "lat": 59.3266694,
+    "lon": 18.0716694
+  },
+  {
+    "id": "4z8sApmsz0DsBpvBVFpCQI",
+    "name": "Tre Kronor Museum",
+    "lat": 59.3269415,
+    "lon": 18.0710466
+  },
+  {
+    "id": "1fVbKWnhdfehOheld9TADx",
+    "name": "Royal Academy of Fine Arts",
+    "lat": 59.3296809,
+    "lon": 18.0645315
+  },
+  {
+    "id": "6OAGF8yfOVhLmjTGHpoSaL",
+    "name": "Museum of Mediterranean and Near Eastern Antiquities",
+    "lat": 59.3292377,
+    "lon": 18.0674667
+  },
+  {
+    "id": "4dpjAj2LeN36jEaFnEKyJa",
+    "name": "Dance Museum (Dansmuseet)",
+    "lat": 59.3324438,
+    "lon": 18.0647802
+  },
+  {
+    "id": "2lH7zQrVsrLWepR7x86DHj",
+    "name": "Museum of Medieval Stockholm",
+    "lat": 59.3285724,
+    "lon": 18.0685584
+  },
+  {
+    "id": "2YuF16bAJkm4OWizSCCRWh",
+    "name": "Swedish Museum of Performing Arts",
+    "lat": 59.33351,
+    "lon": 18.0782
+  },
+  {
+    "id": "4lSbTgaTbP3U7KLynYmsQH",
+    "name": "Museum de Vries",
+    "lat": 59.3212837,
+    "lon": 17.887371
+  },
+  {
+    "id": "1U5LldqHAEPbJSUMUdua5k",
+    "name": "Old Central Station Clock",
+    "lat": 59.3308201,
+    "lon": 18.0580965
+  },
+  {
+    "id": "6WaWbm47Tuab2mTXbArAQB",
+    "name": "Fotografiska (Photography Museum)",
+    "lat": 59.3175312,
+    "lon": 18.0852875
+  },
+  {
+    "id": "2JuqeoAwsns2sX2NkGDtrI",
+    "name": "ArkDes (Architecture & Design Center)",
+    "lat": 59.32583,
+    "lon": 18.085
+  },
+  {
+    "id": "6lFNsERnqQxJHGrC4Iw37G",
+    "name": "Museum of Far Eastern Antiquities",
+    "lat": 59.3274992,
+    "lon": 18.0844705
+  },
+  {
+    "id": "1djKXTB3cUo7kySZmXZZp7",
+    "name": "Stockholm Toy Museum (Bergrummet)",
+    "lat": 59.3279779,
+    "lon": 18.0856257
+  },
+  {
+    "id": "77mXk5bXTS4QhfufIi2H3v",
+    "name": "Gustav III’s Museum of Antiquities",
+    "lat": 59.3265386,
+    "lon": 18.0722818
+  },
+  {
+    "id": "0qiIpHYp2sjiXkQG5cW7Cm",
+    "name": "The Royal Treasury",
+    "lat": 59.3268396,
+    "lon": 18.0711618
+  },
+  {
+    "id": "7M9PSmxUYnO8Zr5QKvwne4",
+    "name": "Spritmuseum (Museum of Spirits)",
+    "lat": 59.3281953,
+    "lon": 18.0964353
+  },
+  {
+    "id": "3jyTGkrwL6jyDNcggYYRrA",
+    "name": "Junibacken",
+    "lat": 59.3273679,
+    "lon": 18.0911027
+  },
+  {
+    "id": "1utjlWJ9mkyMg3rI1z7QHE",
+    "name": "Gripsholm Castle",
+    "lat": 59.258611,
+    "lon": 17.2247222
+  },
+  {
+    "id": "4ZqblOiS9R3CIDSfzYMNTv",
+    "name": "Callanderska Farmstead",
+    "lat": 59.2581101,
+    "lon": 17.2216262
+  },
+  {
+    "id": "6sVb0hMRkdNfMTpByxchej",
+    "name": "S/S Sankt Erik (Icebreaker)",
+    "lat": 59.3271128,
+    "lon": 18.0912981
+  },
+  {
+    "id": "0x1q7tCUQ6ti9gyKJKp6sO",
+    "name": "Lightship Finngrundet",
+    "lat": 59.3270724,
+    "lon": 18.0912135
+  },
+  {
+    "id": "2j699NoolMIgutti5Tl9e9",
+    "name": "HMS Spica (Torpedo Boat)",
+    "lat": 59.3268499,
+    "lon": 18.0897075
+  },
+  {
+    "id": "3BCTU747o7vCXKK2bKiEib",
+    "name": "Birka Viking Museum",
+    "lat": 59.336,
+    "lon": 17.541
+  },
   {
     "id": "7k08vX9KrqcUYQqtR92kzi",
     "name": "Tant Bruns Kaffestuga",
@@ -149,6 +379,12 @@ const episodes = [
     "name": "Aguélimuseet",
     "lat": 59.9226057,
     "lon": 16.610325
+  },
+  {
+    "id": "6lxChqP0z3HpKgzTMLhrhB",
+    "name": "Fredens hus (House of Peace)",
+    "lat": 59.8577524,
+    "lon": 17.6389036
   },
   {
     "id": "6lxChqP0z3HpKgzTMLhrhB",
@@ -293,7 +529,8 @@ export default {
       watchId: null,
       lastPlayedTime: 0,
       cardMessage: "Ready for a new adventure?",
-      wakeLock: null
+      wakeLock: null,
+      keepUnlocked: false
     };
   },
   beforeUnmount() {
@@ -303,19 +540,7 @@ export default {
     }
   },
   async mounted() {
-    try {
-      this.wakeLock = await navigator.wakeLock.request('screen');
-      this.wakeLock.addEventListener('release', () => {
-        this.cardMessage += "Wake Lock was released";
-        console.log('Wake Lock was released');
-      });
-      this.cardMessage += "Wake Lock is active";
-      console.log('Wake Lock is active');
-    } catch (err) {
-      this.cardMessage += error;
-      alert(error);
-      console.error(`${err.name}, ${err.message}`);
-    }
+
   },
   methods: {
     async skipNext() {
@@ -323,6 +548,15 @@ export default {
     },
     async addToQueue() {
       await axios.post("/shotgun/add/to/queue/6sGee4ZfCl5uK9QBkPVMD3");
+    },
+    async keepUnlockedChange() {
+      try {
+        this.wakeLock = await navigator.wakeLock.request('screen');
+        this.cardMessage += "Wake Lock is active";
+      } catch (err) {
+        this.cardMessage += `${err.name}, ${err.message}`;
+        console.error(`${err.name}, ${err.message}`);
+      }
     },
     manualPositionChange() {
       if (this.manualPosition) {
@@ -346,7 +580,7 @@ export default {
         this.go();
       } else {
         const minutesLeft = 10 - Math.ceil((now - this.lastPlayedTime) / 60000);
-        if(minutesLeft<5) {
+        if (minutesLeft < 5) {
           this.cardMessage = `Waiting for a while with the next item to give you a bit of time to digest what you just heard. Will look for the next item in ${minutesLeft} minutes.`;
         }
       }
